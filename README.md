@@ -1,10 +1,10 @@
-# My Personal Project
+# My Cher Closet
 
-## A subtitle
+## My version of Cher's Closet App from the Clueless Movie.
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+Features in this app include:
+- A visualization of how different shirts, pants, shoes look on you.
+- Adding more clothing to your closet.
+- Saving outfits from your closet and being able to load them.
 
 An example of text with **bold** and *italic* fonts.  
