@@ -5,6 +5,8 @@ package model;
 public class Shirt {
     private String name;
 
+
+    // EFFECTS: Creates a shirt with a name
     public Shirt(String name) {
 
     }
