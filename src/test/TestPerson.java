@@ -3,21 +3,31 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import model.Closet;
+import model.Outfit;
 import model.Pants;
 import model.Person;
 import model.Shirt;
 import model.Shoes;
 
+
+// Represents a test class for Person class
 public class TestPerson {
     private Person cher;
     private Closet testCloset;
+    private Shirt testShirt;
+    private Pants testPants;
+    private Shoes testShoes;
+    private Outfit testOutfit;
 
     @BeforeEach
     void runBefore() {
-        Shirt shirt = new Shirt("Plaid top");
-        Pants pants = new Pants("Plaid skirt");
-        Shoes shoes = new Shoes("Yellow flats");
-        cher = new Person("Cher", shirt, pants, shoes);
+        testShirt = new Shirt("Plaid top");
+        testPants = new Pants("Plaid skirt");
+        testShoes = new Shoes("Yellow flats");
+        
+        testOutfit = new Outfit(testShirt, testPants, testShoes);
+
+        cher = new Person("Cher", testShirt, testPants, testShoes);
         testCloset = new Closet();
         
     }
@@ -25,5 +35,52 @@ public class TestPerson {
     @Test
     void testConstructor() {
         assertEquals("Cher", cher.getName());
+        assertTrue(cher.getShirt().equals(testShirt));
+        assertTrue(cher.getPants().equals(testPants));
+        assertTrue(cher.getShoes().equals(testShoes));
+        assertTrue(cher.getOutfit().equals(testOutfit));
+    }
+
+    @Test
+    void testChangeName() {
+        cher.setName("Dionne");
+        assertEquals("Dionne", cher.getName());
+    }
+
+    @Test
+    void testChangeShirt() {
+        Shirt newShirt = new Shirt("Sheer white jacket");
+        Outfit newOutfit = new Outfit(newShirt, testPants, testShoes);
+
+        cher.setShirt(newShirt);
+
+        assertTrue(cher.getShirt().equals(newShirt));
+        assertFalse(cher.getOutfit().equals(testOutfit));
+        assertTrue(cher.getOutfit().equals(newOutfit));
+    }
+
+
+    @Test
+    void testChangePants() {
+        Pants newPants = new Pants("Sheer white dress");
+        Outfit newOutfit = new Outfit(testShirt, newPants, testShoes);
+
+        cher.setPants(newPants);
+
+        assertTrue(cher.getPants().equals(newPants));
+        assertFalse(cher.getOutfit().equals(testOutfit));
+        assertTrue(cher.getOutfit().equals(newOutfit));
+    }
+
+    @Test
+    void testChangeShoes() {
+        Shoes newShoes = new Shoes("Silver heels");
+        Outfit newOutfit = new Outfit(testShirt, testPants, newShoes);
+
+        cher.setShoes(newShoes);
+
+        assertTrue(cher.getShoes().equals(newShoes));
+        assertFalse(cher.getOutfit().equals(testOutfit));
+        assertTrue(cher.getOutfit().equals(newOutfit));
     }
 }
