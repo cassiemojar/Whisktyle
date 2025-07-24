@@ -10,7 +10,7 @@ public class Person {
     // EFFECTS: creates a person with a default shirt, pants, shoes
     public Person(String name, Shirt shirt, Pants pants, Shoes shoes) {
         this.name = name;
-        outfit = new Outfit(shirt, pants, shoes);
+        outfit = new Outfit("Default Outfit", shirt, pants, shoes);
     }
 
 

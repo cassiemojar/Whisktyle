@@ -2,18 +2,24 @@ package model;
 
 // Represents an outfit with a shirt, pants, shoes together
 public class Outfit {
+    private String name;
     private Shirt shirt;
     private Pants pants;
     private Shoes shoes;
 
     // EFFECTS: Creates an outfit with goven shirt, pants, shoes
-    public Outfit(Shirt shirt, Pants pants, Shoes shoes) {
+    public Outfit(String name, Shirt shirt, Pants pants, Shoes shoes) {
+        this.name = name;
         this.shirt = shirt;
         this.pants = pants;
         this.shoes = shoes;
     }
 
     // Setters and getters below
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setShirt(Shirt shirt) {
         this.shirt = shirt;
     }
@@ -24,6 +30,10 @@ public class Outfit {
 
     public void setShoes(Shoes shoes) {
         this.shoes = shoes;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public Shirt getShirt() {
@@ -42,6 +52,7 @@ public class Outfit {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((shirt == null) ? 0 : shirt.hashCode());
         result = prime * result + ((pants == null) ? 0 : pants.hashCode());
         result = prime * result + ((shoes == null) ? 0 : shoes.hashCode());
@@ -57,6 +68,11 @@ public class Outfit {
         if (getClass() != obj.getClass())
             return false;
         Outfit other = (Outfit) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
         if (shirt == null) {
             if (other.shirt != null)
                 return false;

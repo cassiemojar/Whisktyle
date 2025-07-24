@@ -25,7 +25,7 @@ public class TestPerson {
         testPants = new Pants("Plaid skirt");
         testShoes = new Shoes("Yellow flats");
         
-        testOutfit = new Outfit(testShirt, testPants, testShoes);
+        testOutfit = new Outfit("Default Outfit", testShirt, testPants, testShoes);
 
         cher = new Person("Cher", testShirt, testPants, testShoes);
         testCloset = new Closet();
@@ -50,9 +50,10 @@ public class TestPerson {
     @Test
     void testChangeShirt() {
         Shirt newShirt = new Shirt("Sheer white jacket");
-        Outfit newOutfit = new Outfit(newShirt, testPants, testShoes);
+        Outfit newOutfit = new Outfit("Date Outfit", newShirt, testPants, testShoes);
 
         cher.setShirt(newShirt);
+        cher.getOutfit().setName("Date Outfit");
 
         assertTrue(cher.getShirt().equals(newShirt));
         assertFalse(cher.getOutfit().equals(testOutfit));
@@ -63,9 +64,10 @@ public class TestPerson {
     @Test
     void testChangePants() {
         Pants newPants = new Pants("Sheer white dress");
-        Outfit newOutfit = new Outfit(testShirt, newPants, testShoes);
+        Outfit newOutfit = new Outfit("Date Outfit", testShirt, newPants, testShoes);
 
         cher.setPants(newPants);
+        cher.getOutfit().setName("Date Outfit");
 
         assertTrue(cher.getPants().equals(newPants));
         assertFalse(cher.getOutfit().equals(testOutfit));
@@ -75,10 +77,11 @@ public class TestPerson {
     @Test
     void testChangeShoes() {
         Shoes newShoes = new Shoes("Silver heels");
-        Outfit newOutfit = new Outfit(testShirt, testPants, newShoes);
+        Outfit newOutfit = new Outfit("Date Outfit", testShirt, testPants, newShoes);
 
         cher.setShoes(newShoes);
-
+        cher.getOutfit().setName("Date Outfit");
+        
         assertTrue(cher.getShoes().equals(newShoes));
         assertFalse(cher.getOutfit().equals(testOutfit));
         assertTrue(cher.getOutfit().equals(newOutfit));
