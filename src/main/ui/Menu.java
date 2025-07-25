@@ -1,6 +1,8 @@
 package ui;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 import model.Closet;
 
@@ -12,7 +14,6 @@ public class Menu extends JFrame {
     public Menu() {
         super("Cher's Closet");
         setupFrame();
-        
 
     }
 
@@ -21,7 +22,25 @@ public class Menu extends JFrame {
         setTitle("Cher's Closet");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setSize(400, 400);
         setResizable(false);
+        setLayout(new BorderLayout());
+        setBackgroundImage();
         setVisible(true);
+
+    }
+
+    public void setBackgroundImage() {
+        setContentPane(new JPanel() {
+            private Image bg = new ImageIcon(getClass().getResource("images/background.png")).getImage();
+
+            // EFFECTS: Overrides the paintComponent so that it can paint the backgground
+            // image
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g); // Paints back
+                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this); // Draws image
+            }
+        });
     }
 }
