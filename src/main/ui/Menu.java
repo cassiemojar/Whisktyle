@@ -25,9 +25,11 @@ public class Menu extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         // setSize(1000, 500);
         setResizable(true);
-        setLayout(new BorderLayout());
+        setLayout(null);
 
         setBackgroundImage();
+
+        //setUI();
 
         setVisible(true);
 
@@ -55,18 +57,56 @@ public class Menu extends JFrame {
     }
 
     public void setUI() {
-        JPanel panel = new JPanel();
+        JPanel panelTitle = new JPanel();
+        JPanel panelCloset = new JPanel();
+
+        panelTitle.setBounds(0, 0, 456, 134);
+    
+        panelTitle.add(setTitle());
+       // panelCloset.add(setClosetUI());
+        add(panelTitle);
+        add(panelCloset);
+    }
+
+    public JLabel setTitle() {
         ImageIcon headerImg = new ImageIcon(getClass().getResource("img/whisktyle.png"));
         Image image = headerImg.getImage().getScaledInstance(456, 134, Image.SCALE_SMOOTH);
 
         headerImg = new ImageIcon(image);
         JLabel header = new JLabel(headerImg);
 
-        header.setHorizontalAlignment(JLabel.CENTER);
-        header.setVerticalAlignment(JLabel.TOP);
+        //header.setHorizontalAlignment(JLabel.CENTER);
+        //header.setVerticalAlignment(JLabel.BOTTOM);
+        return header;
+    }
 
-        panel.add(header);
-        add(panel);
+    public JLabel setClosetUI() {
+        final ImageIcon finalClosetClosedImg = new ImageIcon(getClass().getResource("img/closet-closed.png"));
+        final ImageIcon finalClosetOpenImg = new ImageIcon(getClass().getResource("img/closet-opened.png"));
+
+        //Image closetClosed = closetClosedImg.getImage().getScaledInstance(231, 238, Image.SCALE_SMOOTH);
+        //Image closetOpen = closetOpenImg.getImage().getScaledInstance(231, 238, Image.SCALE_SMOOTH);
+
+        //final ImageIcon finalClosetClosedImg = new ImageIcon(closetClosed);
+        //final ImageIcon finalClosetOpenImg = new ImageIcon(closetOpen);
+
+        JLabel closetLabel = new JLabel(finalClosetClosedImg);
+
+        
+
+        closetLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                closetLabel.setIcon(finalClosetOpenImg);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                closetLabel.setIcon(finalClosetClosedImg);
+            }
+        });
+
+        return closetLabel;
     }
 
 }
