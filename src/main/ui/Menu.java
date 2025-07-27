@@ -13,7 +13,7 @@ public class Menu extends JFrame {
 
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
-        super("Cher's Closet");
+        super("Whisktyle");
         closet = new Closet();
         setupFrame();
 
@@ -24,24 +24,26 @@ public class Menu extends JFrame {
         setTitle("Whisktyle");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // setSize(1000, 500);
         setResizable(true);
-        // setLayout(new BorderLayout());
-
-        Image img = new ImageIcon(getClass().getResource("img/background.png")).getImage();
-
-        background = new BackgroundImage(img);
-        setContentPane(background);
-
+        setContentPane(setBackgroundImage());
         setUI();
-
         setVisible(true);
 
     }
 
+    // EFFECTS: returns instance of BackgroundImage
+    public BackgroundImage setBackgroundImage() {
+        Image img = new ImageIcon(getClass().getResource("img/background.png")).getImage();
+        background = new BackgroundImage(img);
+        return background;
+    }
+
+    // Represents a class to override paint compenent to allow it to draw background
+    // image
     class BackgroundImage extends JPanel {
         private Image bg;
 
+        // EFFECTS: Constructor for BackgroundImage
         public BackgroundImage(Image img) {
             this.bg = img;
             setLayout(new BorderLayout());
@@ -52,97 +54,135 @@ public class Menu extends JFrame {
             super.paintComponent(g); // Paints back
             g.setColor(Color.RED);
             g.fillRect(0, 0, getWidth(), getHeight());
-            if (bg != null) {
-                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this); // Draws image
-            }
+            g.drawImage(bg, 0, 0, getWidth(), getHeight(), this); // Draws image
 
         }
     }
 
-    // EFFECTS: Creates background image icon then paints it to the entire screen
-    public void setBackgroundImageTest() {
-        setLayout(new BorderLayout());
-
-        setContentPane(new JPanel() {
-            private Image bg = new ImageIcon(getClass().getResource("img/background.png")).getImage();
-
-            // EFFECTS: Overrides the paintComponent so that it can paint the backgground
-            // image
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g); // Paints back
-                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this); // Draws image
-
-            }
-
-        });
+    public void setCursorIcon() {
+       // Image cursorImg = 
     }
 
+
+    // EFFECTS: Adds title panel and closet panel to background panel
     public void setUI() {
-        JPanel boxLayout = new JPanel();
-        boxLayout.setOpaque(false);
-
-        boxLayout.setLayout(new BoxLayout(boxLayout, BoxLayout.Y_AXIS));
-
-        JPanel panelTitle = new JPanel();
-        panelTitle.setOpaque(false);
-
-        JPanel panelCloset = new JPanel();
-        panelCloset.setOpaque(false);
-
-        panelTitle.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        panelCloset.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-
-        panelTitle.add(setTitle(), BorderLayout.NORTH);
-        panelCloset.add(setClosetUI(), BorderLayout.SOUTH);
-
-        boxLayout.add(panelTitle);
-        boxLayout.add(panelCloset);
-
         background.setLayout(new BorderLayout());
-
-        background.add(boxLayout);
+        background.add(setTitlePanel(), BorderLayout.NORTH);
+        background.add(setClosetPanel(), BorderLayout.SOUTH);
     }
 
+    // EFFECTS: Creates and returns title image as label
     public JLabel setTitle() {
         ImageIcon headerImg = new ImageIcon(getClass().getResource("img/whisktyle.png"));
-        Image image = headerImg.getImage().getScaledInstance(500, 134, Image.SCALE_SMOOTH);
+        Image image = headerImg.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
 
         headerImg = new ImageIcon(image);
         JLabel header = new JLabel(headerImg);
-
-        // header.setHorizontalAlignment(JLabel.CENTER);
-        // header.setVerticalAlignment(JLabel.BOTTOM);
         return header;
     }
 
-    public JLabel setClosetUI() {
-        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource("img/closet-closed.jpg"));
-        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource("img/closet-opened.jpg"));
+    // EFFECTS: returns title panel with title image added to it
+    public JPanel setTitlePanel() {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setOpaque(false);
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        titlePanel.add(setTitle());
+        return titlePanel;
+    }
 
-        Image closetClosed = closetClosedImg.getImage().getScaledInstance(300, 438,
+    // EFFECTS: returns closet panel with closet image added to it
+    public JPanel setClosetPanel() {
+        JPanel closetPanel = new JPanel();
+        closetPanel.setOpaque(false);
+        closetPanel.setLayout(new BoxLayout(closetPanel, BoxLayout.Y_AXIS));
+        closetPanel.add(setClosetUI());
+        return closetPanel;
+    }
+
+    // EFFECTS: returns closet opened ImageIcon
+    public ImageIcon setClosetOpenUI() {
+        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource("img/closet-opened.jpg"));
+        Image closetOpen = closetOpenImg.getImage().getScaledInstance(350, 500,
                 Image.SCALE_SMOOTH);
-        Image closetOpen = closetOpenImg.getImage().getScaledInstance(300, 438,
+
+        final ImageIcon finalClosetOpenImg = new ImageIcon(closetOpen);
+
+        return finalClosetOpenImg;
+    }
+
+    // EFFECTS: returns closet closed ImageIcon
+    public ImageIcon setClosetClosedUI() {
+        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource("img/closet-closed.jpg"));
+
+        Image closetClosed = closetClosedImg.getImage().getScaledInstance(350, 500,
                 Image.SCALE_SMOOTH);
 
         final ImageIcon finalClosetClosedImg = new ImageIcon(closetClosed);
-        final ImageIcon finalClosetOpenImg = new ImageIcon(closetOpen);
 
-        JLabel closetLabel = new JLabel(finalClosetClosedImg);
+        return finalClosetClosedImg;
+    }
 
+    // EFFECTS: handles which closet image to show whether mouse hovering over
+    // closet panel or not, returns it after
+    public JLabel handleCloset(JLabel closetLabel, JLayeredPane closetPanel, JPanel buttonsPanel, ImageIcon closetClosed,
+            ImageIcon closetOpen) {
         closetLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                closetLabel.setIcon(finalClosetOpenImg);
+                closetLabel.setIcon(closetOpen);
+                buttonsPanel.setVisible(true);
+                System.out.println("Open");
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                closetLabel.setIcon(finalClosetClosedImg);
+                closetLabel.setIcon(closetClosed);
+                buttonsPanel.setVisible(false);
             }
         });
-
         return closetLabel;
+    }
+
+    public JPanel setButtonsUI() {
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+        buttonsPanel.setOpaque(false);
+
+        JButton button = new JButton("Hi");
+        button.setBackground(Color.red);
+        button.setMaximumSize(new Dimension(100, 100));
+        buttonsPanel.add(button);
+        buttonsPanel.setVisible(false);
+
+        return buttonsPanel;
+    }
+
+    // EFFECTS: sets closet label to closet open image when mouse hovers, close
+    // close image when not
+    public JPanel setClosetUI() {
+        ImageIcon closetClosed = setClosetClosedUI();
+        ImageIcon closetOpen = setClosetOpenUI();
+
+        JLabel closetLabel = new JLabel(closetClosed);
+        closetLabel.setBounds(0, 0, 350, 500);
+
+        JPanel buttonsPanel = setButtonsUI();
+        buttonsPanel.setBounds(0, 0, 350, 500);
+        buttonsPanel.setOpaque(false);
+
+        // Create layered pane to layer buttons on top of image
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(350, 500));
+        layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(buttonsPanel, JLayeredPane.PALETTE_LAYER); // on top
+
+        handleCloset(closetLabel, layeredPane, buttonsPanel, closetClosed, closetOpen);
+
+        JPanel closetPanel = new JPanel();
+        closetPanel.setOpaque(false);
+        closetPanel.add(layeredPane);
+
+        return closetPanel;
     }
 
 }
