@@ -6,6 +6,11 @@ import java.awt.event.*;
 
 // Represents a UI for the main menu of the app
 public class Menu extends WhisktyleAbstract {
+    private static final int CLOSET_WIDTH = 350;
+    private static final int CLOSET_HEIGHT = 500;
+    private static final int BUTTON_WIDTH = 230;
+    private static final int BUTTON_HEIGHT = 90;
+
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
         setTitle("Whisktyle - Menu");
@@ -30,8 +35,8 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: returns closet opened ImageIcon
     public ImageIcon setClosetOpenUI() {
-        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource("img/closet-imgs/closet-opened.jpg"));
-        Image closetOpen = closetOpenImg.getImage().getScaledInstance(350, 500,
+        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-opened.jpg"));
+        Image closetOpen = closetOpenImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
                 Image.SCALE_SMOOTH);
 
         final ImageIcon finalClosetOpenImg = new ImageIcon(closetOpen);
@@ -41,9 +46,9 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: returns closet closed ImageIcon
     public ImageIcon setClosetClosedUI() {
-        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource("img/closet-imgs/closet-closed.jpg"));
+        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-closed.jpg"));
 
-        Image closetClosed = closetClosedImg.getImage().getScaledInstance(350, 500,
+        Image closetClosed = closetClosedImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
                 Image.SCALE_SMOOTH);
 
         final ImageIcon finalClosetClosedImg = new ImageIcon(closetClosed);
@@ -80,10 +85,10 @@ public class Menu extends WhisktyleAbstract {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
 
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/browse-button.png"), "Browse"));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/outfits-button.png"), "Outfits"));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/save-button.png"), "Save"));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/load-button.png"), "Load"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "browse-button.png"), "Browse"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "outfits-button.png"), "Outfits"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "save-button.png"), "Save"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "load-button.png"), "Load"));
         buttonsPanel.setVisible(false);
 
         return buttonsPanel;
@@ -92,8 +97,7 @@ public class Menu extends WhisktyleAbstract {
     public ImageIcon createMenuButtonImg(String imgPath) {
         ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
 
-        // TODO: make constants for width + height
-        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(230, 90, Image.SCALE_SMOOTH);
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_SMOOTH);
         ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
 
         return scaledButtonIcon;
@@ -112,8 +116,6 @@ public class Menu extends WhisktyleAbstract {
 
         return menuButton;
     }
-
-
 
     public void handleButtonSelection(JButton menuButton, String stringUI) {
         menuButton.addActionListener(e -> setNewFrame(stringUI));

@@ -10,6 +10,12 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected Closet closet;
     protected BackgroundImage background;
 
+    protected static final String IMG_DIRECTORY = "img/";
+    protected static final String DEFAULT_IMG_DIRECTORY = IMG_DIRECTORY + "default-imgs/";
+    protected static final String BUTTON_IMG_DIRECTORY = IMG_DIRECTORY + "button-imgs/";
+    protected static final String CLOSET_IMG_DIRECTORY = IMG_DIRECTORY + "closet-imgs/";
+    protected static final String LOADING_IMG_DIRECTORY = IMG_DIRECTORY + "loading-imgs/";
+
     // EFFECTS: Constructor for WhisktyleAbstract, initializing closet, setting up
     // the frame
     public WhisktyleAbstract() {
@@ -34,7 +40,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     // EFFECTS: returns instance of BackgroundImage
     public BackgroundImage setBackgroundImage() {
-        Image img = new ImageIcon(getClass().getResource("img/default-imgs/background.png")).getImage();
+        Image img = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "background.png")).getImage();
         background = new BackgroundImage(img);
         return background;
     }
@@ -63,7 +69,7 @@ public abstract class WhisktyleAbstract extends JFrame {
     // EFFECTS: Gets cursor img, scales it, then sets as cursor
     public void setCursorIcon() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        ImageIcon cursorImg = new ImageIcon(getClass().getResource("img/default-imgs/cursor.png"));
+        ImageIcon cursorImg = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "cursor.png"));
         Image scaledCursorImg = cursorImg.getImage().getScaledInstance(100, 150,
                 Image.SCALE_SMOOTH);
 
@@ -81,7 +87,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     // EFFECTS: Creates and returns title image as label
     public JLabel setTitle() {
-        ImageIcon headerImg = new ImageIcon(getClass().getResource("img/default-imgs/whisktyle.png"));
+        ImageIcon headerImg = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "whisktyle.png"));
         Image image = headerImg.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
 
         headerImg = new ImageIcon(image);

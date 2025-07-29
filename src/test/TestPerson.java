@@ -2,18 +2,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import model.Closet;
 import model.Outfit;
 import model.Pants;
 import model.Person;
 import model.Shirt;
 import model.Shoes;
 
-
 // Represents a test class for Person class
 public class TestPerson {
     private Person cher;
-    private Closet testCloset;
     private Shirt testShirt;
     private Pants testPants;
     private Shoes testShoes;
@@ -24,12 +21,11 @@ public class TestPerson {
         testShirt = new Shirt("Plaid top");
         testPants = new Pants("Plaid skirt");
         testShoes = new Shoes("Yellow flats");
-        
+
         testOutfit = new Outfit("Default Outfit", testShirt, testPants, testShoes);
 
         cher = new Person("Cher", testShirt, testPants, testShoes);
-        testCloset = new Closet();
-        
+
     }
 
     @Test
@@ -60,7 +56,6 @@ public class TestPerson {
         assertTrue(cher.getOutfit().equals(newOutfit));
     }
 
-
     @Test
     void testChangePants() {
         Pants newPants = new Pants("Sheer white dress");
@@ -81,7 +76,7 @@ public class TestPerson {
 
         cher.setShoes(newShoes);
         cher.getOutfit().setName("Date Outfit");
-        
+
         assertTrue(cher.getShoes().equals(newShoes));
         assertFalse(cher.getOutfit().equals(testOutfit));
         assertTrue(cher.getOutfit().equals(newOutfit));
