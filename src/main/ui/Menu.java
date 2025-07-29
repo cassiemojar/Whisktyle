@@ -4,12 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import model.Closet;
-
 // Represents a UI for the main menu of the app
-public class Menu extends WhiskyleAbstract {
+public class Menu extends WhisktyleAbstract {
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
+        setTitle("Whisktyle - Menu");
     }
 
     // EFFECTS: Adds title panel and closet panel to background panel
@@ -113,23 +112,19 @@ public class Menu extends WhiskyleAbstract {
         menuButton.setAlignmentY(Component.CENTER_ALIGNMENT);
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
+        menuButton.addActionListener(e -> handleButtonSelection());
         return menuButton;
     }
 
-    public void handleButtons(JButton button, JLabel closetLabel, ImageIcon closetClosed,
-            ImageIcon closetOpen) {
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                closetLabel.setIcon(closetOpen);
-                System.out.println("Opened thru buttons");
-            }
+    public void handleButtonSelection() {
+        switchToNewFrame();
+    }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                closetLabel.setIcon(closetClosed);
-            }
-        });
+    public void switchToNewFrame() {
+        Loading loadingUI = new Loading();
+        dispose();
+        loadingUI.setVisible(true);
+
     }
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close

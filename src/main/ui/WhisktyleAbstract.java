@@ -1,26 +1,18 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 import model.Closet;
 
-public abstract class WhiskyleAbstract extends JFrame {
+// Represents an abstract class that has methods for the common frame setup
+public abstract class WhisktyleAbstract extends JFrame {
     protected Closet closet;
     protected BackgroundImage background;
 
-    public WhiskyleAbstract() {
+    // EFFECTS: Constructor for WhisktyleAbstract, initializing closet, setting up the frame
+    public WhisktyleAbstract() {
         super("Whisktyle");
         closet = new Closet();
         setupFrame();
@@ -55,7 +47,7 @@ public abstract class WhiskyleAbstract extends JFrame {
         // EFFECTS: Constructor for BackgroundImage
         public BackgroundImage(Image img) {
             this.bg = img;
-            setLayout(new BorderLayout());
+            setLayout(new FlowLayout());
         }
 
         @Override
