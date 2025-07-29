@@ -7,7 +7,6 @@ import model.Closet;
 
 // Represents an abstract class that has methods for the common frame setup
 public abstract class WhisktyleAbstract extends JFrame {
-    protected Closet closet;
     protected BackgroundImage background;
 
     protected static final String IMG_DIRECTORY = "img/";
@@ -16,11 +15,9 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final String CLOSET_IMG_DIRECTORY = IMG_DIRECTORY + "closet-imgs/";
     protected static final String LOADING_IMG_DIRECTORY = IMG_DIRECTORY + "loading-imgs/";
 
-    // EFFECTS: Constructor for WhisktyleAbstract, initializing closet, setting up
-    // the frame
+    // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
-        closet = new Closet();
         setupFrame();
 
     }
@@ -102,5 +99,10 @@ public abstract class WhisktyleAbstract extends JFrame {
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         titlePanel.add(setTitle());
         return titlePanel;
+    }
+
+    // EFFECTS: returns instance of closet
+    public Closet getCloset() {
+        return WhisktyleController.getInstance().getCloset();
     }
 }

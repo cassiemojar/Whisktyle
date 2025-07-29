@@ -1,6 +1,9 @@
 package ui;
 
 import javax.swing.*;
+
+import model.Shirt;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -35,7 +38,8 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: returns closet opened ImageIcon
     public ImageIcon setClosetOpenUI() {
-        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-opened.jpg"));
+        final ImageIcon closetOpenImg = new ImageIcon(
+                getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-opened.jpg"));
         Image closetOpen = closetOpenImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
                 Image.SCALE_SMOOTH);
 
@@ -46,7 +50,8 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: returns closet closed ImageIcon
     public ImageIcon setClosetClosedUI() {
-        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-closed.jpg"));
+        final ImageIcon closetClosedImg = new ImageIcon(
+                getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-closed.jpg"));
 
         Image closetClosed = closetClosedImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
                 Image.SCALE_SMOOTH);
@@ -66,18 +71,12 @@ public class Menu extends WhisktyleAbstract {
             public void mouseEntered(MouseEvent e) {
                 closetLabel.setIcon(closetOpen);
                 buttonsPanel.setVisible(true);
-                System.out.println("Open");
             }
-
-            // @Override
-            // public void mouseExited(MouseEvent e) {
-            // closetLabel.setIcon(closetClosed);
-            // buttonsPanel.setVisible(false);
-            // }
         });
         return closetLabel;
     }
 
+    // EFFECTS: sets and returns button panel, adding the JButtons to the panel
     public JPanel setButtonsUI() {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
@@ -94,15 +93,18 @@ public class Menu extends WhisktyleAbstract {
         return buttonsPanel;
     }
 
+    // EFFECTS: Creates and returns image icon of button and scales it
     public ImageIcon createMenuButtonImg(String imgPath) {
         ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
 
-        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_SMOOTH);
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT,
+                Image.SCALE_SMOOTH);
         ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
 
         return scaledButtonIcon;
     }
 
+    // EFFECTS: Sets size, alignments of button and returns button
     public JButton createMenuButton(ImageIcon buttonImg, String stringUI) {
         JButton menuButton = new JButton();
         menuButton.setIcon(buttonImg);
@@ -117,11 +119,13 @@ public class Menu extends WhisktyleAbstract {
         return menuButton;
     }
 
+    // EFFECTS: handles when button is clicked
     public void handleButtonSelection(JButton menuButton, String stringUI) {
         menuButton.addActionListener(e -> setNewFrame(stringUI));
 
     }
 
+    // EFFECTS: closes this frame, sends to loading frame
     public void setNewFrame(String stringUI) {
         Loading loadingUI = new Loading(stringUI);
         dispose();
@@ -135,15 +139,15 @@ public class Menu extends WhisktyleAbstract {
         ImageIcon closetOpen = setClosetOpenUI();
 
         JLabel closetLabel = new JLabel(closetClosed);
-        closetLabel.setBounds(0, 0, 350, 500);
+        closetLabel.setBounds(0, 0, CLOSET_WIDTH, CLOSET_HEIGHT);
 
         JPanel buttonsPanel = setButtonsUI();
-        buttonsPanel.setBounds(0, 0, 350, 500);
+        buttonsPanel.setBounds(0, 0, CLOSET_WIDTH, CLOSET_HEIGHT);
         buttonsPanel.setOpaque(false);
 
         // Create layered pane to layer buttons on top of image
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(350, 500));
+        layeredPane.setPreferredSize(new Dimension(CLOSET_WIDTH, CLOSET_HEIGHT));
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(buttonsPanel, JLayeredPane.PALETTE_LAYER); // on top
 
