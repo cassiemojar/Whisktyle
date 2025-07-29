@@ -25,6 +25,7 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
+        setCursorIcon();
         setContentPane(setBackgroundImage());
         setUI();
         setVisible(true);
@@ -59,10 +60,18 @@ public class Menu extends JFrame {
         }
     }
 
+    // EFFECTS: Gets cursor img, scales it, then sets as cursor
     public void setCursorIcon() {
-       // Image cursorImg = 
-    }
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        ImageIcon cursorImg = new ImageIcon(getClass().getResource("img/cursor.png"));
+        Image scaledCursorImg = cursorImg.getImage().getScaledInstance(100, 150,
+                Image.SCALE_SMOOTH);
 
+        Cursor c = toolkit.createCustomCursor(scaledCursorImg, new Point(0, 0), "customCursor");
+
+        setCursor(c);
+
+    }
 
     // EFFECTS: Adds title panel and closet panel to background panel
     public void setUI() {
@@ -101,7 +110,7 @@ public class Menu extends JFrame {
 
     // EFFECTS: returns closet opened ImageIcon
     public ImageIcon setClosetOpenUI() {
-        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource("img/closet-opened.jpg"));
+        final ImageIcon closetOpenImg = new ImageIcon(getClass().getResource("img/closet-imgs/closet-opened.jpg"));
         Image closetOpen = closetOpenImg.getImage().getScaledInstance(350, 500,
                 Image.SCALE_SMOOTH);
 
@@ -112,7 +121,7 @@ public class Menu extends JFrame {
 
     // EFFECTS: returns closet closed ImageIcon
     public ImageIcon setClosetClosedUI() {
-        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource("img/closet-closed.jpg"));
+        final ImageIcon closetClosedImg = new ImageIcon(getClass().getResource("img/closet-imgs/closet-closed.jpg"));
 
         Image closetClosed = closetClosedImg.getImage().getScaledInstance(350, 500,
                 Image.SCALE_SMOOTH);
@@ -124,7 +133,8 @@ public class Menu extends JFrame {
 
     // EFFECTS: handles which closet image to show whether mouse hovering over
     // closet panel or not, returns it after
-    public JLabel handleCloset(JLabel closetLabel, JLayeredPane closetPanel, JPanel buttonsPanel, ImageIcon closetClosed,
+    public JLabel handleCloset(JLabel closetLabel, JLayeredPane closetPanel, JPanel buttonsPanel,
+            ImageIcon closetClosed,
             ImageIcon closetOpen) {
         closetLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -134,11 +144,11 @@ public class Menu extends JFrame {
                 System.out.println("Open");
             }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                closetLabel.setIcon(closetClosed);
-                buttonsPanel.setVisible(false);
-            }
+            // @Override
+            // public void mouseExited(MouseEvent e) {
+            // closetLabel.setIcon(closetClosed);
+            // buttonsPanel.setVisible(false);
+            // }
         });
         return closetLabel;
     }
@@ -146,15 +156,43 @@ public class Menu extends JFrame {
     public JPanel setButtonsUI() {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.setOpaque(false);
 
-        JButton button = new JButton("Hi");
-        button.setBackground(Color.red);
-        button.setMaximumSize(new Dimension(100, 100));
-        buttonsPanel.add(button);
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
+
+        //buttonsPanel.add(Box.createVerticalGlue());
+
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/browse-button.png")));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/outfits-button.png")));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/save-button.png")));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/load-button.png")));
+        
+        //buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
+        //buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
         buttonsPanel.setVisible(false);
 
         return buttonsPanel;
+    }
+
+    public ImageIcon createMenuButtonImg(String imgPath) {
+        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
+
+        // TODO: make constants for width + height
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(230, 90, Image.SCALE_SMOOTH);
+        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
+
+        return scaledButtonIcon;
+    }
+
+    public JButton createMenuButton(ImageIcon buttonImg) {
+        JButton menuButton = new JButton();
+        menuButton.setIcon(buttonImg);
+        menuButton.setMaximumSize(new Dimension(240, 100));
+        menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        return menuButton;
     }
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close
