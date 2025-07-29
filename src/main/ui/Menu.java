@@ -7,96 +7,17 @@ import java.awt.event.*;
 import model.Closet;
 
 // Represents a UI for the main menu of the app
-public class Menu extends JFrame {
-    private Closet closet;
-    private BackgroundImage background;
-
+public class Menu extends WhiskyleAbstract {
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
-        super("Whisktyle");
-        closet = new Closet();
-        setupFrame();
-
-    }
-
-    // EFFECTS: Makes menu screen visible
-    public void setupFrame() {
-        setTitle("Whisktyle");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setResizable(true);
-        setCursorIcon();
-        setContentPane(setBackgroundImage());
-        setUI();
-        setVisible(true);
-
-    }
-
-    // EFFECTS: returns instance of BackgroundImage
-    public BackgroundImage setBackgroundImage() {
-        Image img = new ImageIcon(getClass().getResource("img/background.png")).getImage();
-        background = new BackgroundImage(img);
-        return background;
-    }
-
-    // Represents a class to override paint compenent to allow it to draw background
-    // image
-    class BackgroundImage extends JPanel {
-        private Image bg;
-
-        // EFFECTS: Constructor for BackgroundImage
-        public BackgroundImage(Image img) {
-            this.bg = img;
-            setLayout(new BorderLayout());
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g); // Paints back
-            g.setColor(Color.RED);
-            g.fillRect(0, 0, getWidth(), getHeight());
-            g.drawImage(bg, 0, 0, getWidth(), getHeight(), this); // Draws image
-
-        }
-    }
-
-    // EFFECTS: Gets cursor img, scales it, then sets as cursor
-    public void setCursorIcon() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        ImageIcon cursorImg = new ImageIcon(getClass().getResource("img/cursor.png"));
-        Image scaledCursorImg = cursorImg.getImage().getScaledInstance(100, 150,
-                Image.SCALE_SMOOTH);
-
-        Cursor c = toolkit.createCustomCursor(scaledCursorImg, new Point(0, 0), "customCursor");
-
-        setCursor(c);
-
     }
 
     // EFFECTS: Adds title panel and closet panel to background panel
+    @Override
     public void setUI() {
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.NORTH);
         background.add(setClosetPanel(), BorderLayout.SOUTH);
-    }
-
-    // EFFECTS: Creates and returns title image as label
-    public JLabel setTitle() {
-        ImageIcon headerImg = new ImageIcon(getClass().getResource("img/whisktyle.png"));
-        Image image = headerImg.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
-
-        headerImg = new ImageIcon(image);
-        JLabel header = new JLabel(headerImg);
-        return header;
-    }
-
-    // EFFECTS: returns title panel with title image added to it
-    public JPanel setTitlePanel() {
-        JPanel titlePanel = new JPanel();
-        titlePanel.setOpaque(false);
-        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        titlePanel.add(setTitle());
-        return titlePanel;
     }
 
     // EFFECTS: returns closet panel with closet image added to it
@@ -160,15 +81,15 @@ public class Menu extends JFrame {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
 
-        //buttonsPanel.add(Box.createVerticalGlue());
+        // buttonsPanel.add(Box.createVerticalGlue());
 
         buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/browse-button.png")));
         buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/outfits-button.png")));
         buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/save-button.png")));
         buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/load-button.png")));
-        
-        //buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
-        //buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
+
+        // buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
+        // buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
         buttonsPanel.setVisible(false);
 
         return buttonsPanel;
@@ -193,6 +114,22 @@ public class Menu extends JFrame {
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
         return menuButton;
+    }
+
+    public void handleButtons(JButton button, JLabel closetLabel, ImageIcon closetClosed,
+            ImageIcon closetOpen) {
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                closetLabel.setIcon(closetOpen);
+                System.out.println("Opened thru buttons");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                closetLabel.setIcon(closetClosed);
+            }
+        });
     }
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close
