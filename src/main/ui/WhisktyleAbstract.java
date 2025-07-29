@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 import model.Closet;
 
@@ -11,7 +10,8 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected Closet closet;
     protected BackgroundImage background;
 
-    // EFFECTS: Constructor for WhisktyleAbstract, initializing closet, setting up the frame
+    // EFFECTS: Constructor for WhisktyleAbstract, initializing closet, setting up
+    // the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
         closet = new Closet();

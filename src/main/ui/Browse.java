@@ -12,11 +12,4 @@ public class Browse extends WhisktyleAbstract {
         setTitle("Whisktyle - Browse");
     }
 
-    // // EFFECTS: returns instance of BackgroundImage
-    // @Override
-    // public BackgroundImage setBackgroundImage() {
-    //     Image img = new ImageIcon(getClass().getResource("img/default-imgs/whiskyle.png")).getImage();
-    //     background = new BackgroundImage(img);
-    //     return background;
-    // }
 }

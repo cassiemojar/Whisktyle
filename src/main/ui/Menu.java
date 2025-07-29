@@ -80,15 +80,10 @@ public class Menu extends WhisktyleAbstract {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
 
-        // buttonsPanel.add(Box.createVerticalGlue());
-
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/browse-button.png")));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/outfits-button.png")));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/save-button.png")));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/load-button.png")));
-
-        // buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
-        // buttonsPanel.add(createMenuButton(createMenuButtonImg("img/browse.png")));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/browse-button.png"), "Browse"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/outfits-button.png"), "Outfits"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/save-button.png"), "Save"));
+        buttonsPanel.add(createMenuButton(createMenuButtonImg("img/button-imgs/load-button.png"), "Load"));
         buttonsPanel.setVisible(false);
 
         return buttonsPanel;
@@ -104,7 +99,7 @@ public class Menu extends WhisktyleAbstract {
         return scaledButtonIcon;
     }
 
-    public JButton createMenuButton(ImageIcon buttonImg) {
+    public JButton createMenuButton(ImageIcon buttonImg, String stringUI) {
         JButton menuButton = new JButton();
         menuButton.setIcon(buttonImg);
         menuButton.setMaximumSize(new Dimension(240, 100));
@@ -112,19 +107,23 @@ public class Menu extends WhisktyleAbstract {
         menuButton.setAlignmentY(Component.CENTER_ALIGNMENT);
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
-        menuButton.addActionListener(e -> handleButtonSelection());
+
+        handleButtonSelection(menuButton, stringUI);
+
         return menuButton;
     }
 
-    public void handleButtonSelection() {
-        switchToNewFrame();
+
+
+    public void handleButtonSelection(JButton menuButton, String stringUI) {
+        menuButton.addActionListener(e -> setNewFrame(stringUI));
+
     }
 
-    public void switchToNewFrame() {
-        Loading loadingUI = new Loading();
+    public void setNewFrame(String stringUI) {
+        Loading loadingUI = new Loading(stringUI);
         dispose();
         loadingUI.setVisible(true);
-
     }
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close

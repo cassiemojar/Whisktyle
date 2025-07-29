@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,10 +12,12 @@ public class Loading extends WhisktyleAbstract {
     private List<ImageIcon> loadImgs;
     private int currentIndex;
     private Timer timer;
+    private String stringUI;
 
     // EFFECTS: Constructor for Loading, sets title
-    public Loading() {
+    public Loading(String stringUI) {
         setTitle("Whisktyle - Loading");
+        this.stringUI = stringUI;
     }
 
     // EFFECTS: Adds title panel to background panel
@@ -33,14 +34,6 @@ public class Loading extends WhisktyleAbstract {
 
     }
 
-    // EFFECTS: returns instance of BackgroundImage
-    @Override
-    public BackgroundImage setBackgroundImage() {
-        Image img = new ImageIcon(getClass().getResource("img/default-imgs/background.png")).getImage();
-        background = new BackgroundImage(img);
-        return background;
-    }
-
     // EFFECTS: Creates and returns load image as label
     public JLabel setTitle() {
         return switchLoadImg();
@@ -52,7 +45,7 @@ public class Loading extends WhisktyleAbstract {
         JLabel loadLabel = new JLabel();
         loadLabel.setIcon(loadImgs.get(currentIndex));
 
-        int delay = 600;
+        int delay = 500;
 
         timer = new Timer(delay, new ActionListener() {
             @Override
@@ -60,13 +53,9 @@ public class Loading extends WhisktyleAbstract {
                 currentIndex++;
                 if (currentIndex < loadImgs.size()) {
                     loadLabel.setIcon(loadImgs.get(currentIndex));
-                }
-
-                else {
+                } else {
                     timer.stop();
-                    Browse browseUI = new Browse();
-                    dispose();
-                    browseUI.setVisible(true);
+                    handleViewNextFrame();
 
                 }
             }
@@ -74,6 +63,34 @@ public class Loading extends WhisktyleAbstract {
         });
         timer.start();
         return loadLabel;
+    }
+
+    // EFFECTS: handles which UI frame to show next, closes Loading frame
+    public void handleViewNextFrame() {
+        switch (stringUI) {
+            case "Browse":
+                Browse browseUI = new Browse();
+                browseUI.setVisible(true);
+                break;
+
+            case "Outfits":
+                Outfits outfitsUI = new Outfits();
+                outfitsUI.setVisible(true);
+                break;
+
+            case "Save":
+                Save saveUI = new Save();
+                saveUI.setVisible(true);
+                break;
+
+            case "Load":
+                Load loadUI = new Load();
+                loadUI.setVisible(true);
+                break;
+        }
+
+        dispose();
+
     }
 
     // MODIFIES: this
@@ -96,5 +113,9 @@ public class Loading extends WhisktyleAbstract {
         Image image = loadImg.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
         loadImg = new ImageIcon(image);
         return loadImg;
+    }
+
+    public void handleNextFrame() {
+
     }
 }
