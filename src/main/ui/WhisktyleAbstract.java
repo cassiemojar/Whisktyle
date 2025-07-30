@@ -15,6 +15,12 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final String CLOSET_IMG_DIRECTORY = IMG_DIRECTORY + "closet-imgs/";
     protected static final String LOADING_IMG_DIRECTORY = IMG_DIRECTORY + "loading-imgs/";
 
+    protected static final int BUTTON_WIDTH = 230;
+    protected static final int BUTTON_HEIGHT = 90;
+
+    protected Component horizontalSpacer = Box.createRigidArea(new Dimension(20, 0));
+    protected Component verticalSpacer = Box.createRigidArea(new Dimension(0, 20));
+
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
@@ -89,6 +95,8 @@ public abstract class WhisktyleAbstract extends JFrame {
 
         headerImg = new ImageIcon(image);
         JLabel header = new JLabel(headerImg);
+
+        header.setAlignmentY(Component.CENTER_ALIGNMENT);
         return header;
     }
 

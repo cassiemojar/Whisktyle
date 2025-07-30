@@ -20,6 +20,7 @@ public class Outfit {
     public void setName(String name) {
         this.name = name;
     }
+
     public void setShirt(Shirt shirt) {
         this.shirt = shirt;
     }
@@ -59,35 +60,47 @@ public class Outfit {
         return result;
     }
 
+    @SuppressWarnings("methodlength")
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Outfit other = (Outfit) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (shirt == null) {
-            if (other.shirt != null)
+            if (other.shirt != null) {
                 return false;
-        } else if (!shirt.equals(other.shirt))
+            }
+        } else if (!shirt.equals(other.shirt)) {
             return false;
+        }
         if (pants == null) {
-            if (other.pants != null)
+            if (other.pants != null) {
                 return false;
-        } else if (!pants.equals(other.pants))
+            }
+        } else if (!pants.equals(other.pants)) {
             return false;
+        }
         if (shoes == null) {
-            if (other.shoes != null)
+            if (other.shoes != null) {
                 return false;
-        } else if (!shoes.equals(other.shoes))
+            }
+        } else if (!shoes.equals(other.shoes)) {
             return false;
+        }
         return true;
     }
 }

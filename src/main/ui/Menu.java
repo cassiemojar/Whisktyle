@@ -2,8 +2,6 @@ package ui;
 
 import javax.swing.*;
 
-import model.Shirt;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -11,8 +9,6 @@ import java.awt.event.*;
 public class Menu extends WhisktyleAbstract {
     private static final int CLOSET_WIDTH = 350;
     private static final int CLOSET_HEIGHT = 500;
-    private static final int BUTTON_WIDTH = 230;
-    private static final int BUTTON_HEIGHT = 90;
 
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
@@ -85,8 +81,11 @@ public class Menu extends WhisktyleAbstract {
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
 
         buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "browse-button.png"), "Browse"));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "outfits-button.png"), "Outfits"));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "save-button.png"), "Save"));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "load-button.png"), "Load"));
         buttonsPanel.setVisible(false);
 
@@ -108,7 +107,9 @@ public class Menu extends WhisktyleAbstract {
     public JButton createMenuButton(ImageIcon buttonImg, String stringUI) {
         JButton menuButton = new JButton();
         menuButton.setIcon(buttonImg);
-        menuButton.setMaximumSize(new Dimension(240, 100));
+        menuButton.setIcon(buttonImg);
+        menuButton.setPreferredSize(new Dimension(buttonImg.getIconWidth(), buttonImg.getIconHeight()));
+        menuButton.setMaximumSize(new Dimension(buttonImg.getIconWidth(), buttonImg.getIconHeight()));
         menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         menuButton.setAlignmentY(Component.CENTER_ALIGNMENT);
         menuButton.setOpaque(false);

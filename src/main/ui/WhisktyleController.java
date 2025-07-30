@@ -2,7 +2,7 @@ package ui;
 
 import model.Closet;
 
-// Represents a controller class that maintains same instance of closet across classes using singleton patterm
+// Represents a controller class that maintains same instance of closet across classes using singleton pattern
 public class WhisktyleController {
     private static WhisktyleController singleton;
     private Closet closet;
@@ -12,6 +12,7 @@ public class WhisktyleController {
         closet = new Closet();
     }
 
+    // MODIFIE: this
     // EFFECTS: creates instance of WhisktyleController, returns it
     public static WhisktyleController getInstance() {
         if (singleton == null) {

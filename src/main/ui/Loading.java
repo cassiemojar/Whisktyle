@@ -45,7 +45,7 @@ public class Loading extends WhisktyleAbstract {
         JLabel loadLabel = new JLabel();
         loadLabel.setIcon(loadImgs.get(currentIndex));
 
-        int delay = 500;
+        int delay = 450;
 
         timer = new Timer(delay, new ActionListener() {
             @Override
