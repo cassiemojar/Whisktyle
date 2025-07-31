@@ -21,6 +21,7 @@ public class Browse extends WhisktyleAbstract {
         titlePanel.setOpaque(false);
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
         titlePanel.add(Box.createHorizontalGlue());
+        // titlePanel.add(createReturnButton(BUTTON_IMG_DIRECTORY + "return.png"));
         titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "add-button.png"));
         titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
         titlePanel.add(setTitle());
@@ -47,6 +48,32 @@ public class Browse extends WhisktyleAbstract {
         return menuButton;
     }
 
+    // EFFECTS: creates and returns menu buttons
+    public JButton createReturnButton(String imgPath) {
+        JButton returnButton = new JButton();
+        ImageIcon returnIcon = createReturnButtonImg(imgPath);
+        returnButton.setIcon(returnIcon);
+        returnButton.setPreferredSize(new Dimension(returnIcon.getIconWidth(), returnIcon.getIconHeight()));
+        returnButton.setMaximumSize(new Dimension(returnIcon.getIconWidth(), returnIcon.getIconHeight()));
+
+        returnButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        returnButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        returnButton.setOpaque(false);
+        returnButton.setContentAreaFilled(false);
+
+        return returnButton;
+    }
+
+    public ImageIcon createReturnButtonImg(String imgPath) {
+        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
+
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(50, 50,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
+
+        return scaledButtonIcon;
+    }
+
     public ImageIcon createMenuButtonImg(String imgPath) {
         ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
 
@@ -57,4 +84,144 @@ public class Browse extends WhisktyleAbstract {
         return scaledButtonIcon;
     }
 
+    // EFFECTS: Adds title panel and closet panel to background panel
+    @Override
+    public void setUI() {
+        background.setLayout(new BorderLayout());
+        background.add(setTitlePanel(), BorderLayout.PAGE_START);
+        background.add(setClosetPanel(), BorderLayout.CENTER);
+    }
+
+    // EFFECTS: returns closet panel with closet image added to it
+    public JPanel setClosetPanel() {
+        JPanel closetPanel = new JPanel();
+        closetPanel.setOpaque(false);
+        // closetPanel.setBackground(Color.RED);
+        closetPanel.setLayout(new BoxLayout(closetPanel, BoxLayout.Y_AXIS));
+        closetPanel.add(setClosetUI());
+        return closetPanel;
+    }
+
+    // EFFECTS: returns closet closed ImageIcon
+    // TODO: in abstract, make this an abstract method too much code duplication
+    public ImageIcon createClosetImg() {
+        final ImageIcon closetIcon = new ImageIcon(
+                getClass().getResource(CLOSET_IMG_DIRECTORY + "browse-closet.png"));
+
+        Image closetImg = closetIcon.getImage().getScaledInstance(475, 575,
+                Image.SCALE_SMOOTH);
+
+        final ImageIcon finalClosetIcon = new ImageIcon(closetImg);
+
+        return finalClosetIcon;
+    }
+
+    public JPanel setClosetButtonsUI() {
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
+
+        return buttonsPanel;
+    }
+
+    // EFFECTS: sets closet label to closet open image when mouse hovers, close
+    // close image when not
+    public JPanel setClosetUI() {
+        ImageIcon closetImg = createClosetImg();
+        JLabel closetLabel = new JLabel(closetImg);
+        closetLabel.setBounds(0, 0, 475, 575);
+
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(475, 575));
+        layeredPane.setLayout(null);
+
+        JPanel innerPanel = createClosetInnerPanel();
+        innerPanel.setBounds(0, 0, 475, 575);
+        innerPanel.setOpaque(false); // keep this transparent
+
+        // Add background image to base layer
+        layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
+
+        // Add interactive panels on top
+        layeredPane.add(innerPanel, JLayeredPane.PALETTE_LAYER);
+
+        JPanel closetPanel = new JPanel();
+        closetPanel.setOpaque(false);
+        closetPanel.add(layeredPane);
+
+        return closetPanel;
+    }
+
+    public JPanel createClosetInnerPanel() {
+        JPanel innerPanel = new JPanel();
+        innerPanel.setOpaque(false);
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+
+        JPanel upperPanel = createUpperClosetPanel();
+        upperPanel.setOpaque(true);
+        upperPanel.setMaximumSize(new Dimension(475, 288));
+        upperPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        innerPanel.add(Box.createVerticalGlue()); // push content to center vertically
+        innerPanel.add(upperPanel);
+        innerPanel.add(Box.createVerticalGlue());
+
+        JPanel lowerPanel = createLowerClosetPanel();
+        lowerPanel.setOpaque(false);
+        lowerPanel.setMaximumSize(new Dimension(450, 288));
+
+        // innerPanel.add(new JButton("test"));
+        // innerPanel.add(lowerPanel);
+        // innerPanel.add(new JButton("test"));
+        return innerPanel;
+
+    }
+
+    public JPanel createUpperClosetPanel() {
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
+        upperPanel.setOpaque(true);
+        upperPanel.setBackground(Color.RED);
+        upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
+        // TODO: create constants for width + height
+
+        JLabel upperLabel = new JLabel(createInnerClosetImg());
+        upperLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton upperButton = new JButton("Upper Button");
+        upperButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        upperButton.setMaximumSize(new Dimension(120, 30)); // or whatever fits
+
+        // upperPanel.add(upperLabel);
+        // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
+        // upperPanel.add(upperButton);
+
+        return upperPanel;
+    }
+
+    // TODO: Implement
+    public JPanel createLowerClosetPanel() {
+        JPanel lowerPanel = new JPanel();
+        JLabel lowerLabel = new JLabel();
+        lowerLabel.setIcon(createInnerClosetImg());
+        lowerPanel.add(lowerLabel);
+        lowerPanel.setOpaque(false);
+        lowerPanel.setMaximumSize(new Dimension(475, 288));
+
+        return lowerPanel;
+    }
+
+    public ImageIcon createInnerClosetImg() {
+        final ImageIcon closetIcon = new ImageIcon(
+                getClass().getResource(CLOSET_IMG_DIRECTORY + "inner-closet.png"));
+
+        Image closetImg = closetIcon.getImage().getScaledInstance(475, 288,
+                Image.SCALE_SMOOTH);
+
+        final ImageIcon finalClosetIcon = new ImageIcon(closetImg);
+
+        return finalClosetIcon;
+    }
 }
