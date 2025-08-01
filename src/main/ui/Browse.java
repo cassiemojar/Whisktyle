@@ -157,26 +157,46 @@ public class Browse extends WhisktyleAbstract {
     public JPanel createClosetInnerPanel() {
         JPanel innerPanel = new JPanel();
         innerPanel.setOpaque(false);
+        innerPanel.setPreferredSize(new Dimension(475, 575));
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 
-        JPanel upperPanel = createUpperClosetPanel();
-        upperPanel.setOpaque(true);
-        upperPanel.setMaximumSize(new Dimension(475, 288));
-        upperPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        innerPanel.add(Box.createRigidArea(new Dimension(0, 10))); // top padding
 
-        innerPanel.add(Box.createVerticalGlue()); // push content to center vertically
-        innerPanel.add(upperPanel);
-        innerPanel.add(Box.createVerticalGlue());
+        // Upper panel (centered in a wrapper)
+        JPanel upperWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        upperWrapper.setOpaque(false);
+
+        JPanel upperPanel = createUpperClosetPanel();
+        upperPanel.setPreferredSize(new Dimension(450, 288));
+        upperPanel.setBackground(Color.RED);
+        upperPanel.setOpaque(true);
+
+        upperWrapper.add(upperPanel);
+        innerPanel.add(upperWrapper);
+
+        // Upper button
+        JButton upperButton = new JButton("Upper Button");
+        upperButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        innerPanel.add(upperButton);
+
+        // Lower button
+        JButton lowerButton = new JButton("Lower Button");
+        lowerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        innerPanel.add(lowerButton);
+
+        // Lower panel (centered in a wrapper)
+        JPanel lowerWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        lowerWrapper.setOpaque(false);
 
         JPanel lowerPanel = createLowerClosetPanel();
-        lowerPanel.setOpaque(false);
-        lowerPanel.setMaximumSize(new Dimension(450, 288));
+        lowerPanel.setPreferredSize(new Dimension(450, 288));
+        lowerPanel.setBackground(Color.RED);
+        lowerPanel.setOpaque(true);
 
-        // innerPanel.add(new JButton("test"));
-        // innerPanel.add(lowerPanel);
-        // innerPanel.add(new JButton("test"));
+        lowerWrapper.add(lowerPanel);
+        innerPanel.add(lowerWrapper);
+
         return innerPanel;
-
     }
 
     public JPanel createUpperClosetPanel() {
@@ -185,6 +205,7 @@ public class Browse extends WhisktyleAbstract {
         upperPanel.setOpaque(true);
         upperPanel.setBackground(Color.RED);
         upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
+        upperPanel.setPreferredSize(new Dimension(475, 288));
         // TODO: create constants for width + height
 
         JLabel upperLabel = new JLabel(createInnerClosetImg());
@@ -203,14 +224,22 @@ public class Browse extends WhisktyleAbstract {
 
     // TODO: Implement
     public JPanel createLowerClosetPanel() {
-        JPanel lowerPanel = new JPanel();
-        JLabel lowerLabel = new JLabel();
-        lowerLabel.setIcon(createInnerClosetImg());
-        lowerPanel.add(lowerLabel);
-        lowerPanel.setOpaque(false);
-        lowerPanel.setMaximumSize(new Dimension(475, 288));
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
+        upperPanel.setOpaque(true);
+        upperPanel.setBackground(Color.RED);
+        upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
+        upperPanel.setPreferredSize(new Dimension(475, 288));
+        // TODO: create constants for width + height
 
-        return lowerPanel;
+        JLabel upperLabel = new JLabel(createInnerClosetImg());
+        upperLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // upperPanel.add(upperLabel);
+        // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
+        // upperPanel.add(upperButton);
+
+        return upperPanel;
     }
 
     public ImageIcon createInnerClosetImg() {
