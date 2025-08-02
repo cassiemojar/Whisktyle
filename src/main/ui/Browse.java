@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.*;
 
+import model.Shirt;
+
 //import model.Shirt;
 
 import java.awt.*;
@@ -20,6 +22,9 @@ public class Browse extends WhisktyleAbstract {
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
         setTitle("Whisktyle - Browse");
+        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180)));
+        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 250, 180)));
+        getCloset().getShirts().add(new Shirt("test 3", createImgIcon(IMG_DIRECTORY + "test-shirt-three.png", 250, 180)));
     }
 
     @Override
@@ -47,6 +52,24 @@ public class Browse extends WhisktyleAbstract {
     // EFFECTS: creates and returns inner menu buttons
     public JButton createInnerMenuButton(String imgPath) {
         return createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
+    }
+
+    public void handleInnerButton(JButton menuButton, JPanel panel, String clothing, String direction, int index) {
+        if (direction.equals("Right")) {
+            index++;
+        } else {
+            if (index != 0) {
+                index--;
+            }
+        }
+
+        switch (clothing) {
+            case "Shirt":
+                menuButton.addActionListener(e -> setShirtUI(panel));
+
+            case "Pants":
+                menuButton.addActionListener(e -> setPantsUI(panel));
+        }
     }
 
     // EFFECTS: Adds title panel and closet panel to background panel
@@ -151,7 +174,7 @@ public class Browse extends WhisktyleAbstract {
         return panel;
     }
 
-    public JPanel setPantsUI(JPanel panel) {
+    public void setPantsUI(JPanel panel) {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -163,7 +186,6 @@ public class Browse extends WhisktyleAbstract {
                 createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250));
         panel.add(shirtLabel, gbc);
         panel.setMaximumSize(panel.getPreferredSize());
-        return panel;
     }
 
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
