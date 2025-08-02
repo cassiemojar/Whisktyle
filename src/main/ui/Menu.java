@@ -34,27 +34,12 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: returns closet opened ImageIcon
     public ImageIcon setClosetOpenUI() {
-        final ImageIcon closetOpenImg = new ImageIcon(
-                getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-opened.jpg"));
-        Image closetOpen = closetOpenImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
-                Image.SCALE_SMOOTH);
-
-        final ImageIcon finalClosetOpenImg = new ImageIcon(closetOpen);
-
-        return finalClosetOpenImg;
+        return createImgIcon(CLOSET_IMG_DIRECTORY + "closet-opened.jpg", CLOSET_WIDTH, CLOSET_HEIGHT);
     }
 
     // EFFECTS: returns closet closed ImageIcon
     public ImageIcon setClosetClosedUI() {
-        final ImageIcon closetClosedImg = new ImageIcon(
-                getClass().getResource(CLOSET_IMG_DIRECTORY + "closet-closed.jpg"));
-
-        Image closetClosed = closetClosedImg.getImage().getScaledInstance(CLOSET_WIDTH, CLOSET_HEIGHT,
-                Image.SCALE_SMOOTH);
-
-        final ImageIcon finalClosetClosedImg = new ImageIcon(closetClosed);
-
-        return finalClosetClosedImg;
+        return createImgIcon(CLOSET_IMG_DIRECTORY + "closet-closed.jpg", CLOSET_WIDTH, CLOSET_HEIGHT);
     }
 
     // EFFECTS: handles which closet image to show whether mouse hovering over
@@ -80,43 +65,23 @@ public class Menu extends WhisktyleAbstract {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
 
-        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "browse-button.png"), "Browse"));
+        buttonsPanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "browse-button.png", "Browse"));
         buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "outfits-button.png"), "Outfits"));
+        buttonsPanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "outfits-button.png", "Outfits"));
         buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "save-button.png"), "Save"));
+        buttonsPanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "save-button.png", "Save"));
         buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        buttonsPanel.add(createMenuButton(createMenuButtonImg(BUTTON_IMG_DIRECTORY + "load-button.png"), "Load"));
+        buttonsPanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "load-button.png", "Load"));
         buttonsPanel.setVisible(false);
 
         return buttonsPanel;
     }
 
-    // EFFECTS: Creates and returns image icon of button and scales it
-    public ImageIcon createMenuButtonImg(String imgPath) {
-        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
-
-        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT,
-                Image.SCALE_SMOOTH);
-        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
-
-        return scaledButtonIcon;
-    }
-
     // EFFECTS: Sets size, alignments of button and returns button
-    public JButton createMenuButton(ImageIcon buttonImg, String stringUI) {
-        JButton menuButton = new JButton();
-        menuButton.setIcon(buttonImg);
-        menuButton.setIcon(buttonImg);
-        menuButton.setPreferredSize(new Dimension(buttonImg.getIconWidth(), buttonImg.getIconHeight()));
-        menuButton.setMaximumSize(new Dimension(buttonImg.getIconWidth(), buttonImg.getIconHeight()));
-        menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        menuButton.setAlignmentY(Component.CENTER_ALIGNMENT);
-        menuButton.setOpaque(false);
-        menuButton.setContentAreaFilled(false);
+    public JButton createMenuButton(String imgPath, String stringUI) {
+        JButton menuButton = createButton(imgPath, BUTTON_WIDTH, BUTTON_HEIGHT);
 
         handleButtonSelection(menuButton, stringUI);
-
         return menuButton;
     }
 

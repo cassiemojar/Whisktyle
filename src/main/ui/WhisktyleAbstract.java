@@ -113,4 +113,44 @@ public abstract class WhisktyleAbstract extends JFrame {
     public Closet getCloset() {
         return WhisktyleController.getInstance().getCloset();
     }
+
+    // EFFECTS: scales and returns image icon
+    public ImageIcon createImgIcon(String imgPath, int width, int height) {
+        final ImageIcon icon = new ImageIcon(
+                getClass().getResource(imgPath));
+
+        Image img = icon.getImage().getScaledInstance(width, height,
+                Image.SCALE_SMOOTH);
+
+        final ImageIcon finalIcon = new ImageIcon(img);
+
+        return finalIcon;
+    }
+
+    // EFFECTS: creates and returns inner menu buttons
+    public JButton createButton(String imgPath, int width, int height) {
+        JButton button = new JButton();
+        ImageIcon innerButtonIcon = createButtonImg(imgPath, width, height);
+        button.setIcon(innerButtonIcon);
+        button.setPreferredSize(new Dimension(innerButtonIcon.getIconWidth(), innerButtonIcon.getIconHeight()));
+        button.setMaximumSize(new Dimension(innerButtonIcon.getIconWidth(), innerButtonIcon.getIconHeight()));
+
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setAlignmentY(Component.CENTER_ALIGNMENT);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+
+        return button;
+    }
+
+    // EFFECTS: creates, scales, returns image icon of a button
+    public ImageIcon createButtonImg(String imgPath, int width, int height) {
+        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
+
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(width, height,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
+
+        return scaledButtonIcon;
+    }
 }
