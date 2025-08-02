@@ -7,7 +7,9 @@ import model.Shirt;
 import java.awt.*;
 import java.awt.event.*;
 
-// Reprsents a Browse class 
+// Represents a Browse class 
+// TODO: Refactor, clean up code
+
 public class Browse extends WhisktyleAbstract {
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
@@ -64,10 +66,63 @@ public class Browse extends WhisktyleAbstract {
         return returnButton;
     }
 
+    // EFFECTS: creates and returns inner menu buttons
+    public JButton createInnerMenuButton(String imgPath) {
+        JButton innerButton = new JButton();
+        ImageIcon innerButtonIcon = createInnerButtonImg(imgPath);
+        innerButton.setIcon(innerButtonIcon);
+        innerButton.setPreferredSize(new Dimension(innerButtonIcon.getIconWidth(), innerButtonIcon.getIconHeight()));
+        innerButton.setMaximumSize(new Dimension(innerButtonIcon.getIconWidth(), innerButtonIcon.getIconHeight()));
+
+        innerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        innerButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        innerButton.setOpaque(false);
+        innerButton.setContentAreaFilled(false);
+
+        return innerButton;
+    }
+
+    // EFFECTS: creates and returns play menu button
+    public JButton createPlayButton(String imgPath) {
+        JButton playButton = new JButton();
+        ImageIcon playButtonIcon = createInnerButtonImg(imgPath);
+        playButton.setIcon(playButtonIcon);
+        playButton.setPreferredSize(new Dimension(playButtonIcon.getIconWidth(), playButtonIcon.getIconHeight()));
+        playButton.setMaximumSize(new Dimension(playButtonIcon.getIconWidth(), playButtonIcon.getIconHeight()));
+
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        playButton.setOpaque(false);
+        playButton.setContentAreaFilled(false);
+
+        return playButton;
+    }
+
+    // TODO: Make create img abstract method, reduce code duplication
     public ImageIcon createReturnButtonImg(String imgPath) {
         ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
 
         Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(50, 50,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
+
+        return scaledButtonIcon;
+    }
+
+    public ImageIcon createInnerButtonImg(String imgPath) {
+        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
+
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(50, 35,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
+
+        return scaledButtonIcon;
+    }
+
+    public ImageIcon createPlayButtonImg(String imgPath) {
+        ImageIcon buttonIcon = new ImageIcon(getClass().getResource(imgPath));
+
+        Image scaledButtonImg = buttonIcon.getImage().getScaledInstance(90, 35,
                 Image.SCALE_SMOOTH);
         ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
 
@@ -168,33 +223,43 @@ public class Browse extends WhisktyleAbstract {
 
         JPanel upperPanel = createUpperClosetPanel();
         upperPanel.setPreferredSize(new Dimension(450, 288));
-        upperPanel.setBackground(Color.RED);
+        //upperPanel.setBackground(Color.RED);
         upperPanel.setOpaque(true);
 
         upperWrapper.add(upperPanel);
         innerPanel.add(upperWrapper);
 
         // Upper button
-        JButton upperButton = new JButton("Upper Button");
-        upperButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        innerPanel.add(upperButton);
+        JPanel upperButtonPanel = new JPanel();
+        upperButtonPanel.setLayout(new BoxLayout(upperButtonPanel, BoxLayout.X_AXIS));
 
-        // Lower button
-        JButton lowerButton = new JButton("Lower Button");
-        lowerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        innerPanel.add(lowerButton);
+        upperButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "left-button.png"));
+        upperButtonPanel.add(createPlayButton(BUTTON_IMG_DIRECTORY + "play-button.png"));
+        upperButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "right-button.png"));
+
+        innerPanel.add(upperButtonPanel);
+
 
         // Lower panel (centered in a wrapper)
         JPanel lowerWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         lowerWrapper.setOpaque(false);
 
         JPanel lowerPanel = createLowerClosetPanel();
-        lowerPanel.setPreferredSize(new Dimension(450, 288));
-        lowerPanel.setBackground(Color.RED);
+        lowerPanel.setPreferredSize(new Dimension(450, 238));
+        //lowerPanel.setBackground(Color.RED);
         lowerPanel.setOpaque(true);
 
+    
         lowerWrapper.add(lowerPanel);
         innerPanel.add(lowerWrapper);
+
+        // Lower button
+        JPanel lowerButtonPanel = new JPanel();
+        lowerButtonPanel.setLayout(new BoxLayout(lowerButtonPanel, BoxLayout.X_AXIS));
+        lowerButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "left-button.png"));
+        lowerButtonPanel.add(createPlayButton(BUTTON_IMG_DIRECTORY + "play-button.png"));
+        lowerButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "right-button.png"));
+        innerPanel.add(lowerButtonPanel);
 
         return innerPanel;
     }
@@ -202,8 +267,8 @@ public class Browse extends WhisktyleAbstract {
     public JPanel createUpperClosetPanel() {
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
-        upperPanel.setOpaque(true);
-        upperPanel.setBackground(Color.RED);
+        upperPanel.setOpaque(false);
+        //upperPanel.setBackground(Color.RED);
         upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
         upperPanel.setPreferredSize(new Dimension(475, 288));
         // TODO: create constants for width + height
@@ -215,7 +280,7 @@ public class Browse extends WhisktyleAbstract {
         upperButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         upperButton.setMaximumSize(new Dimension(120, 30)); // or whatever fits
 
-        // upperPanel.add(upperLabel);
+        upperPanel.add(upperLabel);
         // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
         // upperPanel.add(upperButton);
 
@@ -224,33 +289,41 @@ public class Browse extends WhisktyleAbstract {
 
     // TODO: Implement
     public JPanel createLowerClosetPanel() {
-        JPanel upperPanel = new JPanel();
-        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
-        upperPanel.setOpaque(true);
-        upperPanel.setBackground(Color.RED);
-        upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
-        upperPanel.setPreferredSize(new Dimension(475, 288));
+        JPanel lowerPanel = new JPanel();
+        lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
+        lowerPanel.setOpaque(false);
+        //upperPanel.setBackground(Color.RED);
+        lowerPanel.setMaximumSize(new Dimension(475, 238)); // Half of 575
+        lowerPanel.setPreferredSize(new Dimension(475, 238));
         // TODO: create constants for width + height
 
-        JLabel upperLabel = new JLabel(createInnerClosetImg());
-        upperLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel lowerLabel = new JLabel(createInnerClosetImg());
+        lowerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // upperPanel.add(upperLabel);
-        // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
+        lowerPanel.add(lowerLabel);
+        lowerPanel.add(Box.createRigidArea(new Dimension(0,50))); // spacing
         // upperPanel.add(upperButton);
 
-        return upperPanel;
+        return lowerPanel;
     }
 
     public ImageIcon createInnerClosetImg() {
         final ImageIcon closetIcon = new ImageIcon(
                 getClass().getResource(CLOSET_IMG_DIRECTORY + "inner-closet.png"));
 
-        Image closetImg = closetIcon.getImage().getScaledInstance(475, 288,
+        Image closetImg = closetIcon.getImage().getScaledInstance(475, 238,
                 Image.SCALE_SMOOTH);
 
         final ImageIcon finalClosetIcon = new ImageIcon(closetImg);
 
         return finalClosetIcon;
+    }
+
+    public void setInnerClosetButtons() {
+
+    }
+
+    public void setInnerClosetImg(){
+
     }
 }
