@@ -137,13 +137,46 @@ public class Browse extends WhisktyleAbstract {
         return buttonPanel;
     }
 
+    public JPanel setShirtUI(JPanel panel) {
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        JLabel shirtLabel = new JLabel();
+        shirtLabel.setIcon(createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180));
+        panel.add(shirtLabel, gbc);
+        panel.setMaximumSize(panel.getPreferredSize());
+        return panel;
+    }
+
+    public JPanel setPantsUI(JPanel panel) {
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        JLabel shirtLabel = new JLabel();
+        shirtLabel.setIcon(
+                createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250));
+        panel.add(shirtLabel, gbc);
+        panel.setMaximumSize(panel.getPreferredSize());
+        return panel;
+    }
+
+    // EFFECTS: Creates, sets up panels for inner closet panel and returns
     public JPanel createClosetInnerPanel() {
         JPanel innerPanel = createInnerComponent(); // upper panel centered in a wrapper
         JPanel upperWrapper = createWrapper();
         JPanel upperPanel = createUpperClosetPanel();
-        upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2));
-        // upperPanel.setBackground(Color.RED);
-        upperPanel.setOpaque(false);
+        upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
+        upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
+        upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
+        upperPanel.setBackground(Color.RED);
+        upperPanel.setOpaque(true);
+        setShirtUI(upperPanel);
 
         upperWrapper.add(upperPanel);
         innerPanel.add(upperWrapper);
@@ -152,9 +185,12 @@ public class Browse extends WhisktyleAbstract {
 
         JPanel lowerWrapper = createWrapper(); // Lower panel centered in a wrapper
         JPanel lowerPanel = createLowerClosetPanel();
-        lowerPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2));
-        // lowerPanel.setBackground(Color.RED);
-        lowerPanel.setOpaque(false);
+        lowerPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+        lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+
+        lowerPanel.setBackground(Color.RED);
+        lowerPanel.setOpaque(true);
+        setPantsUI(lowerPanel);
 
         lowerWrapper.add(lowerPanel);
         innerPanel.add(lowerWrapper);
@@ -170,8 +206,8 @@ public class Browse extends WhisktyleAbstract {
         upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
         upperPanel.setOpaque(false);
         // upperPanel.setBackground(Color.RED);
-        upperPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2)); // Half of 575
-        upperPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2));
+        upperPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100)); // Half of 575
+        upperPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
 
         return upperPanel;
     }
@@ -179,10 +215,10 @@ public class Browse extends WhisktyleAbstract {
     public JPanel createLowerClosetPanel() {
         JPanel lowerPanel = new JPanel();
         lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
-        lowerPanel.setOpaque(false);
-        // upperPanel.setBackground(Color.RED);
-        lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2)); // Half of 575
-        lowerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT / 2));
+        lowerPanel.setOpaque(true);
+        lowerPanel.setBackground(Color.RED);
+        lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+        lowerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 
         return lowerPanel;
     }
