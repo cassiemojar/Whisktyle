@@ -224,7 +224,7 @@ public class Browse extends WhisktyleAbstract {
         JPanel upperPanel = createUpperClosetPanel();
         upperPanel.setPreferredSize(new Dimension(450, 288));
         //upperPanel.setBackground(Color.RED);
-        upperPanel.setOpaque(true);
+        upperPanel.setOpaque(false);
 
         upperWrapper.add(upperPanel);
         innerPanel.add(upperWrapper);
@@ -245,9 +245,9 @@ public class Browse extends WhisktyleAbstract {
         lowerWrapper.setOpaque(false);
 
         JPanel lowerPanel = createLowerClosetPanel();
-        lowerPanel.setPreferredSize(new Dimension(450, 238));
+        lowerPanel.setPreferredSize(new Dimension(450, 288));
         //lowerPanel.setBackground(Color.RED);
-        lowerPanel.setOpaque(true);
+        lowerPanel.setOpaque(false);
 
     
         lowerWrapper.add(lowerPanel);
@@ -259,7 +259,9 @@ public class Browse extends WhisktyleAbstract {
         lowerButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "left-button.png"));
         lowerButtonPanel.add(createPlayButton(BUTTON_IMG_DIRECTORY + "play-button.png"));
         lowerButtonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "right-button.png"));
+        
         innerPanel.add(lowerButtonPanel);
+        innerPanel.add(Box.createRigidArea(new Dimension(0, 7))); 
 
         return innerPanel;
     }
@@ -280,7 +282,7 @@ public class Browse extends WhisktyleAbstract {
         upperButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         upperButton.setMaximumSize(new Dimension(120, 30)); // or whatever fits
 
-        upperPanel.add(upperLabel);
+        // upperPanel.add(upperLabel);
         // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
         // upperPanel.add(upperButton);
 
@@ -289,29 +291,29 @@ public class Browse extends WhisktyleAbstract {
 
     // TODO: Implement
     public JPanel createLowerClosetPanel() {
-        JPanel lowerPanel = new JPanel();
-        lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
-        lowerPanel.setOpaque(false);
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
+        upperPanel.setOpaque(false);
         //upperPanel.setBackground(Color.RED);
-        lowerPanel.setMaximumSize(new Dimension(475, 238)); // Half of 575
-        lowerPanel.setPreferredSize(new Dimension(475, 238));
+        upperPanel.setMaximumSize(new Dimension(475, 288)); // Half of 575
+        upperPanel.setPreferredSize(new Dimension(475, 288));
         // TODO: create constants for width + height
 
-        JLabel lowerLabel = new JLabel(createInnerClosetImg());
-        lowerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel upperLabel = new JLabel(createInnerClosetImg());
+        upperLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        lowerPanel.add(lowerLabel);
-        lowerPanel.add(Box.createRigidArea(new Dimension(0,50))); // spacing
+        // upperPanel.add(upperLabel);
+        // upperPanel.add(Box.createRigidArea(new Dimension(0, 5))); // spacing
         // upperPanel.add(upperButton);
 
-        return lowerPanel;
+        return upperPanel;
     }
 
     public ImageIcon createInnerClosetImg() {
         final ImageIcon closetIcon = new ImageIcon(
                 getClass().getResource(CLOSET_IMG_DIRECTORY + "inner-closet.png"));
 
-        Image closetImg = closetIcon.getImage().getScaledInstance(475, 238,
+        Image closetImg = closetIcon.getImage().getScaledInstance(475, 288,
                 Image.SCALE_SMOOTH);
 
         final ImageIcon finalClosetIcon = new ImageIcon(closetImg);
