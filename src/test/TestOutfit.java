@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.ImageIcon;
+
 import model.Outfit;
 import model.Pants;
 import model.Shirt;
@@ -15,7 +17,7 @@ public class TestOutfit {
 
     @BeforeEach
     void runBefore() {
-        testShirt = new Shirt("Plaid top");
+        testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
         testPants = new Pants("Plaid skirt");
         testShoes = new Shoes("Yellow flats");
 
@@ -38,7 +40,7 @@ public class TestOutfit {
 
     @Test
     void testChangeShirt() {
-        Shirt newShirt = new Shirt("Sheer white jacket");
+        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
 
         testOutfit.setShirt(newShirt);
         assertTrue(testOutfit.getShirt().equals(newShirt));
@@ -63,7 +65,7 @@ public class TestOutfit {
     @Test
     void testHashCodeAndEquals() {
         Outfit anotherOutfit = new Outfit("School Outfit", testShirt, testPants, testShoes);
-        Shirt newShirt = new Shirt("Sheer white jacket");
+        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
         Pants newPants = new Pants("Sheer white dress");
         Shoes newShoes = new Shoes("Silver heels");
 

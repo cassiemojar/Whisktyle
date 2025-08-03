@@ -23,8 +23,8 @@ public class Browse extends WhisktyleAbstract {
     public Browse() {
         setTitle("Whisktyle - Browse");
         getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180)));
-        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 250, 180)));
-        getCloset().getShirts().add(new Shirt("test 3", createImgIcon(IMG_DIRECTORY + "test-shirt-three.png", 250, 180)));
+        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180)));
+        
     }
 
     @Override

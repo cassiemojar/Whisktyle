@@ -9,14 +9,14 @@ import java.util.Map;
 // Represents a Closet that does not have a person or clothes initially.
 public class Closet {
     private Person person;
-    private LinkedHashSet<Shirt> shirtsList;
+    private List<Shirt> shirtsList;
     private LinkedHashSet<Pants> pantsList;
     private LinkedHashSet<Shoes> shoesList;
     private Map<String, List<Outfit>> savedOutfits;
 
     // EFFECTS: Creates a closet that has no person, clothing, or saved outfits.
     public Closet() {
-        shirtsList = new LinkedHashSet<>();
+        shirtsList = new ArrayList<>();
         pantsList = new LinkedHashSet<>();
         shoesList = new LinkedHashSet<>();
         savedOutfits = new HashMap<>();
@@ -62,7 +62,7 @@ public class Closet {
         throw new NoPersonException();
     }
 
-    public LinkedHashSet<Shirt> getShirts() {
+    public List<Shirt> getShirts() {
         return this.shirtsList;
     }
 

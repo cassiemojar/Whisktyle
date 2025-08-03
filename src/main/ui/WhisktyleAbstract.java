@@ -21,6 +21,9 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected Component horizontalSpacer = Box.createRigidArea(new Dimension(20, 0));
     protected Component verticalSpacer = Box.createRigidArea(new Dimension(0, 20));
 
+    protected int shirtIndex;
+    protected int pantsIndex;
+
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");

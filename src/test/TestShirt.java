@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.ImageIcon;
+
 import model.Shirt;
 
 public class TestShirt {
@@ -9,7 +11,7 @@ public class TestShirt {
 
     @BeforeEach
     void runBefore() {
-        testShirt = new Shirt("Plaid yellow top");
+        testShirt = new Shirt("Plaid yellow top", new ImageIcon("ui/img/test-shirt.png"));
     }
 
     @Test
@@ -21,5 +23,12 @@ public class TestShirt {
     void testSetName() {
         testShirt.setName("Sheer white jacket");
         assertEquals(testShirt.getName(), "Sheer white jacket");
+    }
+
+    @Test
+    void testSetImgIcon() {
+        ImageIcon testImg = new ImageIcon("ui/img/test-shirt-two.png");
+        testShirt.setImg(testImg);
+        assertTrue(testShirt.getImg().equals(testImg));
     }
 }

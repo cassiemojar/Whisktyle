@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.ImageIcon;
+
 import model.Outfit;
 import model.Pants;
 import model.Person;
@@ -18,7 +20,7 @@ public class TestPerson {
 
     @BeforeEach
     void runBefore() {
-        testShirt = new Shirt("Plaid top");
+        testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
         testPants = new Pants("Plaid skirt");
         testShoes = new Shoes("Yellow flats");
 
@@ -45,7 +47,7 @@ public class TestPerson {
 
     @Test
     void testChangeShirt() {
-        Shirt newShirt = new Shirt("Sheer white jacket");
+        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
         Outfit newOutfit = new Outfit("Date Outfit", newShirt, testPants, testShoes);
 
         cher.setShirt(newShirt);

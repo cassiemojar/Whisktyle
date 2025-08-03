@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.ImageIcon;
+
 import model.Closet;
 import model.NoPersonException;
 import model.Outfit;
@@ -33,19 +35,19 @@ public class TestCloset {
     void runBefore() {
         testCloset = new Closet();
 
-        testShirt1 = new Shirt("Plaid top");
+        testShirt1 = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
         testPants1 = new Pants("Plaid skirt");
         testShoes1 = new Shoes("Yellow flats");
 
         testOutfit1 = new Outfit("School outfit", testShirt1, testPants1, testShoes1);
 
-        testShirt2 = new Shirt("Red top");
+        testShirt2 = new Shirt("Red top", new ImageIcon("ui/img/test-shirt.png"));
         testPants2 = new Pants("Red skirt");
         testShoes2 = new Shoes("Red flats");
 
         testOutfit2 = new Outfit("Second school outfit", testShirt2, testPants2, testShoes2);
 
-        testShirt3 = new Shirt("Sheer white jacket");
+        testShirt3 = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
         testPants3 = new Pants("Sheer white dress");
         testShoes3 = new Shoes("Silver heels");
 
