@@ -10,15 +10,15 @@ import java.util.Map;
 public class Closet {
     private Person person;
     private List<Shirt> shirtsList;
-    private LinkedHashSet<Pants> pantsList;
-    private LinkedHashSet<Shoes> shoesList;
+    private List<Pants> pantsList;
+    private List<Shoes> shoesList;
     private Map<String, List<Outfit>> savedOutfits;
 
     // EFFECTS: Creates a closet that has no person, clothing, or saved outfits.
     public Closet() {
         shirtsList = new ArrayList<>();
-        pantsList = new LinkedHashSet<>();
-        shoesList = new LinkedHashSet<>();
+        pantsList = new ArrayList<>();
+        shoesList = new ArrayList<>();
         savedOutfits = new HashMap<>();
     }
 
@@ -66,11 +66,11 @@ public class Closet {
         return this.shirtsList;
     }
 
-    public LinkedHashSet<Pants> getPants() {
+    public List<Pants> getPants() {
         return this.pantsList;
     }
 
-    public LinkedHashSet<Shoes> getShoes() {
+    public List<Shoes> getShoes() {
         return this.shoesList;
     }
 

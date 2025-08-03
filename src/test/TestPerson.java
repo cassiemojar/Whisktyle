@@ -21,7 +21,7 @@ public class TestPerson {
     @BeforeEach
     void runBefore() {
         testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants = new Pants("Plaid skirt");
+        testPants = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
         testShoes = new Shoes("Yellow flats");
 
         testOutfit = new Outfit("Default Outfit", testShirt, testPants, testShoes);
@@ -60,7 +60,7 @@ public class TestPerson {
 
     @Test
     void testChangePants() {
-        Pants newPants = new Pants("Sheer white dress");
+        Pants newPants = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
         Outfit newOutfit = new Outfit("Date Outfit", testShirt, newPants, testShoes);
 
         cher.setPants(newPants);

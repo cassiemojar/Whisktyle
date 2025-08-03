@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 
+import model.Pants;
 import model.Shirt;
 
 //import model.Shirt;
@@ -19,12 +20,14 @@ public class Browse extends WhisktyleAbstract {
 
     private static final int INNER_CLOSET_WIDTH = 450;
 
+    private JLabel shirtLabel;
+    private JLabel pantsLabel;
+    private JLabel shoesLabel;
+
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
         setTitle("Whisktyle - Browse");
-        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180)));
-        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180)));
-        
+
     }
 
     @Override
@@ -50,31 +53,57 @@ public class Browse extends WhisktyleAbstract {
     }
 
     // EFFECTS: creates and returns inner menu buttons
-    public JButton createInnerMenuButton(String imgPath) {
-        return createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
+    public JButton createInnerMenuButton(JPanel panel, String imgPath, String clothing, String direction) {
+        JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
+        button.addActionListener(e -> handleInnerButton(button, panel, clothing, direction));
+        return button;
     }
 
-    public void handleInnerButton(JButton menuButton, JPanel panel, String clothing, String direction, int index) {
-        if (direction.equals("Right")) {
-            index++;
-        } else {
-            if (index != 0) {
-                index--;
+    public void handleInnerButton(JButton menuButton, JPanel panel, String clothing, String direction) {
+
+        if (clothing.equals("Shirt")) {
+            if (direction.equals("Right")) {
+                if (shirtIndex < getCloset().getShirts().size() - 1) {
+                    shirtIndex++;
+                    System.out.println("Right");
+                    setShirtLabel();
+                }
+            } else {
+                if (shirtIndex != 0) {
+                    shirtIndex--;
+                    System.out.println("Left");
+                    setShirtLabel();
+                }
             }
-        }
-
-        switch (clothing) {
-            case "Shirt":
-                menuButton.addActionListener(e -> setShirtUI(panel));
-
-            case "Pants":
-                menuButton.addActionListener(e -> setPantsUI(panel));
+        } else {
+            if (direction.equals("Right")) {
+                if (pantsIndex < getCloset().getPants().size() - 1) {
+                    pantsIndex++;
+                    System.out.println("Right");
+                    setPantsLabel();
+                }
+            } else {
+                if (pantsIndex != 0) {
+                    pantsIndex--;
+                    System.out.println("Left");
+                    setPantsLabel();
+                }
+            }
         }
     }
 
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
+        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)));
+        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 250, 200)));
+        getCloset().getShirts()
+                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-three.png", 250, 200)));
+
+        getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 200, 250)));
+
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
         background.add(setClosetPanel(), BorderLayout.CENTER);
@@ -150,41 +179,47 @@ public class Browse extends WhisktyleAbstract {
     }
 
     // EFFECTS: creates and returns a panel with the inner buttons added
-    public JPanel setClosetButtonPanel() {
+    public JPanel setClosetButtonPanel(JPanel panel, String clothing) {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        buttonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "left-button.png"));
-        buttonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "play-button.png"));
-        buttonPanel.add(createInnerMenuButton(BUTTON_IMG_DIRECTORY + "right-button.png"));
+        buttonPanel.add(createInnerMenuButton(panel, BUTTON_IMG_DIRECTORY + "left-button.png", clothing, "Left"));
+        buttonPanel.add(createInnerMenuButton(panel, BUTTON_IMG_DIRECTORY + "play-button.png", clothing, "Play"));
+        buttonPanel.add(createInnerMenuButton(panel, BUTTON_IMG_DIRECTORY + "right-button.png", clothing, "Right"));
         return buttonPanel;
     }
 
-    public JPanel setShirtUI(JPanel panel) {
+    public void setShirtLabel() {
+        shirtLabel.setIcon(getCloset().getShirts().get(shirtIndex).getImg());
+    }
+
+    public void setPantsLabel() {
+        pantsLabel.setIcon(getCloset().getPants().get(pantsIndex).getImg());
+    }
+
+    public void setShirtUI(JPanel panel) {
+        shirtLabel = new JLabel();
+        setShirtLabel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        JLabel shirtLabel = new JLabel();
-        shirtLabel.setIcon(createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 180));
         panel.add(shirtLabel, gbc);
         panel.setMaximumSize(panel.getPreferredSize());
-        return panel;
     }
 
     public void setPantsUI(JPanel panel) {
+        pantsLabel = new JLabel();
+        setPantsLabel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        JLabel shirtLabel = new JLabel();
-        shirtLabel.setIcon(
-                createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250));
-        panel.add(shirtLabel, gbc);
+        panel.add(pantsLabel, gbc);
         panel.setMaximumSize(panel.getPreferredSize());
     }
 
@@ -193,9 +228,9 @@ public class Browse extends WhisktyleAbstract {
         JPanel innerPanel = createInnerComponent(); // upper panel centered in a wrapper
         JPanel upperWrapper = createWrapper();
         JPanel upperPanel = createUpperClosetPanel();
-        upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
-        upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
-        upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
+        upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+        upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+        upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         upperPanel.setBackground(Color.RED);
         upperPanel.setOpaque(true);
         setShirtUI(upperPanel);
@@ -203,7 +238,7 @@ public class Browse extends WhisktyleAbstract {
         upperWrapper.add(upperPanel);
         innerPanel.add(upperWrapper);
 
-        innerPanel.add(setClosetButtonPanel());
+        innerPanel.add(setClosetButtonPanel(upperPanel, "Shirt"));
 
         JPanel lowerWrapper = createWrapper(); // Lower panel centered in a wrapper
         JPanel lowerPanel = createLowerClosetPanel();
@@ -217,7 +252,7 @@ public class Browse extends WhisktyleAbstract {
         lowerWrapper.add(lowerPanel);
         innerPanel.add(lowerWrapper);
 
-        innerPanel.add(setClosetButtonPanel());
+        innerPanel.add(setClosetButtonPanel(lowerPanel, "Pants"));
         innerPanel.add(Box.createRigidArea(new Dimension(0, 7)));
 
         return innerPanel;
@@ -228,8 +263,8 @@ public class Browse extends WhisktyleAbstract {
         upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
         upperPanel.setOpaque(false);
         // upperPanel.setBackground(Color.RED);
-        upperPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100)); // Half of 575
-        upperPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 100));
+        upperPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50)); // Half of 575
+        upperPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 
         return upperPanel;
     }

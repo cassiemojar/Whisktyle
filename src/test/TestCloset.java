@@ -36,19 +36,19 @@ public class TestCloset {
         testCloset = new Closet();
 
         testShirt1 = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants1 = new Pants("Plaid skirt");
+        testPants1 = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
         testShoes1 = new Shoes("Yellow flats");
 
         testOutfit1 = new Outfit("School outfit", testShirt1, testPants1, testShoes1);
 
         testShirt2 = new Shirt("Red top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants2 = new Pants("Red skirt");
+        testPants2 = new Pants("Red skirt", new ImageIcon("ui/img/test-pants.png"));
         testShoes2 = new Shoes("Red flats");
 
         testOutfit2 = new Outfit("Second school outfit", testShirt2, testPants2, testShoes2);
 
         testShirt3 = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
-        testPants3 = new Pants("Sheer white dress");
+        testPants3 = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
         testShoes3 = new Shoes("Silver heels");
 
         testOutfit3 = new Outfit("Date outfit", testShirt3, testPants3, testShoes3);
