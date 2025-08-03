@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import model.Closet;
 
@@ -155,5 +156,22 @@ public abstract class WhisktyleAbstract extends JFrame {
         ImageIcon scaledButtonIcon = new ImageIcon(scaledButtonImg);
 
         return scaledButtonIcon;
+    }
+
+    // EFFECTS: sets opacity of image icon and returns
+    public ImageIcon makeImageTransparent(ImageIcon icon, float opacity) {
+        int w = icon.getIconWidth();
+        int h = icon.getIconHeight();
+
+        BufferedImage transparentImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = transparentImage.createGraphics();
+
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+
+        // Draw original image with opacity
+        g2d.drawImage(icon.getImage(), 0, 0, null);
+        g2d.dispose();
+
+        return new ImageIcon(transparentImage);
     }
 }

@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.List;
+
 import javax.swing.*;
 
 import model.Pants;
@@ -60,33 +62,45 @@ public class Browse extends WhisktyleAbstract {
     }
 
     public void handleInnerButton(JButton menuButton, JPanel panel, String clothing, String direction) {
-
         if (clothing.equals("Shirt")) {
             if (direction.equals("Right")) {
-                if (shirtIndex < getCloset().getShirts().size() - 1) {
+                if (shirtIndex < getCloset().getShirts().size() - 1 && shirtIndex >= 0) {
                     shirtIndex++;
                     System.out.println("Right");
                     setShirtLabel();
                 }
-            } else {
-                if (shirtIndex != 0) {
+            } else if (direction.equals("Left")) {
+                if (shirtIndex > 0) {
                     shirtIndex--;
                     System.out.println("Left");
                     setShirtLabel();
                 }
+            } else { // play
+                if (shirtIndex != -1) {
+                    setSaveShirtLabel();
+                    shirtIndex = -1;
+
+                }
+
             }
         } else {
             if (direction.equals("Right")) {
-                if (pantsIndex < getCloset().getPants().size() - 1) {
+                if (pantsIndex < getCloset().getPants().size() - 1 && pantsIndex >= 0) {
                     pantsIndex++;
                     System.out.println("Right");
                     setPantsLabel();
                 }
-            } else {
+            } else if (direction.equals("Left")) {
                 if (pantsIndex != 0) {
                     pantsIndex--;
                     System.out.println("Left");
                     setPantsLabel();
+                }
+            } else { // play
+                if (pantsIndex != -1) {
+                    setSavePantsLabel();
+                    pantsIndex = -1;
+
                 }
             }
         }
@@ -189,14 +203,40 @@ public class Browse extends WhisktyleAbstract {
         return buttonPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the label icon to the shirt the index is currently on
     public void setShirtLabel() {
-        shirtLabel.setIcon(getCloset().getShirts().get(shirtIndex).getImg());
+        List<Shirt> shirts = getCloset().getShirts();
+        if (!shirts.isEmpty()) {
+            shirtLabel.setIcon(shirts.get(shirtIndex).getImg());
+        }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the label icon to the pants the index is currently on
     public void setPantsLabel() {
-        pantsLabel.setIcon(getCloset().getPants().get(pantsIndex).getImg());
+        List<Pants> pants = getCloset().getPants();
+        if (!pants.isEmpty()) {
+            pantsLabel.setIcon(pants.get(pantsIndex).getImg());
+        }
     }
 
+    // EFFECTS: makes the shirt label icon the index is currently on transparent
+    public void setSaveShirtLabel() {
+        ImageIcon originalIcon = getCloset().getShirts().get(shirtIndex).getImg();
+        ImageIcon transparentIcon = makeImageTransparent(originalIcon, 0.8f);
+        shirtLabel.setIcon(transparentIcon);
+    }
+
+    // EFFECTS: makes the pants label icon the index is currently on transparent
+    public void setSavePantsLabel() {
+        ImageIcon originalIcon = getCloset().getPants().get(pantsIndex).getImg();
+        ImageIcon transparentIcon = makeImageTransparent(originalIcon, 0.8f);
+        pantsLabel.setIcon(transparentIcon);
+    }
+
+
+    // EFFECTS: creates adds shirt label to panel with centering
     public void setShirtUI(JPanel panel) {
         shirtLabel = new JLabel();
         setShirtLabel();
@@ -210,6 +250,7 @@ public class Browse extends WhisktyleAbstract {
         panel.setMaximumSize(panel.getPreferredSize());
     }
 
+    // EFFECTS: creates adds pants label to panel with centering
     public void setPantsUI(JPanel panel) {
         pantsLabel = new JLabel();
         setPantsLabel();
@@ -258,6 +299,7 @@ public class Browse extends WhisktyleAbstract {
         return innerPanel;
     }
 
+    // EFFECTS: creates and returns upper closet panel
     public JPanel createUpperClosetPanel() {
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
@@ -269,6 +311,7 @@ public class Browse extends WhisktyleAbstract {
         return upperPanel;
     }
 
+    // EFFECTS: creates and returns lower closet panel
     public JPanel createLowerClosetPanel() {
         JPanel lowerPanel = new JPanel();
         lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
