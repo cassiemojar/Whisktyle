@@ -6,6 +6,8 @@ import javax.swing.plaf.ColorUIResource;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 
 import model.Closet;
 
@@ -64,6 +66,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     // EFFECTS: returns instance of BackgroundImage
     public BackgroundImage setBackgroundImage() {
+
         Image img = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "background.png")).getImage();
         background = new BackgroundImage(img);
         return background;
@@ -146,6 +149,20 @@ public abstract class WhisktyleAbstract extends JFrame {
         final ImageIcon finalIcon = new ImageIcon(img);
 
         return finalIcon;
+    }
+
+    // EFFECTS: creates, scales img from the absolute path
+    public ImageIcon createImgIconFromResource(String filePath, int width, int height) {
+        File file = new File(filePath);
+
+        // if (!file.exists()) {
+        //     System.err.println("File not found: " + filePath);
+        //     return null;
+        // }
+
+        ImageIcon icon = new ImageIcon(file.getAbsolutePath());
+        Image scaledImg = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
     }
 
     // EFFECTS: creates and returns inner menu buttons
