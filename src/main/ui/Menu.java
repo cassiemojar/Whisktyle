@@ -91,13 +91,6 @@ public class Menu extends WhisktyleAbstract {
 
     }
 
-    // EFFECTS: closes this frame, sends to loading frame
-    public void setNewFrame(String stringUI) {
-        Loading loadingUI = new Loading(stringUI);
-        dispose();
-        loadingUI.setVisible(true);
-    }
-
     // EFFECTS: sets closet label to closet open image when mouse hovers, close
     // close image when not
     public JPanel setClosetUI() {

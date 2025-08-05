@@ -87,6 +87,11 @@ public class Loading extends WhisktyleAbstract {
                 Load loadUI = new Load();
                 loadUI.setVisible(true);
                 break;
+
+            case "Dress Me":
+                DressMe dressMeUI = new DressMe();
+                dressMeUI.setVisible(true);
+                break;
         }
 
         dispose();

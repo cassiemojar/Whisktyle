@@ -133,6 +133,13 @@ public abstract class WhisktyleAbstract extends JFrame {
         return titlePanel;
     }
 
+    // EFFECTS: closes this frame, sends to loading frame
+    public void setNewFrame(String stringUI) {
+        Loading loadingUI = new Loading(stringUI);
+        dispose();
+        loadingUI.setVisible(true);
+    }
+
     // EFFECTS: returns instance of closet
     public Closet getCloset() {
         return WhisktyleController.getInstance().getCloset();
@@ -156,8 +163,8 @@ public abstract class WhisktyleAbstract extends JFrame {
         File file = new File(filePath);
 
         // if (!file.exists()) {
-        //     System.err.println("File not found: " + filePath);
-        //     return null;
+        // System.err.println("File not found: " + filePath);
+        // return null;
         // }
 
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());

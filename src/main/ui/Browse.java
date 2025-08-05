@@ -89,6 +89,7 @@ public class Browse extends WhisktyleAbstract {
                 }
 
             case "Dress Me":
+                setNewFrame("Dress Me");
         }
     }
 
