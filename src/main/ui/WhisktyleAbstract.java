@@ -1,6 +1,9 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.ColorUIResource;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -25,9 +28,12 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected int shirtIndex;
     protected int pantsIndex;
 
+    private static final Color DARK_BLUE = Color.decode("#44657E");
+
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
+        setCustomOptionPanes();
         setupFrame();
 
     }
@@ -43,6 +49,17 @@ public abstract class WhisktyleAbstract extends JFrame {
         setUI();
         setVisible(true);
 
+    }
+
+    // EFFECTS: modifies colours of JOptionPanes
+    public void setCustomOptionPanes() {
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+
+        UIManager.put("Panel.background", DARK_BLUE);
+        UIManager.put("OptionPane.border", new LineBorder(Color.BLACK, 10));
+
+        UIManager.put("Button.background", Color.DARK_GRAY);
+        UIManager.put("Button.foreground", Color.WHITE);
     }
 
     // EFFECTS: returns instance of BackgroundImage

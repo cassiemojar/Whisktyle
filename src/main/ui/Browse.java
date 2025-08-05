@@ -13,6 +13,7 @@ import java.awt.*;
 //import java.awt.event.*;
 
 // Represents a Browse class 
+// TODO: make a separate class to lessen methods
 public class Browse extends WhisktyleAbstract {
     private static final int INNER_BUTTON_WIDTH = 50;
     private static final int INNER_BUTTON_HEIGHT = 35;
@@ -39,19 +40,21 @@ public class Browse extends WhisktyleAbstract {
         titlePanel.setOpaque(false);
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
         titlePanel.add(Box.createHorizontalGlue());
-        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "add-button.png"));
+        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "add-button.png", "Add"));
         titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
         titlePanel.add(setTitle());
         titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
-        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "dress-me-button.png"));
+        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "dress-me-button.png", "Dress Me"));
         titlePanel.add(Box.createHorizontalGlue());
 
         return titlePanel;
     }
 
     // EFFECTS: creates and returns menu buttons
-    public JButton createMenuButton(String imgPath) {
-        return createButton(imgPath, BUTTON_WIDTH, BUTTON_HEIGHT);
+    public JButton createMenuButton(String imgPath, String selection) {
+        JButton button = createButton(imgPath, BUTTON_WIDTH, BUTTON_HEIGHT);
+        button.addActionListener(e -> handleMenuButton(selection));
+        return button;
     }
 
     // EFFECTS: creates and returns inner menu buttons
@@ -67,6 +70,19 @@ public class Browse extends WhisktyleAbstract {
             handleShirtButton(direction);
         } else {
             handlePantsButton(direction);
+        }
+    }
+
+    // EFFECTS: handles selection of the menu buttons
+    public void handleMenuButton(String selection) {
+        Object[] options = { "SHIRT", "PANTS", "SHOES"};
+
+        switch (selection) {
+            case "Add":
+                int choice = JOptionPane.showOptionDialog(null, "Choose which clothing to add:", "Add Clothing",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            case "Dress Me":
         }
     }
 
@@ -283,7 +299,7 @@ public class Browse extends WhisktyleAbstract {
         upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        //upperPanel.setBackground(Color.RED);
+        // upperPanel.setBackground(Color.RED);
         upperPanel.setOpaque(true);
         setShirtUI(upperPanel);
 
