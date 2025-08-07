@@ -41,26 +41,29 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         fileChooser.setFileFilter(
                 new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
 
-        int result = fileChooser.showOpenDialog(null); // opens file dialogue to see if cancel or accept
+        int result = JFileChooser.CANCEL_OPTION; // opens file dialogue to see if cancel or accept
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            String shirtName = JOptionPane.showInputDialog(this, "Enter a name for this Person:", "Name",
-                    JOptionPane.PLAIN_MESSAGE);
-
-            if (shirtName != null && !shirtName.trim().isEmpty()) {
-                ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
-                Shirt newShirt = new Shirt(shirtName.trim(), shirtImage);
-                getCloset().getShirts().add(newShirt);
-                shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
-                setShirtLabel();
-                JOptionPane.showMessageDialog(this, "Shirt \"" + shirtName + "\" now added to your closet!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
-                        JOptionPane.WARNING_MESSAGE);
-            }
+        while (result != JFileChooser.APPROVE_OPTION) { // Loops so can't cancel
+            result = fileChooser.showOpenDialog(null);
         }
+
+        String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+        String name = JOptionPane.showInputDialog(this, "Enter a name for this Person:", "Name",
+                JOptionPane.PLAIN_MESSAGE);
+
+        if (name != null && !name.trim().isEmpty()) {
+            ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
+            Shirt newShirt = new Shirt(name.trim(), shirtImage);
+            getCloset().getShirts().add(newShirt);
+            shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
+            setShirtLabel();
+            JOptionPane.showMessageDialog(this, "Shirt \"" + name + "\" now added to your closet!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     // EFFECTS: handles the inner buttons that was selected inside the closet

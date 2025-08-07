@@ -1,23 +1,24 @@
 package model;
 
+import javax.swing.ImageIcon;
 
 // Represents a Person that is initially set to default shirt, pants, and shoes
 public class Person {
     private String name;
     private Outfit outfit;
-
+    private ImageIcon img;
 
     // EFFECTS: creates a person with a default shirt, pants, shoes
-    public Person(String name, Shirt shirt, Pants pants, Shoes shoes) {
+    public Person(String name, ImageIcon img, Shirt shirt, Pants pants, Shoes shoes) {
         this.name = name;
+        this.img = img;
         outfit = new Outfit("Default Outfit", shirt, pants, shoes);
     }
-
 
     // Setters and getters below
     public void setName(String name) {
         this.name = name;
-    } 
+    }
 
     public void setShirt(Shirt shirt) {
         outfit.setShirt(shirt);
@@ -31,6 +32,9 @@ public class Person {
         outfit.setShoes(shoes);
     }
 
+    public void setImg(ImageIcon img) {
+        this.img = img;
+    }
 
     public String getName() {
         return this.name;
@@ -52,5 +56,8 @@ public class Person {
         return outfit;
     }
 
+    public ImageIcon getImg() {
+        return img;
+    }
 
 }

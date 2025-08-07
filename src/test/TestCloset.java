@@ -31,6 +31,8 @@ public class TestCloset {
     private Pants testPants3;
     private Shoes testShoes3;
 
+    private ImageIcon testImg;
+
     @BeforeEach
     void runBefore() {
         testCloset = new Closet();
@@ -52,6 +54,8 @@ public class TestCloset {
         testShoes3 = new Shoes("Silver heels");
 
         testOutfit3 = new Outfit("Date outfit", testShirt3, testPants3, testShoes3);
+
+        testImg = new ImageIcon("ui/img/test-person.png");
     }
 
     @Test
@@ -77,7 +81,7 @@ public class TestCloset {
 
     @Test
     void testSetPerson() {
-        Person testPerson2 = new Person("Dionne", testShirt3, testPants3, testShoes3);
+        Person testPerson2 = new Person("Dionne", testImg, testShirt3, testPants3, testShoes3);
         testCloset.setPerson(testPerson2);
         try {
             assertTrue(testCloset.getPerson().equals(testPerson2));

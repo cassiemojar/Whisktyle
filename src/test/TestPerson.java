@@ -17,16 +17,18 @@ public class TestPerson {
     private Pants testPants;
     private Shoes testShoes;
     private Outfit testOutfit;
+    private ImageIcon testImg;
 
     @BeforeEach
     void runBefore() {
         testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
         testPants = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
         testShoes = new Shoes("Yellow flats");
+        testImg = new ImageIcon("ui/img/test-person.png");
 
         testOutfit = new Outfit("Default Outfit", testShirt, testPants, testShoes);
 
-        cher = new Person("Cher", testShirt, testPants, testShoes);
+        cher = new Person("Cher", testImg, testShirt, testPants, testShoes);
 
     }
 
@@ -37,6 +39,7 @@ public class TestPerson {
         assertTrue(cher.getPants().equals(testPants));
         assertTrue(cher.getShoes().equals(testShoes));
         assertTrue(cher.getOutfit().equals(testOutfit));
+        assertTrue(cher.getImg().equals(testImg));
     }
 
     @Test
@@ -82,5 +85,12 @@ public class TestPerson {
         assertTrue(cher.getShoes().equals(newShoes));
         assertFalse(cher.getOutfit().equals(testOutfit));
         assertTrue(cher.getOutfit().equals(newOutfit));
+    }
+
+    @Test
+    void testChangeImg() {
+        ImageIcon newImg = new ImageIcon("ui/img/test-person-two.png");
+        cher.setImg(newImg);
+        assertTrue(cher.getImg().equals(newImg));
     }
 }
