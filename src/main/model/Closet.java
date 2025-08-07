@@ -9,8 +9,8 @@ import java.util.Map;
 // Represents a Closet that does not have a person or clothes initially.
 public class Closet {
     private Person person;
-    private List<Shirt> shirtsList;
-    private List<Pants> pantsList;
+    private List<Clothing> shirtsList;
+    private List<Clothing> pantsList;
     private List<Shoes> shoesList;
     private Map<String, List<Outfit>> savedOutfits;
 
@@ -62,11 +62,11 @@ public class Closet {
         throw new NoPersonException();
     }
 
-    public List<Shirt> getShirts() {
+    public List<Clothing> getShirts() {
         return this.shirtsList;
     }
 
-    public List<Pants> getPants() {
+    public List<Clothing> getPants() {
         return this.pantsList;
     }
 

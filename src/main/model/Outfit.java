@@ -3,12 +3,12 @@ package model;
 // Represents an outfit with a shirt, pants, shoes together
 public class Outfit {
     private String name;
-    private Shirt shirt;
-    private Pants pants;
+    private Clothing shirt;
+    private Clothing pants;
     private Shoes shoes;
 
     // EFFECTS: Creates an outfit with goven shirt, pants, shoes
-    public Outfit(String name, Shirt shirt, Pants pants, Shoes shoes) {
+    public Outfit(String name, Clothing shirt, Clothing pants, Shoes shoes) {
         this.name = name;
         this.shirt = shirt;
         this.pants = pants;
@@ -37,11 +37,11 @@ public class Outfit {
         return this.name;
     }
 
-    public Shirt getShirt() {
+    public Clothing getShirt() {
         return this.shirt;
     }
 
-    public Pants getPants() {
+    public Clothing getPants() {
         return this.pants;
     }
 

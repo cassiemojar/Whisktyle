@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import model.Clothing;
 import model.Pants;
 import model.Person;
 import model.Shirt;
@@ -57,51 +58,8 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
         // From here its for choosing shirt
 
-        JFileChooser fileChooserShirt = new JFileChooser();
-        fileChooserShirt.setDialogTitle("Select a default shirt image");
-        fileChooserShirt.setAcceptAllFileFilterUsed(false); // Need only img files
-        fileChooserShirt.setFileFilter(
-                new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
-
-        int resultShirt = JFileChooser.CANCEL_OPTION; // opens file dialogue to see if cancel or accept
-
-        while (resultShirt != JFileChooser.APPROVE_OPTION) { // Loops so can't cancel
-            resultShirt = fileChooserShirt.showOpenDialog(null);
-        }
-
-        String imagePathShirt = fileChooserShirt.getSelectedFile().getAbsolutePath();
-
-        String shirtName = JOptionPane.showInputDialog(this, "Enter a name for this shirt:", "Shirt's name",
-                JOptionPane.PLAIN_MESSAGE);
-
-        ImageIcon shirtImg = createImgIconFromResource(imagePathShirt, 200, 250);
-        Shirt shirt = new Shirt(shirtName, shirtImg);
-        getCloset().getShirts().add(shirt);
-        shirtIndex = getCloset().getShirts().size() - 1; // Show the new pants
-        setShirtLabel();
-
-        // From here its pants
-        JFileChooser fileChooserPants = new JFileChooser();
-        fileChooserPants.setDialogTitle("Select a pants image");
-        fileChooserPants.setAcceptAllFileFilterUsed(false); // Need only img files
-        fileChooserPants.setFileFilter(
-                new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
-
-        int resultPants = JFileChooser.CANCEL_OPTION; // opens file dialogue to see if cancel or accept
-
-        while (resultPants != JFileChooser.APPROVE_OPTION) { // Loops so can't cancel
-            resultPants = fileChooserPants.showOpenDialog(null);
-        }
-
-        String imagePathPants = fileChooserPants.getSelectedFile().getAbsolutePath();
-        String pantsName = JOptionPane.showInputDialog(this, "Enter a name for these pants:", "Pants' name",
-                JOptionPane.PLAIN_MESSAGE);
-
-        ImageIcon pantsImg = createImgIconFromResource(imagePathPants, 200, 250);
-        Pants pants = new Pants(pantsName, pantsImg);
-        getCloset().getPants().add(pants);
-        pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
-        setPantsLabel();
+        Clothing shirt = addNewClothing("Shirt", getCloset().getShirts());
+        Clothing pants = addNewClothing("Pants", getCloset().getPants());
 
         if (name != null && !name.trim().isEmpty()) {
             ImageIcon personImg = createImgIconFromResource(imagePath, 250, 200);
@@ -158,6 +116,54 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
             case "SHOES":
         }
+    }
+
+    // EFFECTS: handles adding clothing
+    public Clothing addNewClothing(String clothing, List<Clothing> listClothing) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select a " + clothing + " Image");
+        fileChooser.setAcceptAllFileFilterUsed(false); // Need only img files
+        fileChooser.setFileFilter(
+                new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
+        int result = fileChooser.showOpenDialog(null); // opens file dialogue to see if cancel or accept
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            String name = JOptionPane.showInputDialog(this, "Enter a name for this clothing:", "Clothing Name",
+                    JOptionPane.PLAIN_MESSAGE);
+
+            return helperAddClothing(clothing, name, imagePath);
+        }
+        return null;
+    }
+
+    public Clothing helperAddClothing(String clothing, String name, String imagePath) {
+        if (name != null && !name.trim().isEmpty()) {
+            switch (clothing) {
+                case "Shirt":
+                    ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
+                    Shirt newShirt = new Shirt(name.trim(), shirtImage);
+                    getCloset().getShirts().add(newShirt);
+                    shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
+                    setShirtLabel();
+                    JOptionPane.showMessageDialog(this, "Shirt \"" + name + "\" now added to your closet!");
+                    return newShirt;
+
+                case "Pants":
+                    ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
+                    Pants newPants = new Pants(name.trim(), pantsImage);
+                    getCloset().getPants().add(newPants);
+                    pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
+                    setPantsLabel();
+                    JOptionPane.showMessageDialog(this, "Pants \"" + name + "\" now added to your closet!");
+                    return newPants;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        return null;
     }
 
     // EFFECTS: creates a JFileChooser panel for user to select shirt img and name
@@ -270,7 +276,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     // MODIFIES: this
     // EFFECTS: sets the label icon to the shirt the index is currently on
     public void setShirtLabel() {
-        List<Shirt> shirts = getCloset().getShirts();
+        List<Clothing> shirts = getCloset().getShirts();
         if (!shirts.isEmpty()) {
             shirtLabel.setIcon(shirts.get(shirtIndex).getImg());
         }
@@ -279,7 +285,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     // MODIFIES: this
     // EFFECTS: sets the label icon to the pants the index is currently on
     public void setPantsLabel() {
-        List<Pants> pants = getCloset().getPants();
+        List<Clothing> pants = getCloset().getPants();
         if (!pants.isEmpty()) {
             pantsLabel.setIcon(pants.get(pantsIndex).getImg());
         }

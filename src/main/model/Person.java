@@ -9,7 +9,7 @@ public class Person {
     private ImageIcon img;
 
     // EFFECTS: creates a person with a default shirt, pants, shoes
-    public Person(String name, ImageIcon img, Shirt shirt, Pants pants, Shoes shoes) {
+    public Person(String name, ImageIcon img, Clothing shirt, Clothing pants, Shoes shoes) {
         this.name = name;
         this.img = img;
         outfit = new Outfit("Default Outfit", shirt, pants, shoes);
@@ -40,11 +40,11 @@ public class Person {
         return this.name;
     }
 
-    public Shirt getShirt() {
+    public Clothing getShirt() {
         return outfit.getShirt();
     }
 
-    public Pants getPants() {
+    public Clothing getPants() {
         return outfit.getPants();
     }
 
