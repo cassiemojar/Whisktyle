@@ -72,7 +72,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
             JOptionPane.showMessageDialog(this, "Person \"" + name + "\" now associated with your closet!");
         } else {
-            JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
+            JOptionPane.showMessageDialog(this, "Person not added. No name entered.", "Cancelled",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -80,11 +80,14 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     // EFFECTS: handles the inner buttons that was selected inside the closet
     public void handleInnerButton(JButton menuButton, String clothing, String direction) {
         if (clothing.equals("Shirt")) {
-            handleShirtButton(direction);
+            handleInnerButtons(clothing, direction, getCloset().getShirts(), shirtIndex, shirtLabel);
         } else {
-            handlePantsButton(direction);
+            handleInnerButtons(clothing, direction, getCloset().getPants(), pantsIndex, pantsLabel);
         }
     }
+
+    // String clothing, String direction, List<Clothing> listClothing, int index,
+    // JLabel clothingLabel
 
     // EFFECTS: handles selection of the menu buttons
     public void handleMenuButton(String selection) {
@@ -147,6 +150,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         if (name != null && !name.trim().isEmpty()) {
             switch (clothing) {
                 case "Shirt":
+                    JOptionPane.showMessageDialog(this, "Shirt \"" + name + "\" now added to your closet!");
                     return addsToClothingList("Shirt", imagePath, name);
 
                 case "Pants":
@@ -168,97 +172,59 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 Clothing newShirt = new Shirt(name.trim(), shirtImage);
                 getCloset().getShirts().add(newShirt);
                 shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
-                setShirtLabel();
+                setClothingLabel(getCloset().getShirts(), shirtLabel, shirtIndex);
                 return newShirt;
             case "Pants":
                 ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
                 Clothing newPants = new Pants(name.trim(), pantsImage);
                 getCloset().getPants().add(newPants);
                 pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
-                setPantsLabel();
+                setClothingLabel(getCloset().getPants(), pantsLabel, pantsIndex);
                 return newPants;
 
         }
         return null;
     }
 
-    // EFFECTS: handles the button selection for shirt
-    public void handleShirtButton(String direction) {
-        if (direction.equals("Right")) {
-            if (shirtIndex < getCloset().getShirts().size() - 1 && shirtIndex >= 0) {
-                shirtIndex++;
-                System.out.println("Right");
-                setShirtLabel();
-            }
-        } else if (direction.equals("Left")) {
-            if (shirtIndex > 0) {
-                shirtIndex--;
-                System.out.println("Left");
-                setShirtLabel();
-            }
-        } else { // play
-            if (shirtIndex != -1) {
-                setSaveShirtLabel();
-                shirtIndex = -1;
+    public void handleInnerButtons(String clothing, String direction, List<Clothing> listClothing, int index,
+            JLabel clothingLabel) {
+        switch (direction) {
+            case "Right":
+                if (index < listClothing.size() - 1 && index >= 0) {
+                    shirtIndex++;
+                    System.out.println("Right");
+                    setClothingLabel(listClothing, clothingLabel, index);
+                    break;
+                }
 
-            }
+            case "Left":
+                if (index > 0) {
+                    index--;
+                    System.out.println("Left");
+                    setClothingLabel(listClothing, clothingLabel, index);
+                    break;
+                }
 
+            case "Play":
+                if (index != -1) {
+                    saveLabel(listClothing, clothingLabel, index);
+                    index = -1;
+                    break;
+
+                }
+        }
+
+    }
+
+    public void setClothingLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        if (!listClothing.isEmpty()) {
+            clothingLabel.setIcon(listClothing.get(index).getImg());
         }
     }
 
-    // EFFECTS: handles the button selection for pants
-    public void handlePantsButton(String direction) {
-        if (direction.equals("Right")) {
-            if (pantsIndex < getCloset().getPants().size() - 1 && pantsIndex >= 0) {
-                pantsIndex++;
-                System.out.println("Right");
-                setPantsLabel();
-            }
-        } else if (direction.equals("Left")) {
-            if (pantsIndex != 0) {
-                pantsIndex--;
-                System.out.println("Left");
-                setPantsLabel();
-            }
-        } else { // play
-            if (pantsIndex != -1) {
-                setSavePantsLabel();
-                pantsIndex = -1;
-
-            }
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the label icon to the shirt the index is currently on
-    public void setShirtLabel() {
-        List<Clothing> shirts = getCloset().getShirts();
-        if (!shirts.isEmpty()) {
-            shirtLabel.setIcon(shirts.get(shirtIndex).getImg());
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the label icon to the pants the index is currently on
-    public void setPantsLabel() {
-        List<Clothing> pants = getCloset().getPants();
-        if (!pants.isEmpty()) {
-            pantsLabel.setIcon(pants.get(pantsIndex).getImg());
-        }
-    }
-
-    // EFFECTS: makes the shirt label icon the index is currently on transparent
-    public void setSaveShirtLabel() {
-        ImageIcon originalIcon = getCloset().getShirts().get(shirtIndex).getImg();
+    public void saveLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        ImageIcon originalIcon = listClothing.get(index).getImg();
         ImageIcon transparentIcon = makeImageTransparent(originalIcon, 0.8f);
-        shirtLabel.setIcon(transparentIcon);
+        clothingLabel.setIcon(transparentIcon);
     }
-
-    // EFFECTS: makes the pants label icon the index is currently on transparent
-    public void setSavePantsLabel() {
-        ImageIcon originalIcon = getCloset().getPants().get(pantsIndex).getImg();
-        ImageIcon transparentIcon = makeImageTransparent(originalIcon, 0.8f);
-        pantsLabel.setIcon(transparentIcon);
-    }
-
 }

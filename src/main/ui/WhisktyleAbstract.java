@@ -2,12 +2,10 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.ColorUIResource;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 
 import model.Closet;
 
@@ -28,7 +26,6 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final int OUTER_CLOSET_HEIGHT = 575;
 
     protected static final int INNER_CLOSET_WIDTH = 450;
-
 
     protected int shirtIndex;
     protected int pantsIndex;

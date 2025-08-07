@@ -160,7 +160,7 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds shirt label to panel with centering
     public void setShirtUI(JPanel panel) {
         shirtLabel = new JLabel();
-        setShirtLabel();
+        setClothingLabel(getCloset().getShirts(), shirtLabel, shirtIndex);
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -174,7 +174,7 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds pants label to panel with centering
     public void setPantsUI(JPanel panel) {
         pantsLabel = new JLabel();
-        setPantsLabel();
+        setClothingLabel(getCloset().getPants(), pantsLabel, pantsIndex);
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
