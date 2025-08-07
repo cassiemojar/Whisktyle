@@ -16,7 +16,7 @@ import model.Person;
 import model.Shirt;
 import model.Shoes;
 
-// Represents an abstract class that handles buttons and their functions
+// Represents an abstract class that handles buttons and their functions, and additional logic
 public abstract class BrowseButtonController extends WhisktyleAbstract {
     protected JLabel shirtLabel;
     protected JLabel pantsLabel;

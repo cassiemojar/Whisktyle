@@ -24,8 +24,11 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final int BUTTON_WIDTH = 230;
     protected static final int BUTTON_HEIGHT = 90;
 
-    protected Component horizontalSpacer = Box.createRigidArea(new Dimension(20, 0));
-    protected Component verticalSpacer = Box.createRigidArea(new Dimension(0, 20));
+    protected static final int OUTER_CLOSET_WIDTH = 475;
+    protected static final int OUTER_CLOSET_HEIGHT = 575;
+
+    protected static final int INNER_CLOSET_WIDTH = 450;
+
 
     protected int shirtIndex;
     protected int pantsIndex;
@@ -170,6 +173,11 @@ public abstract class WhisktyleAbstract extends JFrame {
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());
         Image scaledImg = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
+    }
+
+    // EFFECTS: returns closet closed ImageIcon
+    public ImageIcon createClosetImg() {
+        return createImgIcon(CLOSET_IMG_DIRECTORY + "browse-closet.png", OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT);
     }
 
     // EFFECTS: creates and returns inner menu buttons

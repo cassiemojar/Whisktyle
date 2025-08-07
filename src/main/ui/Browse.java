@@ -3,23 +3,13 @@ package ui;
 import javax.swing.*;
 
 import model.NoPersonException;
-import model.Pants;
-import model.Shirt;
-
-//import model.Shirt;
 
 import java.awt.*;
-//import java.awt.event.*;
 
 // Represents a Browse class that sets up UI
 public class Browse extends BrowseButtonController {
     private static final int INNER_BUTTON_WIDTH = 50;
     private static final int INNER_BUTTON_HEIGHT = 35;
-
-    private static final int OUTER_CLOSET_WIDTH = 475;
-    private static final int OUTER_CLOSET_HEIGHT = 575;
-
-    private static final int INNER_CLOSET_WIDTH = 450;
 
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
@@ -62,14 +52,20 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
-        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)));
-        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 250, 200)));
-        getCloset().getShirts()
-                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-three.png", 250, 200)));
+        // getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY +
+        // "test-shirt.png", 250, 200)));
+        // getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
+        // "test-shirt-two.png", 250, 200)));
+        // getCloset().getShirts()
+        // .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
+        // "test-shirt-three.png", 250, 200)));
 
-        getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY + "test-shirt-two.png", 200, 250)));
+        // getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY +
+        // "test-pants.png", 200, 250)));
+        // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
+        // "test-shirt.png", 200, 250)));
+        // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
+        // "test-shirt-two.png", 200, 250)));
 
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
@@ -93,11 +89,6 @@ public class Browse extends BrowseButtonController {
         closetPanel.setLayout(new BoxLayout(closetPanel, BoxLayout.Y_AXIS));
         closetPanel.add(setClosetUI());
         return closetPanel;
-    }
-
-    // EFFECTS: returns closet closed ImageIcon
-    public ImageIcon createClosetImg() {
-        return createImgIcon(CLOSET_IMG_DIRECTORY + "browse-closet.png", OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT);
     }
 
     // EFFECTS: creates and returns button panel
