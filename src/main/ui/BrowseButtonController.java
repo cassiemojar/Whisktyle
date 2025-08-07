@@ -25,6 +25,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
     }
 
+    // TODO: refactor
     // EFFECTS: Creates a JFileChooser panel for user to add a person w. image if
     // closet doesn't have person
     public void handleNoPerson() {
@@ -75,7 +76,9 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
         ImageIcon shirtImg = createImgIconFromResource(imagePathShirt, 200, 250);
         Shirt shirt = new Shirt(shirtName, shirtImg);
-
+        getCloset().getShirts().add(shirt);
+        shirtIndex = getCloset().getShirts().size() - 1; // Show the new pants
+        setShirtLabel();
 
         // From here its pants
         JFileChooser fileChooserPants = new JFileChooser();
@@ -96,8 +99,9 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
         ImageIcon pantsImg = createImgIconFromResource(imagePathPants, 200, 250);
         Pants pants = new Pants(pantsName, pantsImg);
-
-
+        getCloset().getPants().add(pants);
+        pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
+        setPantsLabel();
 
         if (name != null && !name.trim().isEmpty()) {
             ImageIcon personImg = createImgIconFromResource(imagePath, 250, 200);
