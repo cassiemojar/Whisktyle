@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 
+import model.NoPersonException;
 import model.Pants;
 import model.Shirt;
 
@@ -23,6 +24,7 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
         setTitle("Whisktyle - Browse");
+        checkIfHasPerson();
 
     }
 
@@ -72,6 +74,15 @@ public class Browse extends BrowseButtonController {
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
         background.add(setClosetPanel(), BorderLayout.CENTER);
+    }
+
+    // EFFECTS: checks if the closet already has a person
+    public void checkIfHasPerson() {
+        try {
+            getCloset().getPerson();
+        } catch (NoPersonException e) {
+            handleNoPerson();
+        }
     }
 
     // EFFECTS: returns closet panel with closet image added to it
