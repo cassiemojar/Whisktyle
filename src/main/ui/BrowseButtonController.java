@@ -56,8 +56,12 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         String name = JOptionPane.showInputDialog(this, "Enter a name for this Person:", "Name",
                 JOptionPane.PLAIN_MESSAGE);
 
-        // From here its for choosing shirt
+        helperNoPerson(name, imagePath);
 
+    }
+
+    // EFFECTS: helper method for handling no person loaded
+    public void helperNoPerson(String name, String imagePath) {
         Clothing shirt = addNewClothing("Shirt", getCloset().getShirts());
         Clothing pants = addNewClothing("Pants", getCloset().getPants());
 
@@ -71,7 +75,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
             JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
                     JOptionPane.WARNING_MESSAGE);
         }
-
     }
 
     // EFFECTS: handles the inner buttons that was selected inside the closet
@@ -108,17 +111,18 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     public void handleClothingOption(Object choice) {
         switch ((String) choice) {
             case "SHIRT":
-                addNewShirt();
+                addNewClothing("Shirt", getCloset().getShirts());
                 break;
             case "PANTS":
-                addNewPants();
+                addNewClothing("Pants", getCloset().getPants());
                 break;
 
             case "SHOES":
         }
     }
 
-    // EFFECTS: handles adding clothing
+    // EFFECTS: creates a JFileChooser panel for user to select clothing img + name,
+    // then adds to respective clothing list
     public Clothing addNewClothing(String clothing, List<Clothing> listClothing) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Select a " + clothing + " Image");
@@ -138,26 +142,16 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         return null;
     }
 
+    // EFFECTS: helper method for addNewClothing method
     public Clothing helperAddClothing(String clothing, String name, String imagePath) {
         if (name != null && !name.trim().isEmpty()) {
             switch (clothing) {
                 case "Shirt":
-                    ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
-                    Shirt newShirt = new Shirt(name.trim(), shirtImage);
-                    getCloset().getShirts().add(newShirt);
-                    shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
-                    setShirtLabel();
-                    JOptionPane.showMessageDialog(this, "Shirt \"" + name + "\" now added to your closet!");
-                    return newShirt;
+                    return addsToClothingList("Shirt", imagePath, name);
 
                 case "Pants":
-                    ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
-                    Pants newPants = new Pants(name.trim(), pantsImage);
-                    getCloset().getPants().add(newPants);
-                    pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
-                    setPantsLabel();
                     JOptionPane.showMessageDialog(this, "Pants \"" + name + "\" now added to your closet!");
-                    return newPants;
+                    return addsToClothingList("Pants", imagePath, name);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
@@ -166,64 +160,26 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         return null;
     }
 
-    // EFFECTS: creates a JFileChooser panel for user to select shirt img and name
-    // and adds to shirtsList
-    public void addNewShirt() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select a Shirt Image");
-        fileChooser.setAcceptAllFileFilterUsed(false); // Need only img files
-        fileChooser.setFileFilter(
-                new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
-        int result = fileChooser.showOpenDialog(null); // opens file dialogue to see if cancel or accept
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            String shirtName = JOptionPane.showInputDialog(this, "Enter a name for this shirt:", "Shirt Name",
-                    JOptionPane.PLAIN_MESSAGE);
-
-            if (shirtName != null && !shirtName.trim().isEmpty()) {
+    // EFFECTS: handles adding to clothes list when handling add button
+    public Clothing addsToClothingList(String clothing, String imagePath, String name) {
+        switch (clothing) {
+            case "Shirt":
                 ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
-                Shirt newShirt = new Shirt(shirtName.trim(), shirtImage);
+                Clothing newShirt = new Shirt(name.trim(), shirtImage);
                 getCloset().getShirts().add(newShirt);
                 shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
                 setShirtLabel();
-                JOptionPane.showMessageDialog(this, "Shirt \"" + shirtName + "\" now added to your closet!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Shirt not added. No name entered.", "Cancelled",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        }
-    }
-
-    // EFFECTS: creates a JFileChooser panel for user to select pants img and name
-    // and adds to pantsList
-    public void addNewPants() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select a Pants Image");
-        fileChooser.setAcceptAllFileFilterUsed(false); // Need only img files
-        fileChooser.setFileFilter(
-                new javax.swing.filechooser.FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
-        int result = fileChooser.showOpenDialog(null); // opens file dialogue to see if cancel or accept
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            String pantsName = JOptionPane.showInputDialog(this, "Enter a name for these pants:", "Pants Name",
-                    JOptionPane.PLAIN_MESSAGE);
-
-            if (pantsName != null && !pantsName.trim().isEmpty()) {
+                return newShirt;
+            case "Pants":
                 ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
-                Pants newPants = new Pants(pantsName.trim(), pantsImage);
+                Clothing newPants = new Pants(name.trim(), pantsImage);
                 getCloset().getPants().add(newPants);
                 pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
                 setPantsLabel();
-                JOptionPane.showMessageDialog(this, "Pants \"" + pantsName + "\" now added to your closet!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Pants not added. No name entered.", "Cancelled",
-                        JOptionPane.WARNING_MESSAGE);
-            }
+                return newPants;
+
         }
+        return null;
     }
 
     // EFFECTS: handles the button selection for shirt
