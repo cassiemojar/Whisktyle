@@ -68,6 +68,10 @@ public class Loading extends WhisktyleAbstract {
     // EFFECTS: handles which UI frame to show next, closes Loading frame
     public void handleViewNextFrame() {
         switch (stringUI) {
+            case "Menu":
+                Menu menuUI = new Menu();
+                menuUI.setVisible(true);
+                break;
             case "Browse":
                 Browse browseUI = new Browse();
                 browseUI.setVisible(true);
