@@ -7,6 +7,7 @@ import model.NoPersonException;
 import java.awt.*;
 
 // Represents a DressMe class that sets up UI
+// TODO: handle how to put clothing onto person img
 public class DressMe extends WhisktyleAbstract {
 
     // EFFECTS: Adds title panel to background panel

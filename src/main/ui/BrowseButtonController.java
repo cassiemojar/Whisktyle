@@ -22,11 +22,11 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     protected JLabel pantsLabel;
     private JLabel shoesLabel;
 
+    // EFFECTS: constructor for BrowseButtonController class
     public BrowseButtonController() {
 
     }
 
-    // TODO: refactor
     // EFFECTS: Creates a JFileChooser panel for user to add a person w. image if
     // closet doesn't have person
     public void handleNoPerson() {
@@ -85,9 +85,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
             handleInnerButtons(clothing, direction, getCloset().getPants(), pantsIndex, pantsLabel);
         }
     }
-
-    // String clothing, String direction, List<Clothing> listClothing, int index,
-    // JLabel clothingLabel
 
     // EFFECTS: handles selection of the menu buttons
     public void handleMenuButton(String selection) {
@@ -186,6 +183,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         return null;
     }
 
+    // EFFECTS: handles inner button selection for closet labels
     public void handleInnerButtons(String clothing, String direction, List<Clothing> listClothing, int index,
             JLabel clothingLabel) {
         switch (direction) {
@@ -216,12 +214,15 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
     }
 
+    // EFFECTS: updates clothing labels of closet
     public void setClothingLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
         if (!listClothing.isEmpty()) {
             clothingLabel.setIcon(listClothing.get(index).getImg());
         }
     }
 
+    // EFFECTS: fixes the closet label (won't allow it to change) + makes icon
+    // transparent
     public void saveLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
         ImageIcon originalIcon = listClothing.get(index).getImg();
         ImageIcon transparentIcon = makeImageTransparent(originalIcon, 0.8f);
