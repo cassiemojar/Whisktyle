@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.*;
 
+import model.NoPersonException;
+
 import java.awt.*;
 
 // Represents a DressMe class that sets up UI
@@ -66,9 +68,54 @@ public class DressMe extends WhisktyleAbstract {
         return innerPanel;
     }
 
+    // EFFECTS: creates and returns a wrapper with the function of centering
+    // components inside closet's inner panels
+    public JPanel createWrapper() {
+        JPanel upperWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        upperWrapper.setOpaque(false);
+        return upperWrapper;
+    }
+
+    // EFFECTS: creates and returns upper closet panel
+    public JPanel createPersonPanel() {
+        JPanel personPanel = new JPanel();
+        personPanel.setLayout(new BoxLayout(personPanel, BoxLayout.Y_AXIS));
+        personPanel.setOpaque(false);
+        // personPanel.setBackground(Color.RED);
+        personPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25)); // Half of 575
+        personPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
+
+        return personPanel;
+    }
+
+    // EFFECTS: sets person image to be person label's icon
+    public void setPersonUI(JPanel panel) {
+        JLabel personLabel = new JLabel();
+        try {
+            ImageIcon icon = getCloset().getPerson().getImg();
+            personLabel.setIcon(icon);
+        } catch (NoPersonException e) {
+            e.printStackTrace();
+        }
+
+        panel.setLayout(new GridBagLayout());
+        panel.add(personLabel, new GridBagConstraints());
+    }
+
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
     public JPanel createClosetInnerPanel() {
-        JPanel innerPanel = createInnerComponent(); // upper panel centered in a wrapper
+        JPanel innerPanel = createInnerComponent(); // inner panel centered in a wrapper
+        JPanel wrapper = createWrapper();
+        JPanel personPanel = createPersonPanel();
+        setPersonUI(personPanel);
+        personPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
+        personPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
+        personPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
+        // personPanel.setBackground(Color.RED);
+        personPanel.setOpaque(true);
+
+        wrapper.add(personPanel);
+        innerPanel.add(wrapper);
 
         return innerPanel;
     }

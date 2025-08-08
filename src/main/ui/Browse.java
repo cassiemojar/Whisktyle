@@ -71,10 +71,11 @@ public class Browse extends BrowseButtonController {
         // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
         // "test-shirt-two.png", 200, 250)));
 
-        getCloset().setPerson(new Person("cassie", new ImageIcon(IMG_DIRECTORY + "test-person.png"),
-                new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)),
-                new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)), 
-                new Shoes("")));
+        getCloset().setPerson(
+                new Person("cassie", new ImageIcon(getClass().getResource(IMG_DIRECTORY + "test-person.png")),
+                        new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)),
+                        new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)),
+                        new Shoes("")));
 
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
