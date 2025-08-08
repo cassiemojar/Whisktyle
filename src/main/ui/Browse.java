@@ -3,6 +3,10 @@ package ui;
 import javax.swing.*;
 
 import model.NoPersonException;
+import model.Pants;
+import model.Person;
+import model.Shirt;
+import model.Shoes;
 
 import java.awt.*;
 
@@ -66,6 +70,11 @@ public class Browse extends BrowseButtonController {
         // "test-shirt.png", 200, 250)));
         // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
         // "test-shirt-two.png", 200, 250)));
+
+        getCloset().setPerson(new Person("cassie", new ImageIcon(IMG_DIRECTORY + "test-person.png"),
+                new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)),
+                new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)), 
+                new Shoes("")));
 
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
