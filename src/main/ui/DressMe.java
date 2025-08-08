@@ -15,6 +15,34 @@ public class DressMe extends WhisktyleAbstract {
     }
 
     @Override
+    // EFFECTS: returns title panel with title image added to it
+    public JPanel setTitlePanel() {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setOpaque(false);
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
+        titlePanel.add(Box.createHorizontalGlue());
+        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "return.png", "Return", 50, 50));
+        titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        titlePanel.add(setTitle());
+        titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "save-button.png", "Save", BUTTON_WIDTH, BUTTON_HEIGHT));
+        titlePanel.add(Box.createHorizontalGlue());
+
+        return titlePanel;
+    }
+
+    // EFFECTS: creates and returns menu buttons
+    public JButton createMenuButton(String imgPath, String selection, int width, int height) {
+        JButton button = createButton(imgPath, width, height);
+        button.addActionListener(e -> handleMenuButton(selection));
+        return button;
+    }
+
+    public void handleMenuButton(String selection) {
+
+    }
+
+    @Override
     // EFFECTS: sets up UI components of frame
     public void setUI() {
         background.setLayout(new BorderLayout());
