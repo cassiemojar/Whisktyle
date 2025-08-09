@@ -127,16 +127,29 @@ public class DressMe extends WhisktyleAbstract {
 
     // EFFECTS: sets person image to be person label's icon
     public void setPersonUI(JPanel panel) {
-        JLabel personLabel = new JLabel();
+        // JLabel personLabel = new JLabel();
+
         try {
-            ImageIcon icon = getCloset().getPerson().getImg();
-            personLabel.setIcon(icon);
+            ImageIcon personIcon = getCloset().getPerson().getImg();
+            OutfitPanel outfitPanel = new OutfitPanel(personIcon);
+
+            if (!getCloset().getShirts().isEmpty()) {
+                outfitPanel.setShirt(getCloset().getShirts().get(shirtIndex).getImg());
+            }
+            if (!getCloset().getPants().isEmpty()) {
+                outfitPanel.setPants(getCloset().getPants().get(pantsIndex).getImg());
+            }
+            // personLabel.setIcon(icon);
+
+            outfitPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
+            outfitPanel.setOpaque(false);
+
+            panel.setLayout(new GridBagLayout());
+            panel.add(outfitPanel, new GridBagConstraints());
+
         } catch (NoPersonException e) {
             e.printStackTrace();
         }
-
-        panel.setLayout(new GridBagLayout());
-        panel.add(personLabel, new GridBagConstraints());
     }
 
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
