@@ -72,7 +72,7 @@ public class Browse extends BrowseButtonController {
         // "test-shirt-two.png", 200, 250)));
 
         getCloset().setPerson(
-                new Person("cassie", new ImageIcon(getClass().getResource(IMG_DIRECTORY + "test-person.png")),
+                new Person("Jheneca", createImgIcon(IMG_DIRECTORY + "person.png", 250, 500),
                         new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)),
                         new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)),
                         new Shoes("")));

@@ -162,7 +162,7 @@ public class DressMe extends WhisktyleAbstract {
         personPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
         personPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
         // personPanel.setBackground(Color.RED);
-        personPanel.setOpaque(true);
+        personPanel.setOpaque(false);
 
         wrapper.add(personPanel);
         innerPanel.add(wrapper);

@@ -162,11 +162,6 @@ public abstract class WhisktyleAbstract extends JFrame {
     public ImageIcon createImgIconFromResource(String filePath, int width, int height) {
         File file = new File(filePath);
 
-        // if (!file.exists()) {
-        // System.err.println("File not found: " + filePath);
-        // return null;
-        // }
-
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());
         Image scaledImg = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
