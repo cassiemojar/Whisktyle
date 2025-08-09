@@ -12,7 +12,7 @@ public class WhisktyleController {
         closet = new Closet();
     }
 
-    // MODIFIE: this
+    // MODIFIES: this
     // EFFECTS: creates instance of WhisktyleController, returns it
     public static WhisktyleController getInstance() {
         if (singleton == null) {

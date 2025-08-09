@@ -11,17 +11,22 @@ public class OutfitPanel extends JPanel {
     private Image pantsImg;
     private Image personImg;
 
+    private static final int HEAD_DISTANCE = -55;
+    private static final int LEG_DISTANCE = 100;
+
     // EFFECTS: constructor for OutfitPanel
     public OutfitPanel(ImageIcon personImg) {
         this.personImg = personImg.getImage();
         setOpaque(false);
     }
 
+    // EFFECTS: converts shirt img icon to img, and as shirtimg
     public void setShirt(ImageIcon shirtImg) {
         this.shirtImg = shirtImg.getImage();
         repaint();
     }
 
+    // EFFECTS: converts pants img icon to img, and as pantsimg
     public void setPants(ImageIcon pantsImg) {
         this.pantsImg = pantsImg.getImage();
         repaint();
@@ -44,13 +49,13 @@ public class OutfitPanel extends JPanel {
 
         if (pantsImg != null) {
             int x = (panelWidth - pantsImg.getWidth(this)) / 2;
-            int y = ((panelHeight - pantsImg.getHeight(this)) / 2) + 100;
+            int y = ((panelHeight - pantsImg.getHeight(this)) / 2) + LEG_DISTANCE;
             g.drawImage(pantsImg, x, y, this);
         }
 
         if (shirtImg != null) {
             int x = (panelWidth - shirtImg.getWidth(this)) / 2;
-            int y = ((panelHeight - shirtImg.getHeight(this)) / 2) - 55;
+            int y = ((panelHeight - shirtImg.getHeight(this)) / 2) + HEAD_DISTANCE;
             g.drawImage(shirtImg, x, y, this);
         }
     }
