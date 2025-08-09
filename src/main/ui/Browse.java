@@ -58,18 +58,18 @@ public class Browse extends BrowseButtonController {
     public void setUI() {
         getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY +
                 "test-shirt.png", 250, 200)));
-        // getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
-        // "test-shirt-two.png", 250, 200)));
-        // getCloset().getShirts()
-        // .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
-        // "test-shirt-three.png", 250, 200)));
+        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
+                "test-shirt-two.png", 250, 200)));
+        getCloset().getShirts()
+                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
+                        "test-shirt-three.png", 250, 200)));
 
         getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY +
                 "test-pants.png", 200, 250)));
-        // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
-        // "test-shirt.png", 200, 250)));
-        // getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
-        // "test-shirt-two.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
+        "test-shirt.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
+        "test-shirt-two.png", 200, 250)));
 
         getCloset().setPerson(
                 new Person("Jheneca", createImgIcon(IMG_DIRECTORY + "person.png", 250, 500),
@@ -170,7 +170,7 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds shirt label to panel with centering
     public void setShirtUI(JPanel panel) {
         shirtLabel = new JLabel();
-        setClothingLabel(getCloset().getShirts(), shirtLabel, shirtIndex);
+        setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex());
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -184,7 +184,7 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds pants label to panel with centering
     public void setPantsUI(JPanel panel) {
         pantsLabel = new JLabel();
-        setClothingLabel(getCloset().getPants(), pantsLabel, pantsIndex);
+        setClothingLabel(getCloset().getPants(), pantsLabel, getCloset().getPantsIndex());
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

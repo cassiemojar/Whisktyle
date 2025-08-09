@@ -13,6 +13,9 @@ public class Closet {
     private List<Shoes> shoesList;
     private Map<String, List<Outfit>> savedOutfits;
 
+    private int shirtIndex;
+    private int pantsIndex;
+
     // EFFECTS: Creates a closet that has no person, clothing, or saved outfits.
     public Closet() {
         shirtsList = new ArrayList<>();
@@ -54,6 +57,14 @@ public class Closet {
         this.person = person;
     }
 
+    public void setShirtIndex(int index) {
+        shirtIndex = index;
+    }
+
+    public void setPantsIndex(int index) {
+        pantsIndex = index;
+    }
+
     public Person getPerson() throws NoPersonException {
         if (this.person != null) {
             return this.person;
@@ -85,6 +96,15 @@ public class Closet {
         return new ArrayList<>();
     }
 
+
+    public int getShirtIndex() {
+        return shirtIndex;
+    }
+
+    public int getPantsIndex() {
+        return pantsIndex;
+    }
+
     // EFFECTS: Gets a specific outfit in an outfit category. Throws OutfitException
     // if not found.
     public Outfit getAnOutfit(String categoryName, String outfitName) throws OutfitException {
@@ -98,4 +118,5 @@ public class Closet {
 
         throw new OutfitException();
     }
+
 }

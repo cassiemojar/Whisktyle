@@ -27,9 +27,6 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     protected static final int INNER_CLOSET_WIDTH = 450;
 
-    protected int shirtIndex;
-    protected int pantsIndex;
-
     private static final Color DARK_BLUE = Color.decode("#44657E");
 
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
@@ -215,4 +212,5 @@ public abstract class WhisktyleAbstract extends JFrame {
 
         return new ImageIcon(transparentImage);
     }
+
 }

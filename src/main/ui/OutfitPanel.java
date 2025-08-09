@@ -44,13 +44,13 @@ public class OutfitPanel extends JPanel {
 
         if (pantsImg != null) {
             int x = (panelWidth - pantsImg.getWidth(this)) / 2;
-            int y = (panelHeight - pantsImg.getHeight(this)) / 2;
+            int y = ((panelHeight - pantsImg.getHeight(this)) / 2) + 100;
             g.drawImage(pantsImg, x, y, this);
         }
 
         if (shirtImg != null) {
             int x = (panelWidth - shirtImg.getWidth(this)) / 2;
-            int y = (panelHeight - shirtImg.getHeight(this)) / 2;
+            int y = ((panelHeight - shirtImg.getHeight(this)) / 2) - 55;
             g.drawImage(shirtImg, x, y, this);
         }
     }

@@ -24,7 +24,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
     // EFFECTS: constructor for BrowseButtonController class
     public BrowseButtonController() {
-
     }
 
     // EFFECTS: Creates a JFileChooser panel for user to add a person w. image if
@@ -80,9 +79,10 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     // EFFECTS: handles the inner buttons that was selected inside the closet
     public void handleInnerButton(JButton menuButton, String clothing, String direction) {
         if (clothing.equals("Shirt")) {
-            handleInnerButtons(clothing, direction, getCloset().getShirts(), shirtIndex, shirtLabel);
+            getCloset().setShirtIndex(handleInnerButtons(clothing, direction, getCloset().getShirts(),
+                    getCloset().getShirtIndex(), shirtLabel));
         } else {
-            handleInnerButtons(clothing, direction, getCloset().getPants(), pantsIndex, pantsLabel);
+            getCloset().setPantsIndex(handleInnerButtons(clothing, direction, getCloset().getPants(), getCloset().getPantsIndex(), pantsLabel));
         }
     }
 
@@ -168,15 +168,15 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
                 Clothing newShirt = new Shirt(name.trim(), shirtImage);
                 getCloset().getShirts().add(newShirt);
-                shirtIndex = getCloset().getShirts().size() - 1; // Show the new shirt
-                setClothingLabel(getCloset().getShirts(), shirtLabel, shirtIndex);
+                getCloset().setShirtIndex(getCloset().getShirts().size() - 1);
+                setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex()); // Show the new shirt
                 return newShirt;
             case "Pants":
                 ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
                 Clothing newPants = new Pants(name.trim(), pantsImage);
                 getCloset().getPants().add(newPants);
-                pantsIndex = getCloset().getPants().size() - 1; // Show the new pants
-                setClothingLabel(getCloset().getPants(), pantsLabel, pantsIndex);
+                getCloset().setPantsIndex(getCloset().getPants().size() - 1); // Show the new pants
+                setClothingLabel(getCloset().getPants(), pantsLabel, getCloset().getPantsIndex());
                 return newPants;
 
         }
@@ -184,33 +184,33 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     }
 
     // EFFECTS: handles inner button selection for closet labels
-    public void handleInnerButtons(String clothing, String direction, List<Clothing> listClothing, int index,
+    public int handleInnerButtons(String clothing, String direction, List<Clothing> listClothing, int index,
             JLabel clothingLabel) {
         switch (direction) {
             case "Right":
                 if (index < listClothing.size() - 1 && index >= 0) {
-                    shirtIndex++;
+                    index++;
                     System.out.println("Right");
                     setClothingLabel(listClothing, clothingLabel, index);
-                    break;
                 }
+                break;
 
             case "Left":
                 if (index > 0) {
                     index--;
                     System.out.println("Left");
                     setClothingLabel(listClothing, clothingLabel, index);
-                    break;
                 }
+                break;
 
             case "Play":
                 if (index != -1) {
                     saveLabel(listClothing, clothingLabel, index);
                     index = -1;
-                    break;
-
                 }
+                break;
         }
+        return index;
 
     }
 
