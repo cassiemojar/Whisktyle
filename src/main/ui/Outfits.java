@@ -90,7 +90,7 @@ public class Outfits extends WhisktyleAbstract {
 
         // Empty inner panel at first
         innerPanel = new JPanel();
-        innerPanel.setBounds(0, 0, OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT);
+        innerPanel.setBounds(0, 0, OUTER_CLOSET_WIDTH - 5, OUTER_CLOSET_HEIGHT - 10);
         innerPanel.setOpaque(false);
 
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
@@ -127,7 +127,7 @@ public class Outfits extends WhisktyleAbstract {
     private void showOutfitsForCategory(String category) {
         innerPanel.removeAll(); // clear old outfits
 
-        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
+        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 40, 40));
         gridPanel.setOpaque(false);
 
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
@@ -152,10 +152,10 @@ public class Outfits extends WhisktyleAbstract {
     private JPanel createOutfitBox(Outfit outfit) {
         JPanel box = new JPanel();
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
-        box.setPreferredSize(new Dimension(150, 150));
-        box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        box.setOpaque(true);
-        box.setBackground(Color.WHITE);
+        box.setPreferredSize(new Dimension(100, 250));
+        //box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        box.setOpaque(false);
+        //box.setBackground(Color.WHITE);
 
         JLabel shirtLabel = new JLabel(outfit.getShirt().getImg());
         JLabel pantsLabel = new JLabel(outfit.getPants().getImg());
