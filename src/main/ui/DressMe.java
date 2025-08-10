@@ -3,8 +3,15 @@ package ui;
 import javax.swing.*;
 
 import model.NoPersonException;
+import model.Outfit;
+import model.Pants;
+import model.Clothing;
+import model.Person;
+import model.Shirt;
+import model.Shoes;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 // Represents a DressMe class that sets up UI
 // TODO: handle how to put clothing onto person img
@@ -47,6 +54,7 @@ public class DressMe extends WhisktyleAbstract {
                 break;
 
             case "Save":
+                handleSaveButton();
                 break;
         }
     }
@@ -168,6 +176,43 @@ public class DressMe extends WhisktyleAbstract {
         innerPanel.add(wrapper);
 
         return innerPanel;
+    }
+
+    // EFFECTS: confirms whether user wants to save the current outfit
+    public void handleSaveButton() {
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to save this outfit?",
+                "Save Outfit", JOptionPane.YES_NO_OPTION);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            saveOutfitOption();
+        }
+    }
+
+    // EFFECTS: handles saving outfit to closet
+    public void saveOutfitOption() {
+        String name = JOptionPane.showInputDialog(this, "Enter a name for this outfit:", "Outfit Name",
+                JOptionPane.PLAIN_MESSAGE);
+
+        String category = JOptionPane.showInputDialog(this, "Enter a category for this outfit:", "Outfit Category",
+                JOptionPane.PLAIN_MESSAGE);
+
+        if (name != null && !name.trim().isEmpty() && category != null && !category.trim().isEmpty()) {
+            Clothing shirt = new Shirt(getCloset().getShirts().get(getCloset().getShirtIndex()).getName(),
+                    getCloset().getShirts().get(getCloset().getShirtIndex()).getImg());
+            Clothing pants = new Pants(getCloset().getPants().get(getCloset().getPantsIndex()).getName(),
+                    getCloset().getPants().get(getCloset().getPantsIndex()).getImg());
+            Shoes shoes = new Shoes("");
+            Outfit newOutfit = new Outfit(name, shirt, pants, shoes);
+
+            getCloset().getSavedOutfits().getOrDefault(category, new ArrayList<>()).add(newOutfit);
+
+            JOptionPane.showMessageDialog(this,
+                    "Outfit \"" + name + "\" to \"" + category + "\" now added to your closet!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Oufit not added. No name or category entered.", "Cancelled",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
 }

@@ -82,7 +82,8 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
             getCloset().setShirtIndex(handleInnerButtons(clothing, direction, getCloset().getShirts(),
                     getCloset().getShirtIndex(), shirtLabel));
         } else {
-            getCloset().setPantsIndex(handleInnerButtons(clothing, direction, getCloset().getPants(), getCloset().getPantsIndex(), pantsLabel));
+            getCloset().setPantsIndex(handleInnerButtons(clothing, direction, getCloset().getPants(),
+                    getCloset().getPantsIndex(), pantsLabel));
         }
     }
 
@@ -169,7 +170,8 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 Clothing newShirt = new Shirt(name.trim(), shirtImage);
                 getCloset().getShirts().add(newShirt);
                 getCloset().setShirtIndex(getCloset().getShirts().size() - 1);
-                setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex()); // Show the new shirt
+                setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex()); // Show the new
+                                                                                                    // shirt
                 return newShirt;
             case "Pants":
                 ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
