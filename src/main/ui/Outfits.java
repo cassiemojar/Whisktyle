@@ -15,6 +15,8 @@ import java.util.Set;
 
 // Reprsents a Outfits class 
 public class Outfits extends WhisktyleAbstract {
+    private JPanel innerPanel;
+
     // EFFECTS: Constructor for Oufits, sets title
     public Outfits() {
         setTitle("Whisktyle - Oufits");
@@ -31,7 +33,7 @@ public class Outfits extends WhisktyleAbstract {
         titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
         titlePanel.add(setTitle());
         titlePanel.add(Box.createRigidArea(new Dimension(20, 0)));
-        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "category-button.png", "Save"));
+        titlePanel.add(createMenuButton(BUTTON_IMG_DIRECTORY + "category-button.png", "Category"));
         titlePanel.add(Box.createHorizontalGlue());
 
         return titlePanel;
@@ -86,12 +88,13 @@ public class Outfits extends WhisktyleAbstract {
         layeredPane.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT));
         layeredPane.setLayout(null);
 
-        JPanel innerPanel = createClosetInnerPanel();
+        // Empty inner panel at first
+        innerPanel = new JPanel();
         innerPanel.setBounds(0, 0, OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT);
         innerPanel.setOpaque(false);
 
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(innerPanel, JLayeredPane.PALETTE_LAYER); // Becomes layered on top
+        layeredPane.add(innerPanel, JLayeredPane.PALETTE_LAYER);
 
         JPanel closetPanel = new JPanel();
         closetPanel.setOpaque(false);
@@ -100,24 +103,6 @@ public class Outfits extends WhisktyleAbstract {
         return closetPanel;
     }
 
-    // EFFECTS: creates and returns inner panel component
-    public JPanel createInnerComponent() {
-        JPanel innerPanel = new JPanel();
-        innerPanel.setOpaque(false);
-        innerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT));
-        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-
-        innerPanel.add(Box.createRigidArea(new Dimension(0, 10))); // top padding
-        return innerPanel;
-    }
-
-    // EFFECTS: creates and returns a wrapper with the function of centering
-    // components inside closet's inner panels
-    public JPanel createWrapper() {
-        JPanel upperWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        upperWrapper.setOpaque(false);
-        return upperWrapper;
-    }
 
     // TODO:
     public void handleCategory() {
@@ -129,26 +114,26 @@ public class Outfits extends WhisktyleAbstract {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
             if (choiceIndex >= 0 && choiceIndex < options.length) {
                 String choice = (String) options[choiceIndex];
+                showOutfitsForCategory(choice);
 
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "You haven't saved an outfit yet! Please browse your clothes and save an outfit.", "Cancelled",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
-    public JPanel createClosetInnerPanel() {
-        JPanel gridPanel = new JPanel();
+    private void showOutfitsForCategory(String category) {
+        innerPanel.removeAll(); // clear old outfits
+
+        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
         gridPanel.setOpaque(false);
 
-        // 0 rows means it will add as many rows as needed
-        gridPanel.setLayout(new GridLayout(0, 3, 10, 10)); // 3 columns, 10px gaps
-
-        // Example: add outfits dynamically
-        for (int i = 0; i < getCloset().getSavedOutfits().size(); i++) {
-            JPanel outfitBox = createOutfitBox(getCloset().getSavedOutfits().get(i));
-            gridPanel.add(outfitBox);
+        for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
+            gridPanel.add(createOutfitBox(outfit));
         }
 
-        // Put gridPanel inside a scroll pane
         JScrollPane scrollPane = new JScrollPane(gridPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -156,11 +141,11 @@ public class Outfits extends WhisktyleAbstract {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
 
-        JPanel wrapper = new JPanel(new BorderLayout());
-        wrapper.setOpaque(false);
-        wrapper.add(scrollPane, BorderLayout.CENTER);
+        innerPanel.setLayout(new BorderLayout());
+        innerPanel.add(scrollPane, BorderLayout.CENTER);
 
-        return wrapper;
+        innerPanel.revalidate();
+        innerPanel.repaint();
     }
 
     // EFFECTS: Creates a single outfit box containing a shirt and pants
@@ -183,30 +168,6 @@ public class Outfits extends WhisktyleAbstract {
         box.add(pantsLabel);
 
         return box;
-    }
-
-    // EFFECTS: creates and returns upper closet panel
-    public JPanel createUpperClosetPanel() {
-        JPanel upperPanel = new JPanel();
-        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
-        upperPanel.setOpaque(false);
-        // upperPanel.setBackground(Color.RED);
-        upperPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50)); // Half of 575
-        upperPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-
-        return upperPanel;
-    }
-
-    // EFFECTS: creates and returns lower closet panel
-    public JPanel createLowerClosetPanel() {
-        JPanel lowerPanel = new JPanel();
-        lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
-        lowerPanel.setOpaque(true);
-        lowerPanel.setBackground(Color.RED);
-        lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        lowerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-
-        return lowerPanel;
     }
 
 }

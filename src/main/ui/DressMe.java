@@ -10,7 +10,8 @@ import model.Shirt;
 import model.Shoes;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 
 // Represents a DressMe class that sets up UI
 // TODO: make separate abstract class
@@ -203,7 +204,9 @@ public class DressMe extends WhisktyleAbstract {
             Shoes shoes = new Shoes("");
             Outfit newOutfit = new Outfit(name, shirt, pants, shoes);
 
-            getCloset().getSavedOutfits().getOrDefault(category, new ArrayList<>()).add(newOutfit);
+            Map<String, List<Outfit>> outfitMap = getCloset().getSavedOutfits();
+
+            outfitMap.computeIfAbsent(category, k -> new ArrayList<>()).add(newOutfit);
 
             JOptionPane.showMessageDialog(this,
                     "Outfit \"" + name + "\" to \"" + category + "\" now added to your closet!");
