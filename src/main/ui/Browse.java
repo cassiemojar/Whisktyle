@@ -56,20 +56,20 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
-        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY +
-                "test-shirt.png", 250, 200)));
-        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
-                "test-shirt-two.png", 250, 200)));
+        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY
+                + "test-shirt.png", 250, 200)));
+        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY
+                + "test-shirt-two.png", 250, 200)));
         getCloset().getShirts()
-                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY +
-                        "test-shirt-three.png", 250, 200)));
+                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY
+                        + "test-shirt-three.png", 250, 200)));
 
-        getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY +
-                "test-pants.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
-        "test-shirt.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY +
-        "test-shirt-two.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY
+                + "test-pants.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY
+                + "test-shirt.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY
+                + "test-shirt-two.png", 200, 250)));
 
         getCloset().setPerson(
                 new Person("Jheneca", createImgIcon(IMG_DIRECTORY + "person.png", 250, 500),

@@ -6,7 +6,6 @@ import model.NoPersonException;
 import model.Outfit;
 import model.Pants;
 import model.Clothing;
-import model.Person;
 import model.Shirt;
 import model.Shoes;
 
@@ -14,7 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 // Represents a DressMe class that sets up UI
-// TODO: handle how to put clothing onto person img
+// TODO: make separate abstract class
 public class DressMe extends WhisktyleAbstract {
 
     // EFFECTS: Adds title panel to background panel
