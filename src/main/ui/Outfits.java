@@ -1,8 +1,17 @@
 package ui;
 
 import javax.swing.*;
+
+import model.Clothing;
+import model.Outfit;
+import model.Pants;
+import model.Shirt;
+import model.Shoes;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Set;
 
 // Reprsents a Outfits class 
 public class Outfits extends WhisktyleAbstract {
@@ -42,7 +51,8 @@ public class Outfits extends WhisktyleAbstract {
                 setNewFrame("Menu");
                 break;
 
-            case "Save":
+            case "Category":
+                handleCategory();
                 break;
         }
     }
@@ -109,39 +119,70 @@ public class Outfits extends WhisktyleAbstract {
         return upperWrapper;
     }
 
+    // TODO:
+    public void handleCategory() {
+        Set<String> categorySet = getCloset().getSavedOutfits().keySet();
+        Object[] options = categorySet.toArray();
+
+        if (!categorySet.isEmpty()) {
+            int choiceIndex = JOptionPane.showOptionDialog(null, "Choose which category to view:", "Category",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (choiceIndex >= 0 && choiceIndex < options.length) {
+                String choice = (String) options[choiceIndex];
+
+            }
+        }
+    }
+
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
     public JPanel createClosetInnerPanel() {
-        JPanel innerPanel = createInnerComponent(); // upper panel centered in a wrapper
-        JPanel upperWrapper = createWrapper();
-        JPanel upperPanel = createUpperClosetPanel();
-        upperPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        // upperPanel.setBackground(Color.RED);
-        upperPanel.setOpaque(true);
-        //setShirtUI(upperPanel);
+        JPanel gridPanel = new JPanel();
+        gridPanel.setOpaque(false);
 
-        upperWrapper.add(upperPanel);
-        innerPanel.add(upperWrapper);
+        // 0 rows means it will add as many rows as needed
+        gridPanel.setLayout(new GridLayout(0, 3, 10, 10)); // 3 columns, 10px gaps
 
-        //innerPanel.add(setClosetButtonPanel(upperPanel, "Shirt"));
+        // Example: add outfits dynamically
+        for (int i = 0; i < getCloset().getSavedOutfits().size(); i++) {
+            JPanel outfitBox = createOutfitBox(getCloset().getSavedOutfits().get(i));
+            gridPanel.add(outfitBox);
+        }
 
-        JPanel lowerWrapper = createWrapper(); // Lower panel centered in a wrapper
-        JPanel lowerPanel = createLowerClosetPanel();
-        lowerPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
-        lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
+        // Put gridPanel inside a scroll pane
+        JScrollPane scrollPane = new JScrollPane(gridPanel,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(null);
 
-        lowerPanel.setBackground(Color.RED);
-        lowerPanel.setOpaque(true);
-        //setPantsUI(lowerPanel);
+        JPanel wrapper = new JPanel(new BorderLayout());
+        wrapper.setOpaque(false);
+        wrapper.add(scrollPane, BorderLayout.CENTER);
 
-        lowerWrapper.add(lowerPanel);
-        innerPanel.add(lowerWrapper);
+        return wrapper;
+    }
 
-        //innerPanel.add(setClosetButtonPanel(lowerPanel, "Pants"));
-        innerPanel.add(Box.createRigidArea(new Dimension(0, 7)));
+    // EFFECTS: Creates a single outfit box containing a shirt and pants
+    private JPanel createOutfitBox(Outfit outfit) {
+        JPanel box = new JPanel();
+        box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
+        box.setPreferredSize(new Dimension(150, 150));
+        box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        box.setOpaque(true);
+        box.setBackground(Color.WHITE);
 
-        return innerPanel;
+        JLabel shirtLabel = new JLabel(outfit.getShirt().getImg());
+        JLabel pantsLabel = new JLabel(outfit.getPants().getImg());
+
+        shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        box.add(shirtLabel);
+        box.add(Box.createVerticalStrut(5));
+        box.add(pantsLabel);
+
+        return box;
     }
 
     // EFFECTS: creates and returns upper closet panel
