@@ -135,9 +135,11 @@ public class Outfits extends WhisktyleAbstract {
 
         JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 20));
         gridPanel.setOpaque(false);
+        
 
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
-            gridPanel.add(createOutfitBox(outfit));
+            OutfitBox outfitBox = new OutfitBox(1, this);
+            gridPanel.add(outfitBox.createOutfitBox(outfit));
         }
 
         JScrollPane scrollPane = new JScrollPane(gridPanel,
@@ -155,30 +157,6 @@ public class Outfits extends WhisktyleAbstract {
         innerPanel.repaint();
     }
 
-    // EFFECTS: Creates a single outfit box containing a shirt and pants
-    private JPanel createOutfitBox(Outfit outfit) {
-        JPanel box = new JPanel();
-        box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
-        box.setPreferredSize(new Dimension(130, 200));
-        box.setMinimumSize(new Dimension(130, 200));
-        box.setMaximumSize(new Dimension(130, 200));
-        box.setBackground(Color.WHITE);
-
-        JLabel shirtLabel = createScaledLabel(outfit.getShirt().getImg(), 120, 70);
-        JLabel pantsLabel = createScaledLabel(outfit.getPants().getImg(), 100, 80);
-        JButton playButton = createInnerMenuButton(BUTTON_IMG_DIRECTORY + "play-button.png");
-
-        shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        box.add(shirtLabel);
-        box.add(pantsLabel);
-        box.add(playButton);
-
-        return box;
-    }
-
     // EFFECTS: creates and returns inner menu buttons
     public JButton createInnerMenuButton(String imgPath) {
         JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
@@ -187,16 +165,16 @@ public class Outfits extends WhisktyleAbstract {
     }
 
     public void handlePlay() {
-        Object[] options = { "VIEW", "DELETE"};
+        Object[] options = { "VIEW", "DELETE" };
 
-       
-                int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \""+ ":", "Selected Outfit",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \"" + ":",
+                "Selected Outfit",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
-                if (choiceIndex >= 0 && choiceIndex < options.length) {
-                    String choice = (String) options[choiceIndex];
+        if (choiceIndex >= 0 && choiceIndex < options.length) {
+            String choice = (String) options[choiceIndex];
 
-                }
+        }
     }
 
 }
