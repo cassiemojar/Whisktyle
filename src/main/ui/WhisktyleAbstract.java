@@ -22,6 +22,9 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final int BUTTON_WIDTH = 230;
     protected static final int BUTTON_HEIGHT = 90;
 
+    protected static final int INNER_BUTTON_WIDTH = 50;
+    protected static final int INNER_BUTTON_HEIGHT = 35;
+
     protected static final int OUTER_CLOSET_WIDTH = 475;
     protected static final int OUTER_CLOSET_HEIGHT = 575;
 

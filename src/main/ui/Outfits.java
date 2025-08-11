@@ -130,7 +130,7 @@ public class Outfits extends WhisktyleAbstract {
     private void showOutfitsForCategory(String category) {
         innerPanel.removeAll(); // clear old outfits
 
-        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 40, 40));
+        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 20));
         gridPanel.setOpaque(false);
 
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
@@ -140,8 +140,6 @@ public class Outfits extends WhisktyleAbstract {
         JScrollPane scrollPane = new JScrollPane(gridPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        scrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
 
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
@@ -158,21 +156,36 @@ public class Outfits extends WhisktyleAbstract {
     private JPanel createOutfitBox(Outfit outfit) {
         JPanel box = new JPanel();
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
-        box.setPreferredSize(new Dimension(100, 120));
-        box.setMaximumSize(new Dimension(100, 120));
+        box.setPreferredSize(new Dimension(130, 200));
+        box.setMinimumSize(new Dimension(130, 200));
+        box.setMaximumSize(new Dimension(130, 200));
         box.setBackground(Color.WHITE);
 
-        JLabel shirtLabel = createScaledLabel(outfit.getShirt().getImg(), 150, 150);
-        JLabel pantsLabel = createScaledLabel(outfit.getPants().getImg(), 150, 150);
+        JLabel shirtLabel = createScaledLabel(outfit.getShirt().getImg(), 120, 70);
+        JLabel pantsLabel = createScaledLabel(outfit.getPants().getImg(), 100, 80);
+        JButton playButton = createInnerMenuButton(BUTTON_IMG_DIRECTORY + "play-button.png");
 
         shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         box.add(shirtLabel);
-        box.add(Box.createVerticalStrut(5)); // smaller gap
         box.add(pantsLabel);
+        box.add(playButton);
 
         return box;
+    }
+
+    // EFFECTS: creates and returns inner menu buttons
+    public JButton createInnerMenuButton(String imgPath) {
+        JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
+        button.addActionListener(e -> handleInnerButton());
+        return button;
+    }
+
+    // EFFECTS: handles logic for inner menu button
+    public void handleInnerButton() {
+
     }
 
 }

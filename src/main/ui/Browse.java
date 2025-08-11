@@ -12,8 +12,6 @@ import java.awt.*;
 
 // Represents a Browse class that sets up UI
 public class Browse extends BrowseButtonController {
-    private static final int INNER_BUTTON_WIDTH = 50;
-    private static final int INNER_BUTTON_HEIGHT = 35;
 
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
