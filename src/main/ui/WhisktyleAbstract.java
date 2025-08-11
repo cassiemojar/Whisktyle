@@ -164,6 +164,11 @@ public abstract class WhisktyleAbstract extends JFrame {
         return new ImageIcon(scaledImg);
     }
 
+    public JLabel createScaledLabel(ImageIcon icon, int width, int height) {
+        Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new JLabel(new ImageIcon(scaledImage));
+    }
+
     // EFFECTS: returns closet closed ImageIcon
     public ImageIcon createClosetImg() {
         return createImgIcon(CLOSET_IMG_DIRECTORY + "browse-closet.png", OUTER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT);

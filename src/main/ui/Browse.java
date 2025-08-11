@@ -204,7 +204,7 @@ public class Browse extends BrowseButtonController {
         upperPanel.setMaximumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         upperPanel.setMinimumSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         // upperPanel.setBackground(Color.RED);
-        upperPanel.setOpaque(true);
+        upperPanel.setOpaque(false);
         setShirtUI(upperPanel);
 
         upperWrapper.add(upperPanel);
@@ -217,8 +217,8 @@ public class Browse extends BrowseButtonController {
         lowerPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 
-        lowerPanel.setBackground(Color.RED);
-        lowerPanel.setOpaque(true);
+        //lowerPanel.setBackground(Color.RED);
+        lowerPanel.setOpaque(false);
         setPantsUI(lowerPanel);
 
         lowerWrapper.add(lowerPanel);
@@ -246,8 +246,8 @@ public class Browse extends BrowseButtonController {
     public JPanel createLowerClosetPanel() {
         JPanel lowerPanel = new JPanel();
         lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
-        lowerPanel.setOpaque(true);
-        lowerPanel.setBackground(Color.RED);
+        lowerPanel.setOpaque(false);
+        //lowerPanel.setBackground(Color.RED);
         lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         lowerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 

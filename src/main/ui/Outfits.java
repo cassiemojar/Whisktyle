@@ -16,6 +16,8 @@ import java.util.Set;
 // Reprsents a Outfits class 
 public class Outfits extends WhisktyleAbstract {
     private JPanel innerPanel;
+    private static final int SCROLL_WIDTH = OUTER_CLOSET_WIDTH - 40;
+    private static final int SCROLL_HEIGHT = OUTER_CLOSET_HEIGHT - 40;
 
     // EFFECTS: Constructor for Oufits, sets title
     public Outfits() {
@@ -90,7 +92,8 @@ public class Outfits extends WhisktyleAbstract {
 
         // Empty inner panel at first
         innerPanel = new JPanel();
-        innerPanel.setBounds(0, 0, OUTER_CLOSET_WIDTH - 5, OUTER_CLOSET_HEIGHT - 10);
+        innerPanel.setBounds(20, 20, OUTER_CLOSET_WIDTH - 40, OUTER_CLOSET_HEIGHT - 40);
+        // innerPanel.setBounds(20, 50, 300, 200);
         innerPanel.setOpaque(false);
 
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
@@ -102,7 +105,6 @@ public class Outfits extends WhisktyleAbstract {
 
         return closetPanel;
     }
-
 
     // TODO:
     public void handleCategory() {
@@ -118,7 +120,8 @@ public class Outfits extends WhisktyleAbstract {
 
             }
         } else {
-            JOptionPane.showMessageDialog(this, "You haven't saved an outfit yet! Please browse your clothes and save an outfit.", "Cancelled",
+            JOptionPane.showMessageDialog(this,
+                    "You haven't saved an outfit yet! Please browse your clothes and save an outfit.", "Cancelled",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -135,8 +138,11 @@ public class Outfits extends WhisktyleAbstract {
         }
 
         JScrollPane scrollPane = new JScrollPane(gridPanel,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        scrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
+
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
@@ -152,19 +158,18 @@ public class Outfits extends WhisktyleAbstract {
     private JPanel createOutfitBox(Outfit outfit) {
         JPanel box = new JPanel();
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
-        box.setPreferredSize(new Dimension(100, 250));
-        //box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        box.setOpaque(false);
-        //box.setBackground(Color.WHITE);
+        box.setPreferredSize(new Dimension(100, 120));
+        box.setMaximumSize(new Dimension(100, 120));
+        box.setBackground(Color.WHITE);
 
-        JLabel shirtLabel = new JLabel(outfit.getShirt().getImg());
-        JLabel pantsLabel = new JLabel(outfit.getPants().getImg());
+        JLabel shirtLabel = createScaledLabel(outfit.getShirt().getImg(), 150, 150);
+        JLabel pantsLabel = createScaledLabel(outfit.getPants().getImg(), 150, 150);
 
         shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         box.add(shirtLabel);
-        box.add(Box.createVerticalStrut(5));
+        box.add(Box.createVerticalStrut(5)); // smaller gap
         box.add(pantsLabel);
 
         return box;
