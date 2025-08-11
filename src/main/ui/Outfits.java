@@ -58,6 +58,10 @@ public class Outfits extends WhisktyleAbstract {
             case "Category":
                 handleCategory();
                 break;
+
+            case "Play":
+                handlePlay();
+                break;
         }
     }
 
@@ -93,7 +97,6 @@ public class Outfits extends WhisktyleAbstract {
         // Empty inner panel at first
         innerPanel = new JPanel();
         innerPanel.setBounds(20, 20, OUTER_CLOSET_WIDTH - 40, OUTER_CLOSET_HEIGHT - 40);
-        // innerPanel.setBounds(20, 50, 300, 200);
         innerPanel.setOpaque(false);
 
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
@@ -179,13 +182,21 @@ public class Outfits extends WhisktyleAbstract {
     // EFFECTS: creates and returns inner menu buttons
     public JButton createInnerMenuButton(String imgPath) {
         JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
-        button.addActionListener(e -> handleInnerButton());
+        button.addActionListener(e -> handleMenuButton("Play"));
         return button;
     }
 
-    // EFFECTS: handles logic for inner menu button
-    public void handleInnerButton() {
+    public void handlePlay() {
+        Object[] options = { "VIEW", "DELETE"};
 
+       
+                int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \""+ ":", "Selected Outfit",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+                if (choiceIndex >= 0 && choiceIndex < options.length) {
+                    String choice = (String) options[choiceIndex];
+
+                }
     }
 
 }
