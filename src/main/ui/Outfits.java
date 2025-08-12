@@ -18,7 +18,6 @@ public class Outfits extends WhisktyleAbstract {
     private JPanel innerPanel;
     private static final int SCROLL_WIDTH = OUTER_CLOSET_WIDTH - 40;
     private static final int SCROLL_HEIGHT = OUTER_CLOSET_HEIGHT - 40;
-    private Outfit selectedOutfit;
 
     // EFFECTS: Constructor for Oufits, sets title
     public Outfits() {
@@ -58,10 +57,6 @@ public class Outfits extends WhisktyleAbstract {
 
             case "Category":
                 handleCategory();
-                break;
-
-            case "Play":
-                handlePlay();
                 break;
         }
     }
@@ -144,11 +139,10 @@ public class Outfits extends WhisktyleAbstract {
             boxPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    selectedOutfit = outfit;
-                    handlePlay();
+                    handlePlay(outfit);
                 }
             });
-            gridPanel.add(outfitBox.createOutfitBox(outfit));
+            gridPanel.add(boxPanel);
 
         }
 
@@ -168,16 +162,16 @@ public class Outfits extends WhisktyleAbstract {
     }
 
     // EFFECTS: creates and returns inner menu buttons
-    public JButton createInnerMenuButton(String imgPath) {
+    public JButton createInnerMenuButton(String imgPath, Outfit outfit) {
         JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
-        button.addActionListener(e -> handleMenuButton("Play"));
+        button.addActionListener(e -> handlePlay(outfit));
         return button;
     }
 
-    public void handlePlay() {
+    public void handlePlay(Outfit selectedOutfit) {
         Object[] options = { "VIEW", "DELETE" };
 
-        int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \"" + ":",
+        int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \"" +selectedOutfit.getName() + "\":",
                 "Selected Outfit",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 

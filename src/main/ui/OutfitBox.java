@@ -34,7 +34,7 @@ public class OutfitBox {
 
         JLabel shirtLabel = parent.createScaledLabel(outfit.getShirt().getImg(), 120, 70);
         JLabel pantsLabel = parent.createScaledLabel(outfit.getPants().getImg(), 100, 80);
-        JButton playButton = parent.createInnerMenuButton(WhisktyleAbstract.BUTTON_IMG_DIRECTORY + "play-button.png");
+        JButton playButton = parent.createInnerMenuButton(WhisktyleAbstract.BUTTON_IMG_DIRECTORY + "play-button.png", outfit);
 
         shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
