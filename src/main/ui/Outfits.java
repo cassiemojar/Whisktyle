@@ -146,6 +146,14 @@ public class Outfits extends WhisktyleAbstract {
 
         }
 
+        innerPanel.setLayout(new BorderLayout());
+        innerPanel.add(helperShowOutfits(gridPanel), BorderLayout.CENTER);
+
+        innerPanel.revalidate();
+        innerPanel.repaint();
+    }
+
+    public JScrollPane helperShowOutfits(JPanel gridPanel) {
         JScrollPane scrollPane = new JScrollPane(gridPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -154,11 +162,7 @@ public class Outfits extends WhisktyleAbstract {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
 
-        innerPanel.setLayout(new BorderLayout());
-        innerPanel.add(scrollPane, BorderLayout.CENTER);
-
-        innerPanel.revalidate();
-        innerPanel.repaint();
+        return scrollPane;
     }
 
     // EFFECTS: creates and returns inner menu buttons
@@ -168,10 +172,12 @@ public class Outfits extends WhisktyleAbstract {
         return button;
     }
 
+    // EFFECTS: handles user selection of viewing or deleting selected outfit
     public void handlePlay(Outfit selectedOutfit) {
         Object[] options = { "VIEW", "DELETE" };
 
-        int choiceIndex = JOptionPane.showOptionDialog(null, "What would you like to do with outift \"" +selectedOutfit.getName() + "\":",
+        int choiceIndex = JOptionPane.showOptionDialog(null,
+                "What would you like to do with outift \"" + selectedOutfit.getName() + "\":",
                 "Selected Outfit",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
