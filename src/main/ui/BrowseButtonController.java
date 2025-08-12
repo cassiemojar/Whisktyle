@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 import model.Clothing;
+import model.Outfit;
 import model.Pants;
 import model.Person;
 import model.Shirt;
@@ -103,6 +104,11 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 break;
 
             case "Dress Me":
+                if (!getCloset().getShirts().isEmpty() && !getCloset().getPants().isEmpty()) {
+                    Clothing shirt = getCloset().getShirts().get(getCloset().getShirtIndex());
+                    Clothing pants = getCloset().getPants().get(getCloset().getPantsIndex());
+                    getCloset().setSelectedOutfit(new Outfit("", shirt, pants, new Shoes("")));
+                }
                 setNewFrame("Dress Me");
                 break;
         }

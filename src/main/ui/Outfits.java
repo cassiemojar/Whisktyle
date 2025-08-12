@@ -18,6 +18,7 @@ public class Outfits extends WhisktyleAbstract {
     private JPanel innerPanel;
     private static final int SCROLL_WIDTH = OUTER_CLOSET_WIDTH - 40;
     private static final int SCROLL_HEIGHT = OUTER_CLOSET_HEIGHT - 40;
+    private Outfit selectedOutfit;
 
     // EFFECTS: Constructor for Oufits, sets title
     public Outfits() {
@@ -135,11 +136,20 @@ public class Outfits extends WhisktyleAbstract {
 
         JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 20));
         gridPanel.setOpaque(false);
-        
 
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
             OutfitBox outfitBox = new OutfitBox(1, this);
+
+            JPanel boxPanel = outfitBox.createOutfitBox(outfit);
+            boxPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    selectedOutfit = outfit;
+                    handlePlay();
+                }
+            });
             gridPanel.add(outfitBox.createOutfitBox(outfit));
+
         }
 
         JScrollPane scrollPane = new JScrollPane(gridPanel,
@@ -173,7 +183,14 @@ public class Outfits extends WhisktyleAbstract {
 
         if (choiceIndex >= 0 && choiceIndex < options.length) {
             String choice = (String) options[choiceIndex];
-
+            switch (choice) {
+                case "VIEW":
+                    getCloset().setSelectedOutfit(selectedOutfit);
+                    setNewFrame("Dress Me");
+                    break;
+                case "DELETE":
+                    break;
+            }
         }
     }
 

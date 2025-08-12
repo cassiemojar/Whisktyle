@@ -16,6 +16,8 @@ public class Closet {
     private int shirtIndex;
     private int pantsIndex;
 
+    private Outfit selectedOutfit;
+
     // EFFECTS: Creates a closet that has no person, clothing, or saved outfits.
     public Closet() {
         shirtsList = new ArrayList<>();
@@ -72,6 +74,10 @@ public class Closet {
         throw new NoPersonException();
     }
 
+    public void setSelectedOutfit(Outfit outfit) {
+        selectedOutfit = outfit;
+    }
+
     public List<Clothing> getShirts() {
         return this.shirtsList;
     }
@@ -96,13 +102,16 @@ public class Closet {
         return new ArrayList<>();
     }
 
-
     public int getShirtIndex() {
         return shirtIndex;
     }
 
     public int getPantsIndex() {
         return pantsIndex;
+    }
+
+    public Outfit getSelectedOutfit() {
+        return selectedOutfit;
     }
 
     // EFFECTS: Gets a specific outfit in an outfit category. Throws OutfitException

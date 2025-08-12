@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import model.Closet;
+import model.Outfit;
 
 // Represents an abstract class that has methods for the common frame setup
 public abstract class WhisktyleAbstract extends JFrame {
@@ -31,6 +32,8 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final int INNER_CLOSET_WIDTH = 450;
 
     private static final Color DARK_BLUE = Color.decode("#44657E");
+
+    private Outfit selectedOutfit;
 
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
@@ -220,5 +223,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
         return new ImageIcon(transparentImage);
     }
+
+    
 
 }

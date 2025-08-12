@@ -141,11 +141,10 @@ public class DressMe extends WhisktyleAbstract {
             ImageIcon personIcon = getCloset().getPerson().getImg();
             OutfitPanel outfitPanel = new OutfitPanel(personIcon);
 
-            if (!getCloset().getShirts().isEmpty()) {
-                outfitPanel.setShirt(getCloset().getShirts().get(getCloset().getShirtIndex()).getImg());
-            }
-            if (!getCloset().getPants().isEmpty()) {
-                outfitPanel.setPants(getCloset().getPants().get(getCloset().getPantsIndex()).getImg());
+            if (getCloset().getSelectedOutfit() != null) {
+                outfitPanel.setShirt(getCloset().getSelectedOutfit().getShirt().getImg());
+                outfitPanel.setPants(getCloset().getSelectedOutfit().getPants().getImg());
+
             }
             // personLabel.setIcon(icon);
 
