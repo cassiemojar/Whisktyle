@@ -21,7 +21,7 @@ import model.Shoes;
 public abstract class BrowseButtonController extends WhisktyleAbstract {
     protected JLabel shirtLabel;
     protected JLabel pantsLabel;
-    private JLabel shoesLabel;
+    // private JLabel shoesLabel;
 
     // EFFECTS: constructor for BrowseButtonController class
     public BrowseButtonController() {
@@ -213,9 +213,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
             case "Play":
                 handlePlay(clothing, listClothing, clothingLabel, index);
-                // saveLabel(listClothing, clothingLabel, index);
-                // index = -1;
-
                 break;
         }
         return index;
@@ -230,14 +227,48 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
     }
 
     // EFFECTS: handles play option from JOptionPane's play button
-    public void handlePlayOption(Object choice, List<Clothing> listClothing, JLabel clothingLabel, int index) {
+    public void handlePlayOption(Object choice, String clothing, List<Clothing> listClothing, JLabel clothingLabel,
+            int index) {
         switch ((String) choice) {
             case "CHOOSE":
                 saveLabel(listClothing, clothingLabel, index);
                 break;
             case "DELETE":
+                handleDelete(clothing, listClothing, clothingLabel, index);
                 break;
 
+        }
+    }
+
+    // EFFECTS: handles delete option, removing selected clothing from saved
+    // clothing
+    public void handleDelete(String clothing, List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        int choice = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete " + clothing + " \"" + listClothing.get(index).getName() + "\"?",
+                "Delete Outfit",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (listClothing.size() == 1) {
+            JOptionPane.showMessageDialog(this,
+                    "You only have one " + clothing + " in your closet. This hasn't been deleted.");
+        } else if (choice == JOptionPane.YES_OPTION) {
+            listClothing.remove(index);
+
+            if (index == listClothing.size()) {
+                index--;
+                if (clothing.equals("Shirt")) {
+                    getCloset().setShirtIndex(listClothing.size() - 1);
+                } else {
+                    getCloset().setShirtIndex(listClothing.size() - 1);
+
+                }
+            }
+
+            setClothingLabel(listClothing, clothingLabel, index);
+            JOptionPane.showMessageDialog(this, clothing + " successfully deleted!");
+
+        } else {
+            JOptionPane.showMessageDialog(this, clothing + "  hasn't been deleted.");
         }
     }
 
@@ -250,7 +281,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
         if (choiceIndex >= 0 && choiceIndex < options.length) {
             String choice = (String) options[choiceIndex];
-            handlePlayOption(choice, listClothing, clothingLabel, index);
+            handlePlayOption(choice, clothing, listClothing, clothingLabel, index);
         }
 
     }
