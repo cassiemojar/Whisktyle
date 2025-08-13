@@ -93,7 +93,7 @@ public class Outfits extends WhisktyleAbstract {
 
         // Empty inner panel at first
         innerPanel = new JPanel();
-        innerPanel.setBounds(20, 20, OUTER_CLOSET_WIDTH - 40, OUTER_CLOSET_HEIGHT - 40);
+        innerPanel.setBounds(20, 20, SCROLL_WIDTH, SCROLL_HEIGHT);
         innerPanel.setOpaque(false);
 
         layeredPane.add(closetLabel, JLayeredPane.DEFAULT_LAYER);
@@ -106,7 +106,7 @@ public class Outfits extends WhisktyleAbstract {
         return closetPanel;
     }
 
-    // TODO:
+    // EFFECTS: displays which categories user can select
     public void handleCategory() {
         Set<String> categorySet = getCloset().getSavedOutfits().keySet();
         Object[] options = categorySet.toArray();
@@ -148,6 +148,7 @@ public class Outfits extends WhisktyleAbstract {
         innerPanel.repaint();
     }
 
+    // EFFECTS: helper method for showOutfitsForCategory
     public JScrollPane helperShowOutfits(JPanel gridPanel) {
         JScrollPane scrollPane = new JScrollPane(gridPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -190,6 +191,7 @@ public class Outfits extends WhisktyleAbstract {
         }
     }
 
+    // EFFECTS: handles delete option, removing selected outfit from saved outfits
     public void handleDelete(Outfit selectedOutfit, String category) {
         int choice = JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to delete outift \"" + selectedOutfit.getName() + "\"?", "Delete Outfit",
