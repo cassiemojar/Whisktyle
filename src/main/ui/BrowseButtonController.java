@@ -212,10 +212,10 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 break;
 
             case "Play":
-                if (index != -1) {
-                    saveLabel(listClothing, clothingLabel, index);
-                    // index = -1;
-                }
+                handlePlay(clothing, listClothing, clothingLabel, index);
+                // saveLabel(listClothing, clothingLabel, index);
+                // index = -1;
+
                 break;
         }
         return index;
@@ -229,8 +229,30 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         }
     }
 
-    public void handlePlay() {
-        
+    // EFFECTS: handles play option from JOptionPane's play button
+    public void handlePlayOption(Object choice, List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        switch ((String) choice) {
+            case "CHOOSE":
+                saveLabel(listClothing, clothingLabel, index);
+                break;
+            case "DELETE":
+                break;
+
+        }
+    }
+
+    // EFFECTS: Shows JOptionPane to display options when clicked play button
+    public void handlePlay(String clothing, List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        Object[] options = { "CHOOSE", "DELETE" };
+        int choiceIndex = JOptionPane.showOptionDialog(null, "What do you want to do with this " + clothing + ":",
+                "Selected " + clothing,
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+        if (choiceIndex >= 0 && choiceIndex < options.length) {
+            String choice = (String) options[choiceIndex];
+            handlePlayOption(choice, listClothing, clothingLabel, index);
+        }
+
     }
 
     // EFFECTS: fixes the closet label (won't allow it to change) + makes icon
