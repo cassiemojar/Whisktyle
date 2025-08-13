@@ -24,7 +24,7 @@ public class OutfitBox {
     }
 
     // EFFECTS: Creates a single outfit box containing a shirt and pants
-    public JPanel createOutfitBox(Outfit outfit) {
+    public JPanel createOutfitBox(Outfit outfit, String category) {
         box = new JPanel();
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
         box.setPreferredSize(new Dimension(130, 200));
@@ -34,7 +34,7 @@ public class OutfitBox {
 
         JLabel shirtLabel = parent.createScaledLabel(outfit.getShirt().getImg(), 120, 70);
         JLabel pantsLabel = parent.createScaledLabel(outfit.getPants().getImg(), 100, 80);
-        JButton playButton = parent.createInnerMenuButton(WhisktyleAbstract.BUTTON_IMG_DIRECTORY + "play-button.png", outfit);
+        JButton playButton = parent.createInnerMenuButton(WhisktyleAbstract.BUTTON_IMG_DIRECTORY + "play-button.png", outfit, category);
 
         shirtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         pantsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

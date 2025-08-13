@@ -17,6 +17,7 @@ public class Closet {
     private int pantsIndex;
 
     private Outfit selectedOutfit;
+    private String selectedOutfitCategory;
 
     // EFFECTS: Creates a closet that has no person, clothing, or saved outfits.
     public Closet() {
@@ -78,6 +79,10 @@ public class Closet {
         selectedOutfit = outfit;
     }
 
+    public void setSelectedOutfitCategory(String category) {
+        selectedOutfitCategory = category;
+    }
+
     public List<Clothing> getShirts() {
         return this.shirtsList;
     }
@@ -112,6 +117,10 @@ public class Closet {
 
     public Outfit getSelectedOutfit() {
         return selectedOutfit;
+    }
+
+    public String setSelectedOutfitCategory() {
+        return selectedOutfitCategory;
     }
 
     // EFFECTS: Gets a specific outfit in an outfit category. Throws OutfitException

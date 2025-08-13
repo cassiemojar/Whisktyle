@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.List;
 
 // Reprsents a Outfits class 
 public class Outfits extends WhisktyleAbstract {
@@ -135,13 +136,7 @@ public class Outfits extends WhisktyleAbstract {
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
             OutfitBox outfitBox = new OutfitBox(1, this);
 
-            JPanel boxPanel = outfitBox.createOutfitBox(outfit);
-            boxPanel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    handlePlay(outfit);
-                }
-            });
+            JPanel boxPanel = outfitBox.createOutfitBox(outfit, category);
             gridPanel.add(boxPanel);
 
         }
@@ -166,14 +161,14 @@ public class Outfits extends WhisktyleAbstract {
     }
 
     // EFFECTS: creates and returns inner menu buttons
-    public JButton createInnerMenuButton(String imgPath, Outfit outfit) {
+    public JButton createInnerMenuButton(String imgPath, Outfit outfit, String category) {
         JButton button = createButton(imgPath, INNER_BUTTON_WIDTH, INNER_BUTTON_HEIGHT);
-        button.addActionListener(e -> handlePlay(outfit));
+        button.addActionListener(e -> handlePlay(outfit, category));
         return button;
     }
 
     // EFFECTS: handles user selection of viewing or deleting selected outfit
-    public void handlePlay(Outfit selectedOutfit) {
+    public void handlePlay(Outfit selectedOutfit, String category) {
         Object[] options = { "VIEW", "DELETE" };
 
         int choiceIndex = JOptionPane.showOptionDialog(null,
@@ -189,8 +184,28 @@ public class Outfits extends WhisktyleAbstract {
                     setNewFrame("Dress Me");
                     break;
                 case "DELETE":
+                    handleDelete(selectedOutfit, category);
                     break;
             }
+        }
+    }
+
+    public void handleDelete(Outfit selectedOutfit, String category) {
+        int choice = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete outift \"" + selectedOutfit.getName() + "\"?", "Delete Outfit",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            List<Outfit> outfitList = getCloset().getOutfitCategory(category);
+            outfitList.remove(selectedOutfit);
+            showOutfitsForCategory(category);
+            if (getCloset().getOutfitCategory(category).isEmpty()) {
+                getCloset().getSavedOutfits().remove(category);
+            }
+
+            JOptionPane.showMessageDialog(this, "Outfit successfully deleted!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Outfit hasn't been deleted.");
         }
     }
 
