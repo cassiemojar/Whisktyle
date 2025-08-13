@@ -191,6 +191,13 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         return null;
     }
 
+    // EFFECTS: updates clothing labels of closet
+    public void setClothingLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        if (!listClothing.isEmpty()) {
+            clothingLabel.setIcon(listClothing.get(index).getImg());
+        }
+    }
+
     // EFFECTS: handles inner button selection for closet labels
     public int handleInnerButtons(String clothing, String direction, List<Clothing> listClothing, int index,
             JLabel clothingLabel) {
@@ -219,11 +226,18 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
     }
 
-    // EFFECTS: updates clothing labels of closet
-    public void setClothingLabel(List<Clothing> listClothing, JLabel clothingLabel, int index) {
-        if (!listClothing.isEmpty()) {
-            clothingLabel.setIcon(listClothing.get(index).getImg());
+    // EFFECTS: Shows JOptionPane to display options when clicked play button
+    public void handlePlay(String clothing, List<Clothing> listClothing, JLabel clothingLabel, int index) {
+        Object[] options = { "CHOOSE", "DELETE", "RETURN TO MENU"};
+        int choiceIndex = JOptionPane.showOptionDialog(null, "What do you want to do with this " + clothing + ":",
+                "Selected " + clothing,
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+        if (choiceIndex >= 0 && choiceIndex < options.length) {
+            String choice = (String) options[choiceIndex];
+            handlePlayOption(choice, clothing, listClothing, clothingLabel, index);
         }
+
     }
 
     // EFFECTS: handles play option from JOptionPane's play button
@@ -235,6 +249,10 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 break;
             case "DELETE":
                 handleDelete(clothing, listClothing, clothingLabel, index);
+                break;
+
+            case "RETURN TO MENU":
+                setNewFrame("Menu");
                 break;
 
         }
@@ -270,20 +288,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         } else {
             JOptionPane.showMessageDialog(this, clothing + "  hasn't been deleted.");
         }
-    }
-
-    // EFFECTS: Shows JOptionPane to display options when clicked play button
-    public void handlePlay(String clothing, List<Clothing> listClothing, JLabel clothingLabel, int index) {
-        Object[] options = { "CHOOSE", "DELETE" };
-        int choiceIndex = JOptionPane.showOptionDialog(null, "What do you want to do with this " + clothing + ":",
-                "Selected " + clothing,
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
-        if (choiceIndex >= 0 && choiceIndex < options.length) {
-            String choice = (String) options[choiceIndex];
-            handlePlayOption(choice, clothing, listClothing, clothingLabel, index);
-        }
-
     }
 
     // EFFECTS: fixes the closet label (won't allow it to change) + makes icon
