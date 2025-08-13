@@ -214,7 +214,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
             case "Play":
                 if (index != -1) {
                     saveLabel(listClothing, clothingLabel, index);
-                    index = -1;
+                    // index = -1;
                 }
                 break;
         }
@@ -227,6 +227,10 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         if (!listClothing.isEmpty()) {
             clothingLabel.setIcon(listClothing.get(index).getImg());
         }
+    }
+
+    public void handlePlay() {
+        
     }
 
     // EFFECTS: fixes the closet label (won't allow it to change) + makes icon
