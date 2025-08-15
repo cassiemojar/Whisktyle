@@ -5,12 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a Closet that does not have a person or clothes initially.
-public class Closet {
+public class Closet implements Writable {
     private Person person;
     private List<Clothing> shirtsList;
     private List<Clothing> pantsList;
-    private List<Shoes> shoesList;
+    private List<Clothing> shoesList;
     private Map<String, List<Outfit>> savedOutfits;
 
     private int shirtIndex;
@@ -55,6 +60,41 @@ public class Closet {
         savedOutfits.get(name).add(outfit);
     }
 
+    // EFFECTS: puts variables as Json Objects
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        if (person != null) {
+            json.put("Person", person.toJson());
+        }
+
+        json.put("Saved Shirts", listToJson(shirtsList));
+        json.put("Saved Pants", listToJson(pantsList));
+        json.put("Saved Shoes", listToJson(shoesList));
+        json.put("Saved Outfits", savedOutfitsToJson());
+        return json;
+    }
+
+    // EFFECTS: puts saved outfits and their categories as JSON objects
+    private JSONObject savedOutfitsToJson() {
+        JSONObject json = new JSONObject();
+        for (String category : savedOutfits.keySet()) {
+            json.put(category, listToJson(savedOutfits.get(category)));
+        }
+        return json;
+    }
+
+    // EFFECTS: converts lists into JSONArrays
+    private JSONArray listToJson(List<? extends Writable> list) {
+        JSONArray array = new JSONArray();
+
+        for (Writable w : list) {
+            array.put(w.toJson());
+        }
+
+        return array;
+    }
+
     // Getters and Setters below
     public void setPerson(Person person) {
         this.person = person;
@@ -91,7 +131,7 @@ public class Closet {
         return this.pantsList;
     }
 
-    public List<Shoes> getShoes() {
+    public List<Clothing> getShoes() {
         return this.shoesList;
     }
 

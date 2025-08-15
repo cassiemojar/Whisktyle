@@ -2,8 +2,12 @@ package model;
 
 import javax.swing.ImageIcon;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a Person that is initially set to default shirt, pants, and shoes
-public class Person {
+public class Person implements Writable{
     private String name;
     private Outfit outfit;
     private ImageIcon img;
@@ -58,6 +62,15 @@ public class Person {
 
     public ImageIcon getImg() {
         return img;
+    }
+
+    // EFFECTS: puts variables as Json Objects
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name", name);
+        json.put("Image Path", img != null ? img.getDescription() : null);
+        return json;
     }
 
 }
