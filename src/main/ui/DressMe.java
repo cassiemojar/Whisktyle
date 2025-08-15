@@ -135,8 +135,6 @@ public class DressMe extends WhisktyleAbstract {
 
     // EFFECTS: sets person image to be person label's icon
     public void setPersonUI(JPanel panel) {
-        // JLabel personLabel = new JLabel();
-
         try {
             ImageIcon personIcon = getCloset().getPerson().getImg();
             OutfitPanel outfitPanel = new OutfitPanel(personIcon);
@@ -146,8 +144,7 @@ public class DressMe extends WhisktyleAbstract {
                 outfitPanel.setPants(getCloset().getSelectedOutfit().getPants().getImg());
 
             }
-            // personLabel.setIcon(icon);
-
+            
             outfitPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
             outfitPanel.setOpaque(false);
 

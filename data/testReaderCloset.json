@@ -1,0 +1,84 @@
+{
+    "Person": {
+        "Name": "Cher",
+        "Image Path": "images/person.png",
+        "Shirt": {
+            "Name": "Sheer white jacket",
+            "Image Path": "jacket.png"
+        },
+        "Pants": {
+            "Name": "Sheer white dress",
+            "Image Path": "dress.png"
+        },
+        "Shoes": {
+            "Name": "Silver heels",
+            "Image Path": "heels.png"
+        }
+    },
+    "Saved Shirts": [
+        {
+            "Name": "Sheer white jacket",
+            "Image Path": "jacket.png"
+        },
+        {
+            "Name": "Plaid yellow jacket",
+            "Image Path": "yellow jacket.png"
+        }
+    ],
+    "Saved Pants": [
+        {
+            "Name": "Sheer white dress",
+            "Image Path": "dress.png"
+        },
+        {
+            "Name": "Plaid yellow skirt",
+            "Image Path": "skirt.png"
+        }
+    ],
+    "Saved Shoes": [
+        {
+            "Name": "Silver heels",
+            "Image Path": "heels.png"
+        },
+        {
+            "Name": "Yellow flats",
+            "Image Path": "flats.png"
+        }
+    ],
+    "Saved Outfits": {
+        "School": [
+            {
+                "Name": "As If!",
+                "Shirt": {
+                    "Name": "Plaid yellow jacket",
+                    "Image Path": "yellow jacket.png"
+                },
+                "Pants": {
+                    "Name": "Plaid yellow skirt",
+                    "Image Path": "skirt.png"
+                },
+                "Shoes": {
+                    "Name": "Yellow flats",
+                    "Image Path": "flats.png"
+                }
+            }
+        ],
+        "Date": [
+            {
+                "Name": "Calvin Klein",
+                "Shirt": {
+                    "Name": "Sheer white jacket",
+                    "Image Path": "jacket.png"
+                },
+                "Pants": {
+                    "Name": "Sheer white dress",
+                    "Image Path": "dress.png"
+                },
+                "Shoes": {
+                    "Name": "Silver heels",
+                    "Image Path": "heels.png"
+                }
+            }
+        ]
+    }
+}

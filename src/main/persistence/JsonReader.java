@@ -48,7 +48,10 @@ public class JsonReader {
         Closet closet = new Closet();
 
         if (jsonObject.has("Person")) {
-            closet.setPerson(parsePerson(jsonObject.getJSONObject("Person")));
+            JSONObject personObject = jsonObject.getJSONObject("Person");
+            if (personObject.has("Name") && !personObject.getString("Name").isEmpty()) {
+                closet.setPerson(parsePerson(personObject));
+            }
         }
 
         addShirts(closet, jsonObject);
@@ -60,22 +63,41 @@ public class JsonReader {
 
     // EFFECTS: parses Person from JSON object and returns it
     private Person parsePerson(JSONObject jsonObject) {
-        Shirt shirt = parseShirt(jsonObject.getJSONObject("Shirt"));
-        Pants pants = parsePants(jsonObject.getJSONObject("Pants"));
-        Shoes shoes = parseShoes(jsonObject.getJSONObject("Shoes"));
+        Shirt shirt = null;
+        Pants pants = null;
+        Shoes shoes = null;
 
-        ImageIcon personImg = new ImageIcon(jsonObject.getString("Image Path"));
-        return new Person(jsonObject.getString("Name"), personImg, shirt, pants, shoes);
+        JSONObject shirtJson = jsonObject.optJSONObject("Shirt");
+        if (shirtJson != null && shirtJson.has("Name")) {
+            shirt = parseShirt(shirtJson);
+        }
+
+        JSONObject pantsJson = jsonObject.optJSONObject("Pants");
+        if (pantsJson != null && pantsJson.has("Name")) {
+            pants = parsePants(pantsJson);
+        }
+
+        JSONObject shoesJson = jsonObject.optJSONObject("Shoes");
+        if (shoesJson != null && shoesJson.has("Name")) {
+            shoes = parseShoes(shoesJson);
+        }
+
+        String name = jsonObject.optString("Name", "");
+        String imgPath = jsonObject.optString("Image Path", "");
+
+        return new Person(name, new ImageIcon(imgPath), shirt, pants, shoes);
     }
 
     // MODIFIES: closet
     // EFFECTS: parses shirts from JSON, adding to closet
     private void addShirts(Closet closet, JSONObject jsonObject) {
         JSONArray shirtsArray = jsonObject.optJSONArray("Saved Shirts");
-
         if (shirtsArray != null) {
-            for (Object shirt : shirtsArray) {
-                closet.addShirt(parseShirt((JSONObject) shirt));
+            for (Object shirtObj : shirtsArray) {
+                JSONObject shirtJson = (JSONObject) shirtObj;
+                if (shirtJson.has("Name")) {
+                    closet.addShirt(parseShirt(shirtJson));
+                }
             }
         }
     }
@@ -86,8 +108,11 @@ public class JsonReader {
         JSONArray pantsArray = jsonObject.optJSONArray("Saved Pants");
 
         if (pantsArray != null) {
-            for (Object pants : pantsArray) {
-                closet.addPants(parsePants((JSONObject) pants));
+            for (Object pantsObj : pantsArray) {
+                JSONObject pantsJson = (JSONObject) pantsObj;
+                if (pantsJson.has("Name")) {
+                    closet.addPants(parsePants(pantsJson));
+                }
             }
         }
     }
@@ -98,8 +123,11 @@ public class JsonReader {
         JSONArray shoesArray = jsonObject.optJSONArray("Saved Shoes");
 
         if (shoesArray != null) {
-            for (Object shoes : shoesArray) {
-                closet.addShoes(parseShoes((JSONObject) shoes));
+            for (Object shoesObj : shoesArray) {
+                JSONObject shoesJson = (JSONObject) shoesObj;
+                if (shoesJson.has("Name")) {
+                    closet.addShoes(parseShoes(shoesJson));
+                }
             }
         }
     }

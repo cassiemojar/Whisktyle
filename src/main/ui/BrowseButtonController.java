@@ -90,7 +90,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
     // EFFECTS: handles selection of the menu buttons
     public void handleMenuButton(String selection) {
-        Object[] options = { "SHIRT", "PANTS", "SHOES" };
+        Object[] options = { "SHIRT", "PANTS"};
 
         switch (selection) {
             case "Add":
@@ -123,8 +123,6 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
             case "PANTS":
                 addNewClothing("Pants", getCloset().getPants());
                 break;
-
-            case "SHOES":
         }
     }
 

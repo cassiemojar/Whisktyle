@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Outfit;
-
+// TODO: add constants
 // Represents an outfit box, used in Outfits class
 public class OutfitBox {
     private JPanel box;
@@ -30,7 +30,8 @@ public class OutfitBox {
         box.setPreferredSize(new Dimension(130, 200));
         box.setMinimumSize(new Dimension(130, 200));
         box.setMaximumSize(new Dimension(130, 200));
-        box.setBackground(Color.WHITE);
+        //box.setBackground(Color.WHITE);
+        box.setOpaque(false);
 
         JLabel shirtLabel = parent.createScaledLabel(outfit.getShirt().getImg(), 120, 70);
         JLabel pantsLabel = parent.createScaledLabel(outfit.getPants().getImg(), 100, 80);
