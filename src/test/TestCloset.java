@@ -68,6 +68,9 @@ public class TestCloset {
             assertTrue(testCloset.getPants().isEmpty());
             assertTrue(testCloset.getShoes().isEmpty());
             assertTrue(testCloset.getOutfitCategory("Any").isEmpty());
+            assertEquals(testCloset.getSelectedOutfit(), null);
+            assertEquals(testCloset.getShirtIndex(), 0);
+            assertEquals(testCloset.getPantsIndex(), 0);
 
             try {
                 testCloset.getAnOutfit("Any", "School Outfit");
@@ -181,5 +184,23 @@ public class TestCloset {
         } catch (OutfitException a) {
             fail();
         }
+    }
+
+    @Test
+    void testSetIndex() {
+        testCloset.setShirtIndex(1);
+        testCloset.setPantsIndex(1);
+
+        assertEquals(testCloset.getShirtIndex(), 1);
+        assertEquals(testCloset.getPantsIndex(), 1);
+
+    }
+
+    @Test
+    void testSetSelectedOutfit() {
+        testCloset.setSelectedOutfit(testOutfit1);
+        testCloset.setSelectedOutfitCategory("School");
+        assertTrue(testCloset.getSelectedOutfit().equals(testOutfit1));
+        assertTrue(testCloset.getSelectedOutfitCategory().equals("School"));
     }
 }

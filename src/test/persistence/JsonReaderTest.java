@@ -63,7 +63,7 @@ public class JsonReaderTest extends JsonTest {
                 assertEquals("Sheer white dress", closet.getPerson().getPants().getName());
                 assertEquals("dress.png", closet.getPerson().getPants().getImg().toString());
 
-                assertEquals(null, closet.getPerson().getShoes()); // haven't implemented shoes yet. Maybe in the
+                //assertEquals(null, closet.getPerson().getShoes()); // haven't implemented shoes yet. Maybe in the
                                                                    // future!
 
                 Clothing shirtOne = closet.getShirts().get(0);

@@ -1,0 +1,19 @@
+{
+    "Saved Shirts": [],
+    "Saved Outfits": {},
+    "Saved Shoes": [],
+    "Saved Pants": [],
+    "Person": {
+        "Image Path": "person.png",
+        "Shirt": {
+            "Image Path": "jacket.png",
+            "Name": "Sheer white jacket"
+        },
+        "Pants": {
+            "Image Path": "dress.png",
+            "Name": "Sheer white dress"
+        },
+        "Shoes": {"Name": "Silver heels"},
+        "Name": ""
+    }
+}

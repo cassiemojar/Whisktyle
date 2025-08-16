@@ -65,7 +65,7 @@ public class Closet implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         if (person != null) {
-            json.put("Person", (person != null) ? person.toJson() : new JSONObject());
+            json.put("Person", person.toJson());
         }
 
         json.put("Saved Shirts", listToJson(shirtsList));
@@ -159,7 +159,7 @@ public class Closet implements Writable {
         return selectedOutfit;
     }
 
-    public String setSelectedOutfitCategory() {
+    public String getSelectedOutfitCategory() {
         return selectedOutfitCategory;
     }
 

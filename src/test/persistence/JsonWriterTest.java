@@ -60,6 +60,45 @@ public class JsonWriterTest {
     }
 
     @Test
+    void testWriterClosetEmptyNamePerson() {
+        try {
+            Closet closet = new Closet();
+
+            Person person = new Person("", new ImageIcon("person.png"),
+                    new Shirt("Sheer white jacket", new ImageIcon("jacket.png")),
+                    new Pants("Sheer white dress", new ImageIcon("dress.png")),
+                    new Shoes("Silver heels"));
+
+
+            person.setShirt(new Shirt("Sheer white jacket", new ImageIcon("jacket.png")));
+            person.setPants(new Pants("Sheer white dress", new ImageIcon("dress.png")));
+            person.setShoes(new Shoes("Silver heels"));
+            closet.setPerson(person);
+
+            JsonWriter writer = new JsonWriter("./data/testWriterClosetNoNamePerson.json");
+            writer.open();
+            writer.write(closet);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterClosetNoNamePerson.json");
+            Closet readCloset = reader.read();
+
+            Person readPerson = readCloset.getPerson();
+            fail();
+            // assertEquals("", readPerson.getName());
+            // assertEquals("person.png", readPerson.getImg().toString());
+            // assertEquals("Sheer white jacket", readPerson.getShirt().getName());
+            // assertEquals("Sheer white dress", readPerson.getPants().getName());
+            // // assertEquals("Silver heels", readPerson.getShoes().getName());
+
+        } catch (IOException | NoPersonException e) {
+            // pass
+        }
+    }
+
+
+
+    @Test
     void testWriterClosetWithData() {
         try {
             Closet closet = new Closet();
@@ -68,7 +107,7 @@ public class JsonWriterTest {
                     new Shirt("Sheer white jacket", new ImageIcon("jacket.png")),
                     new Pants("Sheer white dress", new ImageIcon("dress.png")),
                     new Shoes("Silver heels"));
-                
+
             person.setShirt(new Shirt("Sheer white jacket", new ImageIcon("jacket.png")));
             person.setPants(new Pants("Sheer white dress", new ImageIcon("dress.png")));
             person.setShoes(new Shoes("Silver heels"));
@@ -76,7 +115,7 @@ public class JsonWriterTest {
 
             closet.addShirt(new Shirt("Plaid yellow jacket", new ImageIcon("yellow jacket.png")));
             closet.addPants(new Pants("Plaid yellow skirt", new ImageIcon("skirt.png")));
-            //closet.addShoes(new Shoes("Yellow flats"));
+            // closet.addShoes(new Shoes("Yellow flats"));
 
             Outfit outfit = new Outfit("As If!",
                     new Shirt("Plaid yellow jacket", new ImageIcon("yellow jacket.png")),
@@ -97,8 +136,7 @@ public class JsonWriterTest {
             assertEquals("person.png", readPerson.getImg().toString());
             assertEquals("Sheer white jacket", readPerson.getShirt().getName());
             assertEquals("Sheer white dress", readPerson.getPants().getName());
-           // assertEquals("Silver heels", readPerson.getShoes().getName());
-
+            // assertEquals("Silver heels", readPerson.getShoes().getName());
 
             List<Clothing> shirts = readCloset.getShirts();
             assertEquals(1, shirts.size());
