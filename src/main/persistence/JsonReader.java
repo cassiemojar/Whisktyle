@@ -163,10 +163,10 @@ public class JsonReader {
 
     // EFFECTS: parses Outfit from JSON object and returns
     private Outfit parseOutfit(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        Shirt shirt = parseShirt(jsonObject.getJSONObject("shirt"));
-        Pants pants = parsePants(jsonObject.getJSONObject("pants"));
-        Shoes shoes = parseShoes(jsonObject.getJSONObject("shoes"));
+        String name = jsonObject.getString("Name");
+        Shirt shirt = parseShirt(jsonObject.getJSONObject("Shirt"));
+        Pants pants = parsePants(jsonObject.getJSONObject("Pants"));
+        Shoes shoes = parseShoes(jsonObject.getJSONObject("Shoes"));
         return new Outfit(name, shirt, pants, shoes);
     }
 
