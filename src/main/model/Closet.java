@@ -65,7 +65,7 @@ public class Closet implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         if (person != null) {
-            json.put("Person", person.toJson());
+            json.put("Person", (person != null) ? person.toJson() : new JSONObject());
         }
 
         json.put("Saved Shirts", listToJson(shirtsList));

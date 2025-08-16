@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents an outfit with a shirt, pants, shoes together
-public class Outfit implements Writable{
+public class Outfit implements Writable {
     private String name;
     private Clothing shirt;
     private Clothing pants;
@@ -23,21 +23,12 @@ public class Outfit implements Writable{
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Name", name);
-
-        if (shirt instanceof Writable) {
-            json.put("Shirt", ((Writable) shirt).toJson());
-        }
-        if (pants instanceof Writable) {
-            json.put("Pants", ((Writable) pants).toJson());
-        }
-        if (shoes != null) {
-            json.put("Shoes", shoes.toJson());
-        }
+        json.put("Name", this.name);
+        json.put("Shirt", shirt.toJson());
+        json.put("Pants", pants.toJson());
+        json.put("Shoes", shoes.toJson());
         return json;
     }
-
-    
 
     // Setters and getters below
 

@@ -1,84 +1,36 @@
 {
-    "Person": {
-        "Name": "Cher",
-        "Image Path": "images/person.png",
+    "Saved Shirts": [{
+        "Image Path": "yellow jacket.png",
+        "Name": "Plaid yellow jacket"
+    }],
+    "Saved Outfits": {"School": [{
         "Shirt": {
-            "Name": "Sheer white jacket",
-            "Image Path": "jacket.png"
+            "Image Path": "yellow jacket.png",
+            "Name": "Plaid yellow jacket"
         },
         "Pants": {
-            "Name": "Sheer white dress",
-            "Image Path": "dress.png"
+            "Image Path": "skirt.png",
+            "Name": "Plaid yellow skirt"
         },
-        "Shoes": {
-            "Name": "Silver heels",
-            "Image Path": "heels.png"
-        }
-    },
-    "Saved Shirts": [
-        {
-            "Name": "Sheer white jacket",
-            "Image Path": "jacket.png"
+        "Shoes": {"Name": "Yellow flats"},
+        "Name": "As If!"
+    }]},
+    "Saved Shoes": [],
+    "Saved Pants": [{
+        "Image Path": "skirt.png",
+        "Name": "Plaid yellow skirt"
+    }],
+    "Person": {
+        "Image Path": "person.png",
+        "Shirt": {
+            "Image Path": "jacket.png",
+            "Name": "Sheer white jacket"
         },
-        {
-            "Name": "Plaid yellow jacket",
-            "Image Path": "yellow jacket.png"
-        }
-    ],
-    "Saved Pants": [
-        {
-            "Name": "Sheer white dress",
-            "Image Path": "dress.png"
+        "Pants": {
+            "Image Path": "dress.png",
+            "Name": "Sheer white dress"
         },
-        {
-            "Name": "Plaid yellow skirt",
-            "Image Path": "skirt.png"
-        }
-    ],
-    "Saved Shoes": [
-        {
-            "Name": "Silver heels",
-            "Image Path": "heels.png"
-        },
-        {
-            "Name": "Yellow flats",
-            "Image Path": "flats.png"
-        }
-    ],
-    "Saved Outfits": {
-        "School": [
-            {
-                "Name": "As If!",
-                "Shirt": {
-                    "Name": "Plaid yellow jacket",
-                    "Image Path": "yellow jacket.png"
-                },
-                "Pants": {
-                    "Name": "Plaid yellow skirt",
-                    "Image Path": "skirt.png"
-                },
-                "Shoes": {
-                    "Name": "Yellow flats",
-                    "Image Path": "flats.png"
-                }
-            }
-        ],
-        "Date": [
-            {
-                "Name": "Calvin Klein",
-                "Shirt": {
-                    "Name": "Sheer white jacket",
-                    "Image Path": "jacket.png"
-                },
-                "Pants": {
-                    "Name": "Sheer white dress",
-                    "Image Path": "dress.png"
-                },
-                "Shoes": {
-                    "Name": "Silver heels",
-                    "Image Path": "heels.png"
-                }
-            }
-        ]
+        "Shoes": {"Name": "Silver heels"},
+        "Name": "Cher"
     }
 }

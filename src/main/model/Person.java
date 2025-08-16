@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a Person that is initially set to default shirt, pants, and shoes
-public class Person implements Writable{
+public class Person implements Writable {
     private String name;
     private Outfit outfit;
     private ImageIcon img;
@@ -69,7 +69,12 @@ public class Person implements Writable{
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Name", name);
-        json.put("Image Path", img != null ? img.getDescription() : null);
+        json.put("Image Path", img.getDescription());
+
+        json.put("Shirt", outfit.getShirt().toJson());
+        json.put("Pants", outfit.getPants().toJson());
+        json.put("Shoes", outfit.getShoes().toJson());
+
         return json;
     }
 
