@@ -1,36 +1,20 @@
 {
-    "Saved Shirts": [{
-        "Image Path": "yellow jacket.png",
-        "Name": "Plaid yellow jacket"
-    }],
-    "Saved Outfits": {"School": [{
-        "Shirt": {
-            "Image Path": "yellow jacket.png",
-            "Name": "Plaid yellow jacket"
-        },
-        "Pants": {
-            "Image Path": "skirt.png",
-            "Name": "Plaid yellow skirt"
-        },
-        "Shoes": {"Name": "Yellow flats"},
-        "Name": "As If!"
-    }]},
+    "Saved Shirts": [
+        {"Name": "test 1"},
+        {"Name": "test 2"},
+        {"Name": "test 2"}
+    ],
+    "Saved Outfits": {},
     "Saved Shoes": [],
-    "Saved Pants": [{
-        "Image Path": "skirt.png",
-        "Name": "Plaid yellow skirt"
-    }],
+    "Saved Pants": [
+        {"Name": "test 1"},
+        {"Name": "test 2"},
+        {"Name": "test 2"}
+    ],
     "Person": {
-        "Image Path": "person.png",
-        "Shirt": {
-            "Image Path": "jacket.png",
-            "Name": "Sheer white jacket"
-        },
-        "Pants": {
-            "Image Path": "dress.png",
-            "Name": "Sheer white dress"
-        },
-        "Shoes": {"Name": "Silver heels"},
-        "Name": "Cher"
+        "Shirt": {"Name": "test 1"},
+        "Pants": {"Name": "test 1"},
+        "Shoes": {"Name": ""},
+        "Name": "Jheneca"
     }
 }

@@ -6,9 +6,12 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import model.Closet;
 import model.Outfit;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 // Represents an abstract class that has methods for the common frame setup
 public abstract class WhisktyleAbstract extends JFrame {
@@ -35,9 +38,16 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     private Outfit selectedOutfit;
 
+    // Fields for JSON read, write
+    protected static final String JSON_STORE = "./data/testWriterCloset.json";
+    protected JsonWriter jsonWriter;
+    protected JsonReader jsonReader;
+
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         setCustomOptionPanes();
         setupFrame();
 
@@ -224,6 +234,26 @@ public abstract class WhisktyleAbstract extends JFrame {
         return new ImageIcon(transparentImage);
     }
 
-    
+    // EFFECTS: handles whether user wants to save their progress. Will write a JSON
+    // file to store current data
+    public void saveProgress() {
+        int choice = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to save your current progress?",
+                "Save Progress",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                jsonWriter.open();
+                jsonWriter.write(getCloset());
+                jsonWriter.close();
+                JOptionPane.showMessageDialog(this, "Data saved successfully to " + JSON_STORE);
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "Unable to write to file: " + JSON_STORE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Progress was not saved.");
+        }
+    }
 
 }

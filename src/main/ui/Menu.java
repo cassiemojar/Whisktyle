@@ -2,6 +2,9 @@ package ui;
 
 import javax.swing.*;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,6 +16,7 @@ public class Menu extends WhisktyleAbstract {
     // EFFECTS: Constructor for the main menu, initializes all model classes
     public Menu() {
         setTitle("Whisktyle - Menu");
+
     }
 
     // EFFECTS: Adds title panel and closet panel to background panel
@@ -89,10 +93,10 @@ public class Menu extends WhisktyleAbstract {
     public void handleButtonSelection(JButton menuButton, String stringUI) {
         switch (stringUI) {
             case "Save":
-                menuButton.addActionListener(e -> setProgressSteps(stringUI));
+                menuButton.addActionListener(e -> saveProgress());
                 break;
             case "Load":
-                menuButton.addActionListener(e -> setProgressSteps(stringUI));
+                menuButton.addActionListener(e -> saveProgress());
                 break;
             default:
                 menuButton.addActionListener(e -> setNewFrame(stringUI));
@@ -101,14 +105,7 @@ public class Menu extends WhisktyleAbstract {
 
     }
 
-    public void setProgressSteps(String stringUI) {
-        if (stringUI.equals("Save")) {
-            Save save = new Save();
-        } else {
-            Load load = new Load();
-        }
-
-    }
+ 
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close
     // close image when not
