@@ -87,7 +87,26 @@ public class Menu extends WhisktyleAbstract {
 
     // EFFECTS: handles when button is clicked
     public void handleButtonSelection(JButton menuButton, String stringUI) {
-        menuButton.addActionListener(e -> setNewFrame(stringUI));
+        switch (stringUI) {
+            case "Save":
+                menuButton.addActionListener(e -> setProgressSteps(stringUI));
+                break;
+            case "Load":
+                menuButton.addActionListener(e -> setProgressSteps(stringUI));
+                break;
+            default:
+                menuButton.addActionListener(e -> setNewFrame(stringUI));
+                break;
+        }
+
+    }
+
+    public void setProgressSteps(String stringUI) {
+        if (stringUI.equals("Save")) {
+            Save save = new Save();
+        } else {
+            Load load = new Load();
+        }
 
     }
 
