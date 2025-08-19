@@ -17,8 +17,8 @@ public class TestOutfit {
 
     @BeforeEach
     void runBefore() {
-        testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
+        testShirt = new Shirt("Plaid top", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        testPants = new Pants("Plaid skirt", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         testShoes = new Shoes("Yellow flats");
 
         testOutfit = new Outfit("School Outfit", testShirt, testPants, testShoes);
@@ -40,7 +40,7 @@ public class TestOutfit {
 
     @Test
     void testChangeShirt() {
-        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
+        Shirt newShirt = new Shirt("Sheer white jacket","ui/img/test-shirt.png",  new ImageIcon("ui/img/test-shirt.png"));
 
         testOutfit.setShirt(newShirt);
         assertTrue(testOutfit.getShirt().equals(newShirt));
@@ -48,7 +48,7 @@ public class TestOutfit {
 
     @Test
     void testChangePants() {
-        Pants newPants = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
+        Pants newPants = new Pants("Sheer white dress", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
 
         testOutfit.setPants(newPants);
         assertTrue(testOutfit.getPants().equals(newPants));
@@ -65,8 +65,8 @@ public class TestOutfit {
     @Test
     void testHashCodeAndEquals() {
         Outfit anotherOutfit = new Outfit("School Outfit", testShirt, testPants, testShoes);
-        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
-        Pants newPants = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
+        Shirt newShirt = new Shirt("Sheer white jacket", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        Pants newPants = new Pants("Sheer white dress","ui/img/test-pants.png",  new ImageIcon("ui/img/test-pants.png"));
         Shoes newShoes = new Shoes("Silver heels");
 
         assertTrue(testOutfit.equals(anotherOutfit));

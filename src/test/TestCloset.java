@@ -37,20 +37,20 @@ public class TestCloset {
     void runBefore() {
         testCloset = new Closet();
 
-        testShirt1 = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants1 = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
+        testShirt1 = new Shirt("Plaid top", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        testPants1 = new Pants("Plaid skirt", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         testShoes1 = new Shoes("Yellow flats");
 
         testOutfit1 = new Outfit("School outfit", testShirt1, testPants1, testShoes1);
 
-        testShirt2 = new Shirt("Red top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants2 = new Pants("Red skirt", new ImageIcon("ui/img/test-pants.png"));
+        testShirt2 = new Shirt("Red top", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        testPants2 = new Pants("Red skirt","ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         testShoes2 = new Shoes("Red flats");
 
         testOutfit2 = new Outfit("Second school outfit", testShirt2, testPants2, testShoes2);
 
-        testShirt3 = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
-        testPants3 = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
+        testShirt3 = new Shirt("Sheer white jacket", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        testPants3 = new Pants("Sheer white dress", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         testShoes3 = new Shoes("Silver heels");
 
         testOutfit3 = new Outfit("Date outfit", testShirt3, testPants3, testShoes3);
@@ -84,7 +84,7 @@ public class TestCloset {
 
     @Test
     void testSetPerson() {
-        Person testPerson2 = new Person("Dionne", testImg, testShirt3, testPants3, testShoes3);
+        Person testPerson2 = new Person("Dionne", "ui/img/test-person.png", testImg, testShirt3, testPants3, testShoes3);
         testCloset.setPerson(testPerson2);
         try {
             assertTrue(testCloset.getPerson().equals(testPerson2));
@@ -203,4 +203,5 @@ public class TestCloset {
         assertTrue(testCloset.getSelectedOutfit().equals(testOutfit1));
         assertTrue(testCloset.getSelectedOutfitCategory().equals("School"));
     }
+
 }

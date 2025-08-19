@@ -64,14 +64,13 @@ public class JsonWriterTest {
         try {
             Closet closet = new Closet();
 
-            Person person = new Person("", new ImageIcon("person.png"),
-                    new Shirt("Sheer white jacket", new ImageIcon("jacket.png")),
-                    new Pants("Sheer white dress", new ImageIcon("dress.png")),
+            Person person = new Person("", "person.png", new ImageIcon("person.png"), new Shirt("Sheer white jacket", "jacket.png", new ImageIcon("jacket.png")),
+                    new Pants("Sheer white dress", "dress.png", new ImageIcon("dress.png")),
                     new Shoes("Silver heels"));
 
 
-            person.setShirt(new Shirt("Sheer white jacket", new ImageIcon("jacket.png")));
-            person.setPants(new Pants("Sheer white dress", new ImageIcon("dress.png")));
+            person.setShirt(new Shirt("Sheer white jacket", "jacket.png", new ImageIcon("jacket.png")));
+            person.setPants(new Pants("Sheer white dress", "dress.png", new ImageIcon("dress.png")));
             person.setShoes(new Shoes("Silver heels"));
             closet.setPerson(person);
 
@@ -86,7 +85,7 @@ public class JsonWriterTest {
             Person readPerson = readCloset.getPerson();
             fail();
             // assertEquals("", readPerson.getName());
-            // assertEquals("person.png", readPerson.getImg().toString());
+            // assertEquals("person.png", readPerson.getImgPath());
             // assertEquals("Sheer white jacket", readPerson.getShirt().getName());
             // assertEquals("Sheer white dress", readPerson.getPants().getName());
             // // assertEquals("Silver heels", readPerson.getShoes().getName());
@@ -103,23 +102,23 @@ public class JsonWriterTest {
         try {
             Closet closet = new Closet();
 
-            Person person = new Person("Cher", new ImageIcon("person.png"),
-                    new Shirt("Sheer white jacket", new ImageIcon("jacket.png")),
-                    new Pants("Sheer white dress", new ImageIcon("dress.png")),
+            Person person = new Person("Cher", "person.png", new ImageIcon("person.png"),
+                    new Shirt("Sheer white jacket", "jacket.png", new ImageIcon("jacket.png")),
+                    new Pants("Sheer white dress", "dress.png", new ImageIcon("dress.png")),
                     new Shoes("Silver heels"));
 
-            person.setShirt(new Shirt("Sheer white jacket", new ImageIcon("jacket.png")));
-            person.setPants(new Pants("Sheer white dress", new ImageIcon("dress.png")));
+            person.setShirt(new Shirt("Sheer white jacket", "jacket.png", new ImageIcon("jacket.png")));
+            person.setPants(new Pants("Sheer white dress", "dress.png", new ImageIcon("dress.png")));
             person.setShoes(new Shoes("Silver heels"));
             closet.setPerson(person);
 
-            closet.addShirt(new Shirt("Plaid yellow jacket", new ImageIcon("yellow jacket.png")));
-            closet.addPants(new Pants("Plaid yellow skirt", new ImageIcon("skirt.png")));
+            closet.addShirt(new Shirt("Plaid yellow jacket", "yellow jacket.png", new ImageIcon("yellow jacket.png")));
+            closet.addPants(new Pants("Plaid yellow skirt", "skirt.png", new ImageIcon("skirt.png")));
             // closet.addShoes(new Shoes("Yellow flats"));
 
             Outfit outfit = new Outfit("As If!",
-                    new Shirt("Plaid yellow jacket", new ImageIcon("yellow jacket.png")),
-                    new Pants("Plaid yellow skirt", new ImageIcon("skirt.png")),
+                    new Shirt("Plaid yellow jacket", "yellow jacket.png", new ImageIcon("yellow jacket.png")),
+                    new Pants("Plaid yellow skirt", "skirt.png", new ImageIcon("skirt.png")),
                     new Shoes("Yellow flats"));
             closet.addOutfit("School", outfit);
 
@@ -133,7 +132,7 @@ public class JsonWriterTest {
 
             Person readPerson = readCloset.getPerson();
             assertEquals("Cher", readPerson.getName());
-            assertEquals("person.png", readPerson.getImg().toString());
+            assertEquals("person.png", readPerson.getImgPath());
             assertEquals("Sheer white jacket", readPerson.getShirt().getName());
             assertEquals("Sheer white dress", readPerson.getPants().getName());
             // assertEquals("Silver heels", readPerson.getShoes().getName());

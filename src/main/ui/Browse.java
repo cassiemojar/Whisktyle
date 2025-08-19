@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 
+import model.Clothing;
 import model.NoPersonException;
 import model.Pants;
 import model.Person;
@@ -54,25 +55,19 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
-        getCloset().getShirts().add(new Shirt("test 1", createImgIcon(IMG_DIRECTORY
-                + "test-shirt.png", 250, 200)));
-        getCloset().getShirts().add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY
-                + "test-shirt-two.png", 250, 200)));
-        getCloset().getShirts()
-                .add(new Shirt("test 2", createImgIcon(IMG_DIRECTORY
-                        + "test-shirt-three.png", 250, 200)));
+        getCloset().getShirts().add(new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png", new ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
+        getCloset().getShirts().add(new Shirt("test 2", IMG_DIRECTORY + "test-shirt-two.png", new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
+        getCloset().getShirts().add(new Shirt("test 3", IMG_DIRECTORY + "test-shirt-three.png", new ImageIcon(IMG_DIRECTORY + "test-shirt-three.png")));
 
-        getCloset().getPants().add(new Pants("test 1", createImgIcon(IMG_DIRECTORY
-                + "test-pants.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY
-                + "test-shirt.png", 200, 250)));
-        getCloset().getPants().add(new Pants("test 2", createImgIcon(IMG_DIRECTORY
-                + "test-shirt-two.png", 200, 250)));
+        getCloset().getPants().add(new Pants("test 1", IMG_DIRECTORY + "test-pants.png", new ImageIcon(IMG_DIRECTORY + "test-pants.png")));
+        getCloset().getPants().add(new Pants("test 2", IMG_DIRECTORY + "test-shirt.png", new ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
+        getCloset().getPants().add(new Pants("test 3", IMG_DIRECTORY + "test-shirt-two.png", new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
 
         getCloset().setPerson(
-                new Person("Jheneca", createImgIcon(IMG_DIRECTORY + "person.png", 250, 500),
-                        new Shirt("test 1", createImgIcon(IMG_DIRECTORY + "test-shirt.png", 250, 200)),
-                        new Pants("test 1", createImgIcon(IMG_DIRECTORY + "test-pants.png", 200, 250)),
+                new Person("Jheneca",
+                        IMG_DIRECTORY + "person.png", new ImageIcon(IMG_DIRECTORY + "person.png"),
+                        new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png", new ImageIcon(IMG_DIRECTORY + "test-shirt.png")),
+                        new Pants("test 1", IMG_DIRECTORY + "test-pants.png", new ImageIcon(IMG_DIRECTORY + "test-pants.png")),
                         new Shoes("")));
 
         background.setLayout(new BorderLayout());
@@ -168,7 +163,10 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds shirt label to panel with centering
     public void setShirtUI(JPanel panel) {
         shirtLabel = new JLabel();
-        setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex());
+        Clothing currentShirt = getCloset().getShirts().get(getCloset().getShirtIndex());
+        ImageIcon scaled = createImgIconFromResource(currentShirt.getImgPath(), 250, 200);
+        shirtLabel.setIcon(scaled);
+
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -182,15 +180,19 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds pants label to panel with centering
     public void setPantsUI(JPanel panel) {
         pantsLabel = new JLabel();
-        setClothingLabel(getCloset().getPants(), pantsLabel, getCloset().getPantsIndex());
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
 
-        panel.add(pantsLabel, gbc);
-        panel.setMaximumSize(panel.getPreferredSize());
+    Clothing currentPants = getCloset().getPants().get(getCloset().getPantsIndex());
+    ImageIcon scaled = createImgIconFromResource(currentPants.getImgPath(), 200, 250); 
+    pantsLabel.setIcon(scaled);
+
+    panel.setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.anchor = GridBagConstraints.CENTER;
+
+    panel.add(pantsLabel, gbc);
+    panel.setMaximumSize(panel.getPreferredSize());
     }
 
     // EFFECTS: Creates, sets up panels for inner closet panel and returns
@@ -215,7 +217,7 @@ public class Browse extends BrowseButtonController {
         lowerPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 
-        //lowerPanel.setBackground(Color.RED);
+        // lowerPanel.setBackground(Color.RED);
         lowerPanel.setOpaque(false);
         setPantsUI(lowerPanel);
 
@@ -245,7 +247,7 @@ public class Browse extends BrowseButtonController {
         JPanel lowerPanel = new JPanel();
         lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
         lowerPanel.setOpaque(false);
-        //lowerPanel.setBackground(Color.RED);
+        // lowerPanel.setBackground(Color.RED);
         lowerPanel.setMaximumSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
         lowerPanel.setPreferredSize(new Dimension(OUTER_CLOSET_WIDTH, (OUTER_CLOSET_HEIGHT / 2) - 50));
 

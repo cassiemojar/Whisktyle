@@ -144,7 +144,7 @@ public class DressMe extends WhisktyleAbstract {
                 outfitPanel.setPants(getCloset().getSelectedOutfit().getPants().getImg());
 
             }
-            
+
             outfitPanel.setPreferredSize(new Dimension(INNER_CLOSET_WIDTH, OUTER_CLOSET_HEIGHT - 25));
             outfitPanel.setOpaque(false);
 
@@ -194,8 +194,9 @@ public class DressMe extends WhisktyleAbstract {
 
         if (name != null && !name.trim().isEmpty() && category != null && !category.trim().isEmpty()) {
             Clothing shirt = new Shirt(getCloset().getShirts().get(getCloset().getShirtIndex()).getName(),
+                    getCloset().getShirts().get(getCloset().getShirtIndex()).getImgPath(),
                     getCloset().getShirts().get(getCloset().getShirtIndex()).getImg());
-            Clothing pants = new Pants(getCloset().getPants().get(getCloset().getPantsIndex()).getName(),
+            Clothing pants = new Pants(getCloset().getPants().get(getCloset().getPantsIndex()).getName(), getCloset().getPants().get(getCloset().getPantsIndex()).getImgPath(), 
                     getCloset().getPants().get(getCloset().getPantsIndex()).getImg());
             Shoes shoes = new Shoes("");
             Outfit newOutfit = new Outfit(name, shirt, pants, shoes);

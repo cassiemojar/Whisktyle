@@ -55,13 +55,13 @@ public class JsonReaderTest extends JsonTest {
 
             try {
                 assertEquals("Cher", closet.getPerson().getName());
-                assertEquals("person.png", closet.getPerson().getImg().toString());
+                assertEquals("person.png", closet.getPerson().getImgPath());
 
                 assertEquals("Sheer white jacket", closet.getPerson().getShirt().getName());
-                assertEquals("jacket.png", closet.getPerson().getShirt().getImg().toString());
+                assertEquals("jacket.png", closet.getPerson().getShirt().getImgPath());
 
                 assertEquals("Sheer white dress", closet.getPerson().getPants().getName());
-                assertEquals("dress.png", closet.getPerson().getPants().getImg().toString());
+                assertEquals("dress.png", closet.getPerson().getPants().getImgPath());
 
                 //assertEquals(null, closet.getPerson().getShoes()); // haven't implemented shoes yet. Maybe in the
                                                                    // future!
@@ -69,16 +69,16 @@ public class JsonReaderTest extends JsonTest {
                 Clothing shirtOne = closet.getShirts().get(0);
                 Clothing shirtTwo = closet.getShirts().get(1);
                 assertEquals("Sheer white jacket", shirtOne.getName());
-                assertEquals("jacket.png", shirtOne.getImg().toString());
+                assertEquals("jacket.png", shirtOne.getImgPath());
                 assertEquals("Plaid yellow jacket", shirtTwo.getName());
-                assertEquals("yellow-jacket.png", shirtTwo.getImg().toString());
+                assertEquals("yellow-jacket.png", shirtTwo.getImgPath());
 
                 Clothing pantsOne = closet.getPants().get(0);
                 Clothing pantsTwo = closet.getPants().get(1);
                 assertEquals("Sheer white dress", pantsOne.getName());
-                assertEquals("dress.png", pantsOne.getImg().toString());
+                assertEquals("dress.png", pantsOne.getImgPath());
                 assertEquals("Plaid yellow skirt", pantsTwo.getName());
-                assertEquals("skirt.png", pantsTwo.getImg().toString());
+                assertEquals("skirt.png", pantsTwo.getImgPath());
 
                 assertTrue(closet.getShoes().isEmpty());
 
@@ -86,9 +86,9 @@ public class JsonReaderTest extends JsonTest {
                 assertTrue(savedOutfits.keySet().contains("School"));
                 assertEquals(savedOutfits.get("School").get(0).getName(), "As If!");
                 assertEquals(savedOutfits.get("School").get(0).getShirt().getName(), "Plaid yellow jacket");
-                assertEquals(savedOutfits.get("School").get(0).getShirt().getImg().toString(), "yellow-jacket.png");
+                assertEquals(savedOutfits.get("School").get(0).getShirt().getImgPath(), "yellow-jacket.png");
                 assertEquals(savedOutfits.get("School").get(0).getPants().getName(), "Plaid yellow skirt");
-                assertEquals(savedOutfits.get("School").get(0).getPants().getImg().toString(), "skirt.png");
+                assertEquals(savedOutfits.get("School").get(0).getPants().getImgPath(), "skirt.png");
                 assertEquals(savedOutfits.get("School").get(0).getShoes().getName(), "");
 
                 // assertEquals(closet.getSavedOutfits().get("School").get(0).getShirt(), closet.getShirts().get(0));
@@ -97,9 +97,9 @@ public class JsonReaderTest extends JsonTest {
                 assertTrue(closet.getSavedOutfits().keySet().contains("First Date"));
                 assertEquals(savedOutfits.get("First Date").get(0).getName(), "Calvin Klein");
                 assertEquals(savedOutfits.get("First Date").get(0).getShirt().getName(), "Sheer white jacket");
-                assertEquals(savedOutfits.get("First Date").get(0).getShirt().getImg().toString(), "jacket.png");
+                assertEquals(savedOutfits.get("First Date").get(0).getShirt().getImgPath(), "jacket.png");
                 assertEquals(savedOutfits.get("First Date").get(0).getPants().getName(), "Sheer white dress");
-                assertEquals(savedOutfits.get("First Date").get(0).getPants().getImg().toString(), "dress.png");
+                assertEquals(savedOutfits.get("First Date").get(0).getPants().getImgPath(), "dress.png");
                 assertEquals(savedOutfits.get("First Date").get(0).getShoes().getName(), "");
         
             } catch (NoPersonException e) {

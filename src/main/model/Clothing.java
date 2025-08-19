@@ -9,9 +9,11 @@ import persistence.Writable;
 public abstract class Clothing implements Writable {
     private String name;
     private ImageIcon img;
+    private String imgPath;
 
-    public Clothing(String name, ImageIcon img) {
+    public Clothing(String name, String imgPath, ImageIcon img) {
         this.name = name;
+        this.imgPath = imgPath;
         this.img = img;
     }
 
@@ -20,7 +22,9 @@ public abstract class Clothing implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Name", name);
-        json.put("Image Path", img != null ? img.getDescription() : null);
+        if (img != null) {
+            json.put("Image Path", imgPath);
+        }
         return json;
     }
 
@@ -39,6 +43,14 @@ public abstract class Clothing implements Writable {
 
     public ImageIcon getImg() {
         return img;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getImgPath() {
+        return imgPath;
     }
 
 }

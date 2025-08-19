@@ -67,7 +67,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
 
         if (name != null && !name.trim().isEmpty()) {
             ImageIcon personImg = createImgIconFromResource(imagePath, 250, 200);
-            Person person = new Person(name.trim(), personImg, shirt, pants, new Shoes(""));
+            Person person = new Person(name.trim(), imagePath, personImg, shirt, pants, new Shoes(""));
             getCloset().setPerson(person);
 
             JOptionPane.showMessageDialog(this, "Person \"" + name + "\" now associated with your closet!");
@@ -171,7 +171,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         switch (clothing) {
             case "Shirt":
                 ImageIcon shirtImage = createImgIconFromResource(imagePath, 250, 200);
-                Clothing newShirt = new Shirt(name.trim(), shirtImage);
+                Clothing newShirt = new Shirt(name.trim(), imagePath, shirtImage);
                 getCloset().getShirts().add(newShirt);
                 getCloset().setShirtIndex(getCloset().getShirts().size() - 1);
                 setClothingLabel(getCloset().getShirts(), shirtLabel, getCloset().getShirtIndex()); // Show the new
@@ -179,7 +179,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
                 return newShirt;
             case "Pants":
                 ImageIcon pantsImage = createImgIconFromResource(imagePath, 200, 250);
-                Clothing newPants = new Pants(name.trim(), pantsImage);
+                Clothing newPants = new Pants(name.trim(), imagePath, pantsImage);
                 getCloset().getPants().add(newPants);
                 getCloset().setPantsIndex(getCloset().getPants().size() - 1); // Show the new pants
                 setClothingLabel(getCloset().getPants(), pantsLabel, getCloset().getPantsIndex());

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 public class Shirt extends Clothing{
 
     // EFFECTS: Creates a shirt with a name
-    public Shirt(String name, ImageIcon img) {
-        super(name, img);
+    public Shirt(String name, String imgPath, ImageIcon img) {
+        super(name, imgPath, img);
     }
 }

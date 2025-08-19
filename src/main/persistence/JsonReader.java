@@ -79,7 +79,7 @@ public class JsonReader {
         String name = jsonObject.optString("Name", "");
         String imgPath = jsonObject.optString("Image Path", "");
 
-        return new Person(name, new ImageIcon(imgPath), shirt, pants, shoes);
+        return new Person(name, imgPath, new ImageIcon(imgPath), shirt, pants, shoes);
     }
 
     // MODIFIES: closet
@@ -133,12 +133,12 @@ public class JsonReader {
 
     // EFFECTS: parses Shirt from JSON object and returns
     private Shirt parseShirt(JSONObject jsonObject) {
-        return new Shirt(jsonObject.getString("Name"), new ImageIcon(jsonObject.getString("Image Path")));
+        return new Shirt(jsonObject.getString("Name"), jsonObject.getString("Image Path"), new ImageIcon(jsonObject.getString("Image Path")));
     }
 
     // EFFECTS: parses Pants from JSON object and returns
     private Pants parsePants(JSONObject jsonObject) {
-        return new Pants(jsonObject.getString("Name"), new ImageIcon(jsonObject.getString("Image Path")));
+        return new Pants(jsonObject.getString("Name"), jsonObject.getString("Image Path"), new ImageIcon(jsonObject.getString("Image Path")));
     }
 
     private Shoes parseShoes(JSONObject jsonObject) {

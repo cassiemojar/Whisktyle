@@ -11,10 +11,12 @@ public class Person implements Writable {
     private String name;
     private Outfit outfit;
     private ImageIcon img;
+    private String imgPath;
 
     // EFFECTS: creates a person with a default shirt, pants, shoes
-    public Person(String name, ImageIcon img, Clothing shirt, Clothing pants, Shoes shoes) {
+    public Person(String name, String imgPath, ImageIcon img, Clothing shirt, Clothing pants, Shoes shoes) {
         this.name = name;
+        this.imgPath = imgPath;
         this.img = img;
         outfit = new Outfit("Default Outfit", shirt, pants, shoes);
     }
@@ -36,9 +38,14 @@ public class Person implements Writable {
         outfit.setShoes(shoes);
     }
 
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
     public void setImg(ImageIcon img) {
         this.img = img;
     }
+
 
     public String getName() {
         return this.name;
@@ -60,16 +67,21 @@ public class Person implements Writable {
         return outfit;
     }
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
     public ImageIcon getImg() {
         return img;
     }
+
 
     // EFFECTS: puts variables as Json Objects
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Name", name);
-        json.put("Image Path", img.getDescription());
+        json.put("Image Path", imgPath);
 
         json.put("Shirt", outfit.getShirt().toJson());
         json.put("Pants", outfit.getPants().toJson());

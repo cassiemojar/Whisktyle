@@ -17,18 +17,20 @@ public class TestPerson {
     private Pants testPants;
     private Shoes testShoes;
     private Outfit testOutfit;
+    private String testImgPath;
     private ImageIcon testImg;
 
     @BeforeEach
     void runBefore() {
-        testShirt = new Shirt("Plaid top", new ImageIcon("ui/img/test-shirt.png"));
-        testPants = new Pants("Plaid skirt", new ImageIcon("ui/img/test-pants.png"));
+        testShirt = new Shirt("Plaid top", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
+        testPants = new Pants("Plaid skirt", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         testShoes = new Shoes("Yellow flats");
+        testImgPath = "ui/img/test-person.png";
         testImg = new ImageIcon("ui/img/test-person.png");
 
         testOutfit = new Outfit("Default Outfit", testShirt, testPants, testShoes);
 
-        cher = new Person("Cher", testImg, testShirt, testPants, testShoes);
+        cher = new Person("Cher", testImgPath, testImg, testShirt, testPants, testShoes);
 
     }
 
@@ -40,6 +42,7 @@ public class TestPerson {
         assertTrue(cher.getShoes().equals(testShoes));
         assertTrue(cher.getOutfit().equals(testOutfit));
         assertTrue(cher.getImg().equals(testImg));
+        assertTrue(cher.getImgPath().equals(testImgPath));
     }
 
     @Test
@@ -50,7 +53,7 @@ public class TestPerson {
 
     @Test
     void testChangeShirt() {
-        Shirt newShirt = new Shirt("Sheer white jacket", new ImageIcon("ui/img/test-shirt.png"));
+        Shirt newShirt = new Shirt("Sheer white jacket", "ui/img/test-shirt.png", new ImageIcon("ui/img/test-shirt.png"));
         Outfit newOutfit = new Outfit("Date Outfit", newShirt, testPants, testShoes);
 
         cher.setShirt(newShirt);
@@ -63,7 +66,7 @@ public class TestPerson {
 
     @Test
     void testChangePants() {
-        Pants newPants = new Pants("Sheer white dress", new ImageIcon("ui/img/test-pants.png"));
+        Pants newPants = new Pants("Sheer white dress", "ui/img/test-pants.png", new ImageIcon("ui/img/test-pants.png"));
         Outfit newOutfit = new Outfit("Date Outfit", testShirt, newPants, testShoes);
 
         cher.setPants(newPants);
@@ -89,8 +92,11 @@ public class TestPerson {
 
     @Test
     void testChangeImg() {
-        ImageIcon newImg = new ImageIcon("ui/img/test-person-two.png");
+        String newImgPath = "ui/img/test-person-two.png";
+        ImageIcon newImg = new ImageIcon(newImgPath);
+        cher.setImgPath(newImgPath);
         cher.setImg(newImg);
         assertTrue(cher.getImg().equals(newImg));
+        assertTrue(cher.getImgPath().equals(newImgPath));
     }
 }
