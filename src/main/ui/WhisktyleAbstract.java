@@ -352,7 +352,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
             Person person = closet.getPerson();
 
-            person.setImg(createImgIconFromResource(person.getImgPath(), 250, 200));
+            person.setImg(new ImageIcon(person.getImgPath()));
 
         } catch (NoPersonException e) {
             JOptionPane.showMessageDialog(this,

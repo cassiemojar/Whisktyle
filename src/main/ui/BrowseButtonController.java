@@ -66,7 +66,7 @@ public abstract class BrowseButtonController extends WhisktyleAbstract {
         Clothing pants = addNewClothing("Pants", getCloset().getPants());
 
         if (name != null && !name.trim().isEmpty()) {
-            ImageIcon personImg = createImgIconFromResource(imagePath, 250, 200);
+            ImageIcon personImg = createImgIconFromResource(imagePath, OUTER_CLOSET_WIDTH - 150, OUTER_CLOSET_HEIGHT - 20);
             Person person = new Person(name.trim(), imagePath, personImg, shirt, pants, new Shoes(""));
             getCloset().setPerson(person);
 
