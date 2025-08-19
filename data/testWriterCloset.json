@@ -1,36 +1,49 @@
 {
-    "Saved Shirts": [{
-        "Image Path": "yellow jacket.png",
-        "Name": "Plaid yellow jacket"
-    }],
-    "Saved Outfits": {"School": [{
-        "Shirt": {
-            "Image Path": "yellow jacket.png",
-            "Name": "Plaid yellow jacket"
+    "Saved Shirts": [
+        {
+            "Image Path": "img/test-shirt.png",
+            "Name": "test 1"
         },
-        "Pants": {
-            "Image Path": "skirt.png",
-            "Name": "Plaid yellow skirt"
+        {
+            "Image Path": "img/test-shirt-two.png",
+            "Name": "test 2"
         },
-        "Shoes": {"Name": "Yellow flats"},
-        "Name": "As If!"
-    }]},
+        {
+            "Image Path": "img/test-shirt-three.png",
+            "Name": "test 3"
+        },
+        {
+            "Image Path": "C:\\Users\\cassi\\OneDrive\\Pictures\\Screenshots\\Screenshot (1).png",
+            "Name": "m"
+        }
+    ],
+    "Saved Outfits": {},
     "Saved Shoes": [],
-    "Saved Pants": [{
-        "Image Path": "skirt.png",
-        "Name": "Plaid yellow skirt"
-    }],
+    "Saved Pants": [
+        {
+            "Image Path": "img/test-pants.png",
+            "Name": "test 1"
+        },
+        {
+            "Image Path": "img/test-shirt.png",
+            "Name": "test 2"
+        },
+        {
+            "Image Path": "img/test-shirt-two.png",
+            "Name": "test 3"
+        }
+    ],
     "Person": {
-        "Image Path": "person.png",
+        "Image Path": "img/person.png",
         "Shirt": {
-            "Image Path": "jacket.png",
-            "Name": "Sheer white jacket"
+            "Image Path": "img/test-shirt.png",
+            "Name": "test 1"
         },
         "Pants": {
-            "Image Path": "dress.png",
-            "Name": "Sheer white dress"
+            "Image Path": "img/test-pants.png",
+            "Name": "test 1"
         },
-        "Shoes": {"Name": "Silver heels"},
-        "Name": "Cher"
+        "Shoes": {"Name": ""},
+        "Name": "Jheneca"
     }
 }

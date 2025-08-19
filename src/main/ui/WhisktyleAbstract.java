@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import model.Closet;
 import model.Outfit;
@@ -256,4 +257,29 @@ public abstract class WhisktyleAbstract extends JFrame {
         }
     }
 
+    // EFFECTS: handles whether user wants to load their progress. Will read a JSON
+    // file to load stored data
+    public void loadProgress() {
+        int choice = JOptionPane.showConfirmDialog(this,
+                "Do you want to load your previous progress?",
+                "Load Progress",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                Closet closet = jsonReader.read();
+
+                WhisktyleController.getInstance().setCloset(closet);
+
+                JOptionPane.showMessageDialog(this,
+                        "Data loaded successfully from " + JSON_STORE);
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Unable to read from file: " + JSON_STORE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Progress was not loaded.");
+        }
+    }
 }

@@ -26,4 +26,10 @@ public class WhisktyleController {
         return closet;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the closet instance to the given closet
+    public void setCloset(Closet closet) {
+        this.closet = closet;
+    }
+
 }
