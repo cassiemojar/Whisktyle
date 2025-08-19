@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.util.List;
@@ -250,16 +251,41 @@ public abstract class WhisktyleAbstract extends JFrame {
 
         if (choice == JOptionPane.YES_OPTION) {
             try {
-                jsonWriter.open();
-                jsonWriter.write(getCloset());
-                jsonWriter.close();
-                JOptionPane.showMessageDialog(this, "Data saved successfully to " + JSON_STORE);
+                File file = helperFileSave();
+                if (file != null) {
+                    jsonWriter.open();
+                    jsonWriter.write(getCloset());
+                    jsonWriter.close();
+                    JOptionPane.showMessageDialog(this, "Data saved successfully to " + JSON_STORE);
+                }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Unable to write to file: " + JSON_STORE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Progress was not saved.");
         }
+    }
+
+    // EFFECTS: helper method for save progress, creates a file chooser dialog
+    public File helperFileSave() {
+        JFileChooser fileChooserSave = new JFileChooser();
+        fileChooserSave.setDialogTitle("Save Progress");
+        fileChooserSave.setAcceptAllFileFilterUsed(false); // Need only json files
+        fileChooserSave.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+
+        int userSelection = fileChooserSave.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooserSave.getSelectedFile();
+
+            // Ensure it ends with .json
+            if (!fileToSave.getAbsolutePath().toLowerCase().endsWith(".json")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".json");
+            }
+
+            return fileToSave;
+        }
+        return null;
     }
 
     // EFFECTS: handles whether user wants to load their progress. Will read a JSON
@@ -272,14 +298,19 @@ public abstract class WhisktyleAbstract extends JFrame {
 
         if (choice == JOptionPane.YES_OPTION) {
             try {
-                Closet closet = jsonReader.read();
+                File file = helperLoadProgress();
+                if (file != null) {
+                    JsonReader reader = new JsonReader(file.getAbsolutePath());
+                    Closet closet = reader.read();
 
-                firstHelperLoadProgress(closet);
+                    firstHelperLoadProgress(closet);
 
-                WhisktyleController.getInstance().setCloset(closet);
+                    WhisktyleController.getInstance().setCloset(closet);
 
-                JOptionPane.showMessageDialog(this,
-                        "Data loaded successfully from " + JSON_STORE);
+                    JOptionPane.showMessageDialog(this,
+                            "Data loaded successfully from " + JSON_STORE);
+
+                }
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this,
@@ -288,6 +319,23 @@ public abstract class WhisktyleAbstract extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Progress was not loaded.");
         }
+    }
+
+    // EFFECTS: first helper method for load progress, shows file chooser dialog
+    public File helperLoadProgress() {
+        JFileChooser fileChooserLoad = new JFileChooser();
+        fileChooserLoad.setDialogTitle("Load Progress");
+        fileChooserLoad.setAcceptAllFileFilterUsed(false); // Need only json files
+        fileChooserLoad.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+
+        int userSelection = fileChooserLoad.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToLoad = fileChooserLoad.getSelectedFile();
+            return fileToLoad;
+        }
+        return null;
+
     }
 
     // EFFECTS: Helper method for load progress
@@ -332,5 +380,4 @@ public abstract class WhisktyleAbstract extends JFrame {
         }
     }
 
-    
 }
