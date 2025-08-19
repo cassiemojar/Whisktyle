@@ -4,13 +4,18 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.*;
+import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 import model.Closet;
+import model.Clothing;
+import model.NoPersonException;
 import model.Outfit;
+import model.Person;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -270,11 +275,37 @@ public abstract class WhisktyleAbstract extends JFrame {
                 Closet closet = jsonReader.read();
 
                 WhisktyleController.getInstance().setCloset(closet);
+                for (Clothing c : closet.getShirts()) {
+                    c.setImg(createImgIconFromResource(c.getImgPath(), 250, 200));
+                }
+                for (Clothing c : closet.getPants()) {
+                    c.setImg(createImgIconFromResource(c.getImgPath(), 200, 250));
+                }
+
+                Person person = closet.getPerson();
+
+                person.setImg(createImgIconFromResource(person.getImgPath(), 250, 200));
+
+                Map<String, List<Outfit>> savedOutfits = closet.getSavedOutfits();
+                for (Map.Entry<String, List<Outfit>> entry : savedOutfits.entrySet()) {
+                    List<Outfit> outfits = entry.getValue();
+                    for (Outfit outfit : outfits) {
+                        if (outfit.getShirt() != null) {
+                            outfit.getShirt().setImg(
+                                    createImgIconFromResource(outfit.getShirt().getImgPath(), 250, 200));
+                        }
+                        if (outfit.getPants() != null) {
+                            outfit.getPants().setImg(
+                                    createImgIconFromResource(outfit.getPants().getImgPath(), 200, 250));
+                        }
+                    }
+                }
+                WhisktyleController.getInstance().setCloset(closet);
 
                 JOptionPane.showMessageDialog(this,
                         "Data loaded successfully from " + JSON_STORE);
 
-            } catch (IOException e) {
+            } catch (IOException | NoPersonException e) {
                 JOptionPane.showMessageDialog(this,
                         "Unable to read from file: " + JSON_STORE);
             }

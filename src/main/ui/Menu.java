@@ -96,7 +96,7 @@ public class Menu extends WhisktyleAbstract {
                 menuButton.addActionListener(e -> saveProgress());
                 break;
             case "Load":
-                menuButton.addActionListener(e -> saveProgress());
+                menuButton.addActionListener(e -> loadProgress());
                 break;
             default:
                 menuButton.addActionListener(e -> setNewFrame(stringUI));
