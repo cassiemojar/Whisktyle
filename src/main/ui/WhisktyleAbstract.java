@@ -47,13 +47,13 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     // Fields for JSON read, write
     protected static final String JSON_STORE = "./data/testWriterCloset.json";
-    protected JsonWriter jsonWriter;
+    protected JsonWriter writer;
     protected JsonReader jsonReader;
 
     // EFFECTS: Constructor for WhisktyleAbstract, setting up the frame
     public WhisktyleAbstract() {
         super("Whisktyle");
-        jsonWriter = new JsonWriter(JSON_STORE);
+        writer = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         setCustomOptionPanes();
         setupFrame();
@@ -253,13 +253,14 @@ public abstract class WhisktyleAbstract extends JFrame {
             try {
                 File file = helperFileSave();
                 if (file != null) {
-                    jsonWriter.open();
-                    jsonWriter.write(getCloset());
-                    jsonWriter.close();
-                    JOptionPane.showMessageDialog(this, "Data saved successfully to " + JSON_STORE);
+                    JsonWriter writer = new JsonWriter(file.getAbsolutePath());
+                    writer.open();
+                    writer.write(getCloset());
+                    writer.close();
+                    JOptionPane.showMessageDialog(this, "Data saved successfully to " + file.getAbsolutePath());
                 }
             } catch (FileNotFoundException e) {
-                JOptionPane.showMessageDialog(this, "Unable to write to file: " + JSON_STORE);
+                JOptionPane.showMessageDialog(this, "Unable to save file. Please try again!");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Progress was not saved.");
@@ -308,13 +309,13 @@ public abstract class WhisktyleAbstract extends JFrame {
                     WhisktyleController.getInstance().setCloset(closet);
 
                     JOptionPane.showMessageDialog(this,
-                            "Data loaded successfully from " + JSON_STORE);
+                            "Data loaded successfully from " + file.getAbsolutePath());
 
                 }
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this,
-                        "Unable to read from file: " + JSON_STORE);
+                        "Unable to read from file. Please try again!");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Progress was not loaded.");

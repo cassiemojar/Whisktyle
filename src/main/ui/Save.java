@@ -20,9 +20,9 @@ public class Save extends Menu {
 
         if (choice == JOptionPane.YES_OPTION) {
             try {
-                jsonWriter.open();
-                jsonWriter.write(getCloset());
-                jsonWriter.close();
+                writer.open();
+                writer.write(getCloset());
+                writer.close();
                 JOptionPane.showMessageDialog(this, "Data saved successfully to " + JSON_STORE);
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Unable to write to file: " + JSON_STORE);

@@ -1,6 +1,36 @@
 {
-    "Saved Shirts": [],
-    "Saved Outfits": {},
+    "Saved Shirts": [{
+        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
+        "Name": "shirt"
+    }],
+    "Saved Outfits": {"test": [{
+        "Shirt": {
+            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
+            "Name": "shirt"
+        },
+        "Pants": {
+            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
+            "Name": "pants"
+        },
+        "Shoes": {"Name": ""},
+        "Name": "Test outfit"
+    }]},
     "Saved Shoes": [],
-    "Saved Pants": []
+    "Saved Pants": [{
+        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
+        "Name": "pants"
+    }],
+    "Person": {
+        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\person.png",
+        "Shirt": {
+            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
+            "Name": "shirt"
+        },
+        "Pants": {
+            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
+            "Name": "pants"
+        },
+        "Shoes": {"Name": ""},
+        "Name": "jheneca"
+    }
 }

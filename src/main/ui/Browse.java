@@ -10,14 +10,16 @@ import model.Shirt;
 import model.Shoes;
 
 import java.awt.*;
+import java.util.List;
 
 // Represents a Browse class that sets up UI
+// TODO: fix bug where when no has person, can cancel on shirt and pants
 public class Browse extends BrowseButtonController {
 
     // EFFECTS: Constructor for Browse, sets title
     public Browse() {
         setTitle("Whisktyle - Browse");
-
+        checkIfHasPerson();
     }
 
     @Override
@@ -54,35 +56,41 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
-        checkIfHasPerson();
+
         // getCloset().getShirts().add(
-        //         new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png", new ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
-        // getCloset().getShirts().add(new Shirt("test 2", IMG_DIRECTORY + "test-shirt-two.png",
-        //         new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
-        // getCloset().getShirts().add(new Shirt("test 3", IMG_DIRECTORY + "test-shirt-three.png",
-        //         new ImageIcon(IMG_DIRECTORY + "test-shirt-three.png")));
+        // new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png", new
+        // ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
+        // getCloset().getShirts().add(new Shirt("test 2", IMG_DIRECTORY +
+        // "test-shirt-two.png",
+        // new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
+        // getCloset().getShirts().add(new Shirt("test 3", IMG_DIRECTORY +
+        // "test-shirt-three.png",
+        // new ImageIcon(IMG_DIRECTORY + "test-shirt-three.png")));
 
         // getCloset().getPants().add(
-        //         new Pants("test 1", IMG_DIRECTORY + "test-pants.png", new ImageIcon(IMG_DIRECTORY + "test-pants.png")));
+        // new Pants("test 1", IMG_DIRECTORY + "test-pants.png", new
+        // ImageIcon(IMG_DIRECTORY + "test-pants.png")));
         // getCloset().getPants().add(
-        //         new Pants("test 2", IMG_DIRECTORY + "test-shirt.png", new ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
-        // getCloset().getPants().add(new Pants("test 3", IMG_DIRECTORY + "test-shirt-two.png",
-        //         new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
+        // new Pants("test 2", IMG_DIRECTORY + "test-shirt.png", new
+        // ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
+        // getCloset().getPants().add(new Pants("test 3", IMG_DIRECTORY +
+        // "test-shirt-two.png",
+        // new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
 
         // getCloset().setPerson(
-        //         new Person("Jheneca",
-        //                 IMG_DIRECTORY + "person.png", new ImageIcon(IMG_DIRECTORY + "person.png"),
-        //                 new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png",
-        //                         new ImageIcon(IMG_DIRECTORY + "test-shirt.png")),
-        //                 new Pants("test 1", IMG_DIRECTORY + "test-pants.png",
-        //                         new ImageIcon(IMG_DIRECTORY + "test-pants.png")),
-        //                 new Shoes("")));
+        // new Person("Jheneca",
+        // IMG_DIRECTORY + "person.png", new ImageIcon(IMG_DIRECTORY + "person.png"),
+        // new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png",
+        // new ImageIcon(IMG_DIRECTORY + "test-shirt.png")),
+        // new Pants("test 1", IMG_DIRECTORY + "test-pants.png",
+        // new ImageIcon(IMG_DIRECTORY + "test-pants.png")),
+        // new Shoes("")));
 
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
-        
+
         background.add(setClosetPanel(), BorderLayout.CENTER);
-        
+
     }
 
     // EFFECTS: checks if the closet already has a person
@@ -98,7 +106,6 @@ public class Browse extends BrowseButtonController {
     public JPanel setClosetPanel() {
         JPanel closetPanel = new JPanel();
         closetPanel.setOpaque(false);
-        // closetPanel.setBackground(Color.RED);
         closetPanel.setLayout(new BoxLayout(closetPanel, BoxLayout.Y_AXIS));
         closetPanel.add(setClosetUI());
         return closetPanel;
@@ -173,9 +180,14 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds shirt label to panel with centering
     public void setShirtUI(JPanel panel) {
         shirtLabel = new JLabel();
-        Clothing currentShirt = getCloset().getShirts().get(getCloset().getShirtIndex());
-        ImageIcon scaled = createImgIconFromResource(currentShirt.getImgPath(), 250, 200);
-        shirtLabel.setIcon(scaled);
+        List<Clothing> shirts = getCloset().getShirts();
+        if (!shirts.isEmpty()) {
+            Clothing currentShirt = getCloset().getShirts().get(getCloset().getShirtIndex());
+            ImageIcon scaled = createImgIconFromResource(currentShirt.getImgPath(), 250, 200);
+            shirtLabel.setIcon(scaled);
+        } else {
+            shirtLabel.setIcon(null);
+        }
 
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -190,10 +202,14 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: creates adds pants label to panel with centering
     public void setPantsUI(JPanel panel) {
         pantsLabel = new JLabel();
-
-        Clothing currentPants = getCloset().getPants().get(getCloset().getPantsIndex());
-        ImageIcon scaled = createImgIconFromResource(currentPants.getImgPath(), 200, 250);
-        pantsLabel.setIcon(scaled);
+        List<Clothing> pants = getCloset().getPants();
+        if (!pants.isEmpty()) {
+            Clothing currentPants = getCloset().getPants().get(getCloset().getPantsIndex());
+            ImageIcon scaled = createImgIconFromResource(currentPants.getImgPath(), 200, 250);
+            pantsLabel.setIcon(scaled);
+        } else {
+            pantsLabel.setIcon(null);
+        }
 
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
