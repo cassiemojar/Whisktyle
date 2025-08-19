@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 
 // Reprsents a Save class 
-public class Save extends Menu{
+public class Save extends Menu {
     // EFFECTS: Constructor for Save, sets title
     public Save() {
         saveMessage();

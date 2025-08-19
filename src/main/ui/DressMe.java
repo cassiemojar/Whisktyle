@@ -196,7 +196,8 @@ public class DressMe extends WhisktyleAbstract {
             Clothing shirt = new Shirt(getCloset().getShirts().get(getCloset().getShirtIndex()).getName(),
                     getCloset().getShirts().get(getCloset().getShirtIndex()).getImgPath(),
                     getCloset().getShirts().get(getCloset().getShirtIndex()).getImg());
-            Clothing pants = new Pants(getCloset().getPants().get(getCloset().getPantsIndex()).getName(), getCloset().getPants().get(getCloset().getPantsIndex()).getImgPath(), 
+            Clothing pants = new Pants(getCloset().getPants().get(getCloset().getPantsIndex()).getName(),
+                    getCloset().getPants().get(getCloset().getPantsIndex()).getImgPath(),
                     getCloset().getPants().get(getCloset().getPantsIndex()).getImg());
             Shoes shoes = new Shoes("");
             Outfit newOutfit = new Outfit(name, shirt, pants, shoes);

@@ -274,38 +274,14 @@ public abstract class WhisktyleAbstract extends JFrame {
             try {
                 Closet closet = jsonReader.read();
 
-                WhisktyleController.getInstance().setCloset(closet);
-                for (Clothing c : closet.getShirts()) {
-                    c.setImg(createImgIconFromResource(c.getImgPath(), 250, 200));
-                }
-                for (Clothing c : closet.getPants()) {
-                    c.setImg(createImgIconFromResource(c.getImgPath(), 200, 250));
-                }
+                firstHelperLoadProgress(closet);
 
-                Person person = closet.getPerson();
-
-                person.setImg(createImgIconFromResource(person.getImgPath(), 250, 200));
-
-                Map<String, List<Outfit>> savedOutfits = closet.getSavedOutfits();
-                for (Map.Entry<String, List<Outfit>> entry : savedOutfits.entrySet()) {
-                    List<Outfit> outfits = entry.getValue();
-                    for (Outfit outfit : outfits) {
-                        if (outfit.getShirt() != null) {
-                            outfit.getShirt().setImg(
-                                    createImgIconFromResource(outfit.getShirt().getImgPath(), 250, 200));
-                        }
-                        if (outfit.getPants() != null) {
-                            outfit.getPants().setImg(
-                                    createImgIconFromResource(outfit.getPants().getImgPath(), 200, 250));
-                        }
-                    }
-                }
                 WhisktyleController.getInstance().setCloset(closet);
 
                 JOptionPane.showMessageDialog(this,
                         "Data loaded successfully from " + JSON_STORE);
 
-            } catch (IOException | NoPersonException e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(this,
                         "Unable to read from file: " + JSON_STORE);
             }
@@ -313,4 +289,48 @@ public abstract class WhisktyleAbstract extends JFrame {
             JOptionPane.showMessageDialog(this, "Progress was not loaded.");
         }
     }
+
+    // EFFECTS: Helper method for load progress
+    public void firstHelperLoadProgress(Closet closet) {
+        try {
+            WhisktyleController.getInstance().setCloset(closet);
+            for (Clothing c : closet.getShirts()) {
+                c.setImg(createImgIconFromResource(c.getImgPath(), 250, 200));
+            }
+            for (Clothing c : closet.getPants()) {
+                c.setImg(createImgIconFromResource(c.getImgPath(), 200, 250));
+            }
+
+            Person person = closet.getPerson();
+
+            person.setImg(createImgIconFromResource(person.getImgPath(), 250, 200));
+
+        } catch (NoPersonException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Please note that you don't have a person loaded right now.");
+        }
+
+        secondHelperLoadProgress(closet);
+
+    }
+
+    // EFFECTS: Helper method for load progress
+    public void secondHelperLoadProgress(Closet closet) {
+        Map<String, List<Outfit>> savedOutfits = closet.getSavedOutfits();
+        for (Map.Entry<String, List<Outfit>> entry : savedOutfits.entrySet()) {
+            List<Outfit> outfits = entry.getValue();
+            for (Outfit outfit : outfits) {
+                if (outfit.getShirt() != null) {
+                    outfit.getShirt().setImg(
+                            createImgIconFromResource(outfit.getShirt().getImgPath(), 250, 200));
+                }
+                if (outfit.getPants() != null) {
+                    outfit.getPants().setImg(
+                            createImgIconFromResource(outfit.getPants().getImgPath(), 200, 250));
+                }
+            }
+        }
+    }
+
+    
 }

@@ -66,6 +66,7 @@ public class Loading extends WhisktyleAbstract {
     }
 
     // EFFECTS: handles which UI frame to show next, closes Loading frame
+    @SuppressWarnings("methodlength")
     public void handleViewNextFrame() {
         switch (stringUI) {
             case "Menu":
@@ -122,9 +123,5 @@ public class Loading extends WhisktyleAbstract {
         Image image = loadImg.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
         loadImg = new ImageIcon(image);
         return loadImg;
-    }
-
-    public void handleNextFrame() {
-
     }
 }
