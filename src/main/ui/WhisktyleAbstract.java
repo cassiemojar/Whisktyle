@@ -76,6 +76,7 @@ public abstract class WhisktyleAbstract extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
         setCursorIcon();
+        setIconImage(new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "icon.png")).getImage());
         setContentPane(setBackgroundImage());
         setUI();
         setVisible(true);

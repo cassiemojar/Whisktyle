@@ -13,8 +13,7 @@
             "Image Path": "dress.png",
             "Name": "Sheer white dress"
         },
-        "Shoes": {
-            "Name": "Silver heels"
-        }
+        "Shoes": {"Name": "Silver heels"},
+        "Name": ""
     }
 }

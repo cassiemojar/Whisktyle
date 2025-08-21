@@ -1,36 +1,36 @@
 {
     "Saved Shirts": [{
-        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
-        "Name": "shirt"
+        "Image Path": "yellow jacket.png",
+        "Name": "Plaid yellow jacket"
     }],
-    "Saved Outfits": {"test": [{
+    "Saved Outfits": {"School": [{
         "Shirt": {
-            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
-            "Name": "shirt"
+            "Image Path": "yellow jacket.png",
+            "Name": "Plaid yellow jacket"
         },
         "Pants": {
-            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
-            "Name": "pants"
+            "Image Path": "skirt.png",
+            "Name": "Plaid yellow skirt"
         },
-        "Shoes": {"Name": ""},
-        "Name": "Test outfit"
+        "Shoes": {"Name": "Yellow flats"},
+        "Name": "As If!"
     }]},
     "Saved Shoes": [],
     "Saved Pants": [{
-        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
-        "Name": "pants"
+        "Image Path": "skirt.png",
+        "Name": "Plaid yellow skirt"
     }],
     "Person": {
-        "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\person.png",
+        "Image Path": "person.png",
         "Shirt": {
-            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-shirt.png",
-            "Name": "shirt"
+            "Image Path": "jacket.png",
+            "Name": "Sheer white jacket"
         },
         "Pants": {
-            "Image Path": "C:\\Users\\cassi\\OneDrive\\Desktop\\Summer Projects\\Whisktyle\\src\\main\\ui\\img\\test-pants.png",
-            "Name": "pants"
+            "Image Path": "dress.png",
+            "Name": "Sheer white dress"
         },
-        "Shoes": {"Name": ""},
-        "Name": "jheneca"
+        "Shoes": {"Name": "Silver heels"},
+        "Name": "Cher"
     }
 }
