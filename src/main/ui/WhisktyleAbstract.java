@@ -30,6 +30,9 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final String CLOSET_IMG_DIRECTORY = IMG_DIRECTORY + "closet-imgs/";
     protected static final String LOADING_IMG_DIRECTORY = IMG_DIRECTORY + "loading-imgs/";
 
+    private static final int CURSOR_WIDTH = 100;
+    private static final int CURSOR_HEIGHT = 150;
+
     private static final int HEADER_WIDTH = 500;
     private static final int HEADER_HEIGHT = 150;
 
@@ -123,7 +126,7 @@ public abstract class WhisktyleAbstract extends JFrame {
     public void setCursorIcon() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         ImageIcon cursorImg = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "cursor.png"));
-        Image scaledCursorImg = cursorImg.getImage().getScaledInstance(100, 150,
+        Image scaledCursorImg = cursorImg.getImage().getScaledInstance(CURSOR_WIDTH, CURSOR_HEIGHT,
                 Image.SCALE_SMOOTH);
 
         Cursor c = toolkit.createCustomCursor(scaledCursorImg, new Point(0, 0), "customCursor");
@@ -358,7 +361,7 @@ public abstract class WhisktyleAbstract extends JFrame {
 
             Person person = closet.getPerson();
 
-            person.setImg(new ImageIcon(person.getImgPath()));
+            person.setImg(createImgIconFromResource(person.getImgPath(), 230, 524));
 
         } catch (NoPersonException e) {
             JOptionPane.showMessageDialog(this,

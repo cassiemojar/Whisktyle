@@ -2,15 +2,8 @@ package ui;
 
 import javax.swing.*;
 
-import model.Clothing;
 import model.Outfit;
-import model.Pants;
-import model.Shirt;
-import model.Shoes;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.List;
 

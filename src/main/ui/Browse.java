@@ -4,16 +4,10 @@ import javax.swing.*;
 
 import model.Clothing;
 import model.NoPersonException;
-import model.Pants;
-import model.Person;
-import model.Shirt;
-import model.Shoes;
-
 import java.awt.*;
 import java.util.List;
 
 // Represents a Browse class that sets up UI
-// TODO: fix bug where when no has person, can cancel on shirt and pants
 public class Browse extends BrowseButtonController {
 
     // EFFECTS: Constructor for Browse, sets title

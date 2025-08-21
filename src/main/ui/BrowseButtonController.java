@@ -21,7 +21,6 @@ import model.Shoes;
 public abstract class BrowseButtonController extends WhisktyleAbstract {
     protected JLabel shirtLabel;
     protected JLabel pantsLabel;
-    // private JLabel shoesLabel;
 
     // EFFECTS: constructor for BrowseButtonController class
     public BrowseButtonController() {

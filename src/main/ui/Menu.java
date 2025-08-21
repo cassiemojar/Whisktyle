@@ -2,9 +2,6 @@ package ui;
 
 import javax.swing.*;
 
-import persistence.JsonReader;
-import persistence.JsonWriter;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -104,8 +101,6 @@ public class Menu extends WhisktyleAbstract {
         }
 
     }
-
- 
 
     // EFFECTS: sets closet label to closet open image when mouse hovers, close
     // close image when not

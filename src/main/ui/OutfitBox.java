@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 
 import model.Outfit;
 
-// TODO: add constants
 // Represents an outfit box, used in Outfits class
 public class OutfitBox {
     private JPanel box;

@@ -114,7 +114,6 @@ public class JsonReader {
     // MODIFIES: closet
     // EFFECTS: parses saved shoes from JSON, adding to closet
     private void addShoes(Closet closet, JSONObject jsonObject) {
-        JSONArray shoesArray = jsonObject.optJSONArray("Saved Shoes");
 
     }
 
