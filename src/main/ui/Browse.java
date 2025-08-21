@@ -56,36 +56,6 @@ public class Browse extends BrowseButtonController {
     // EFFECTS: Adds title panel and closet panel to background panel
     @Override
     public void setUI() {
-
-        // getCloset().getShirts().add(
-        // new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png", new
-        // ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
-        // getCloset().getShirts().add(new Shirt("test 2", IMG_DIRECTORY +
-        // "test-shirt-two.png",
-        // new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
-        // getCloset().getShirts().add(new Shirt("test 3", IMG_DIRECTORY +
-        // "test-shirt-three.png",
-        // new ImageIcon(IMG_DIRECTORY + "test-shirt-three.png")));
-
-        // getCloset().getPants().add(
-        // new Pants("test 1", IMG_DIRECTORY + "test-pants.png", new
-        // ImageIcon(IMG_DIRECTORY + "test-pants.png")));
-        // getCloset().getPants().add(
-        // new Pants("test 2", IMG_DIRECTORY + "test-shirt.png", new
-        // ImageIcon(IMG_DIRECTORY + "test-shirt.png")));
-        // getCloset().getPants().add(new Pants("test 3", IMG_DIRECTORY +
-        // "test-shirt-two.png",
-        // new ImageIcon(IMG_DIRECTORY + "test-shirt-two.png")));
-
-        // getCloset().setPerson(
-        // new Person("Jheneca",
-        // IMG_DIRECTORY + "person.png", new ImageIcon(IMG_DIRECTORY + "person.png"),
-        // new Shirt("test 1", IMG_DIRECTORY + "test-shirt.png",
-        // new ImageIcon(IMG_DIRECTORY + "test-shirt.png")),
-        // new Pants("test 1", IMG_DIRECTORY + "test-pants.png",
-        // new ImageIcon(IMG_DIRECTORY + "test-pants.png")),
-        // new Shoes("")));
-
         background.setLayout(new BorderLayout());
         background.add(setTitlePanel(), BorderLayout.PAGE_START);
 

@@ -83,16 +83,6 @@ public class Loading extends WhisktyleAbstract {
                 outfitsUI.setVisible(true);
                 break;
 
-            case "Save":
-                Save saveUI = new Save();
-                saveUI.setVisible(true);
-                break;
-
-            case "Load":
-                Load loadUI = new Load();
-                loadUI.setVisible(true);
-                break;
-
             case "Dress Me":
                 DressMe dressMeUI = new DressMe();
                 dressMeUI.setVisible(true);

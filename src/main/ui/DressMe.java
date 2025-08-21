@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.*;
 
 // Represents a DressMe class that sets up UI
-// TODO: make separate abstract class
 public class DressMe extends WhisktyleAbstract {
 
     // EFFECTS: Adds title panel to background panel
