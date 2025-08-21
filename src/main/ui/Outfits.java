@@ -134,7 +134,7 @@ public class Outfits extends WhisktyleAbstract {
         gridPanel.setOpaque(false);
 
         for (Outfit outfit : getCloset().getSavedOutfits().get(category)) {
-            OutfitBox outfitBox = new OutfitBox(1, this);
+            OutfitBox outfitBox = new OutfitBox(this);
 
             JPanel boxPanel = outfitBox.createOutfitBox(outfit, category);
             gridPanel.add(boxPanel);

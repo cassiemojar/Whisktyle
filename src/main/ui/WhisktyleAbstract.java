@@ -30,6 +30,9 @@ public abstract class WhisktyleAbstract extends JFrame {
     protected static final String CLOSET_IMG_DIRECTORY = IMG_DIRECTORY + "closet-imgs/";
     protected static final String LOADING_IMG_DIRECTORY = IMG_DIRECTORY + "loading-imgs/";
 
+    private static final int HEADER_WIDTH = 500;
+    private static final int HEADER_HEIGHT = 150;
+
     protected static final int BUTTON_WIDTH = 230;
     protected static final int BUTTON_HEIGHT = 90;
 
@@ -41,9 +44,12 @@ public abstract class WhisktyleAbstract extends JFrame {
 
     protected static final int INNER_CLOSET_WIDTH = 450;
 
-    private static final Color DARK_BLUE = Color.decode("#44657E");
+    protected static final int SHIRT_WIDTH = 250;
+    protected static final int SHIRT_HEIGHT = 200;
+    protected static final int PANTS_WIDTH = 200;
+    protected static final int PANTS_HEIGHT = 250;
 
-    private Outfit selectedOutfit;
+    private static final Color DARK_BLUE = Color.decode("#44657E");
 
     // Fields for JSON read, write
     protected static final String JSON_STORE = "./data/testWriterCloset.json";
@@ -135,7 +141,7 @@ public abstract class WhisktyleAbstract extends JFrame {
     // EFFECTS: Creates and returns title image as label
     public JLabel setTitle() {
         ImageIcon headerImg = new ImageIcon(getClass().getResource(DEFAULT_IMG_DIRECTORY + "whisktyle.png"));
-        Image image = headerImg.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
+        Image image = headerImg.getImage().getScaledInstance(HEADER_WIDTH, HEADER_HEIGHT, Image.SCALE_SMOOTH);
 
         headerImg = new ImageIcon(image);
         JLabel header = new JLabel(headerImg);
@@ -344,10 +350,10 @@ public abstract class WhisktyleAbstract extends JFrame {
         try {
             WhisktyleController.getInstance().setCloset(closet);
             for (Clothing c : closet.getShirts()) {
-                c.setImg(createImgIconFromResource(c.getImgPath(), 250, 200));
+                c.setImg(createImgIconFromResource(c.getImgPath(), SHIRT_WIDTH, SHIRT_HEIGHT));
             }
             for (Clothing c : closet.getPants()) {
-                c.setImg(createImgIconFromResource(c.getImgPath(), 200, 250));
+                c.setImg(createImgIconFromResource(c.getImgPath(), PANTS_WIDTH, PANTS_HEIGHT));
             }
 
             Person person = closet.getPerson();
@@ -371,11 +377,11 @@ public abstract class WhisktyleAbstract extends JFrame {
             for (Outfit outfit : outfits) {
                 if (outfit.getShirt() != null) {
                     outfit.getShirt().setImg(
-                            createImgIconFromResource(outfit.getShirt().getImgPath(), 250, 200));
+                            createImgIconFromResource(outfit.getShirt().getImgPath(), SHIRT_WIDTH, SHIRT_HEIGHT));
                 }
                 if (outfit.getPants() != null) {
                     outfit.getPants().setImg(
-                            createImgIconFromResource(outfit.getPants().getImgPath(), 200, 250));
+                            createImgIconFromResource(outfit.getPants().getImgPath(), PANTS_WIDTH, PANTS_HEIGHT));
                 }
             }
         }
